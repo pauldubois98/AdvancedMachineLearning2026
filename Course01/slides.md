@@ -11,21 +11,13 @@ date: Week 1 — Lecture
 
 # Practical information
 
-## This course, in one slide
+## Summary
 
 ![](img/about.png)
 
-## What you are expected to know already
+## Expected to be known already
 
 ![](img/prerequisites.png)
-
-## Grading
-
-100% of your grade will be based on the final project report.
-
-The goal is for you to pick up some topic of your interest, with public data available.
-Produce an analysis using one or more technique(s) introduced during this course.
-You will write your findings in a report of ~5 pages.
 
 ## Reading material
 
@@ -39,6 +31,100 @@ The slides are not comprehensive.
 ## Where it is used
 
 ![](img/applications.png)
+
+## Grading
+
+100% of your grade will be based on the final project report.
+
+The goal is for you to pick up some topic of your interest, with public data available.
+Produce an analysis using one or more technique(s) introduced during this course.
+You will write your findings in a report of ~5 pages.
+
+# Suggested datasets for the project
+
+## 1. Stars CYG OB1
+
+![](img/ds_stars.png)
+
+## 2. Ames Housing
+
+![](img/ds_ames.png)
+
+## 3. DVF, Demandes de Valeurs Foncières
+
+![](img/ds_dvf.png)
+
+## 4. Breast Cancer Wisconsin (Diagnostic)
+
+![](img/ds_breast_cancer.png)
+
+## 5. Adult (Census Income)
+
+![](img/ds_adult.png)
+
+## 6. Credit Card Fraud Detection (ULB)
+
+![](img/ds_creditcard.png)
+
+## 7. Spambase
+
+![](img/ds_spambase.png)
+
+## 8. USGS Earthquake Catalogue
+
+![](img/ds_earthquakes.png)
+
+## 9. Vélib' Métropole station availability
+
+![](img/ds_velib.png)
+
+## 10. Online Retail II
+
+![](img/ds_online_retail.png)
+
+## 11. Wholesale Customers
+
+![](img/ds_wholesale.png)
+
+## 12. 20 Newsgroups
+
+![](img/ds_newsgroups.png)
+
+## 13. Olivetti Faces (AT&T)
+
+![](img/ds_olivetti.png)
+
+## 14. MovieLens 100K
+
+![](img/ds_movielens.png)
+
+## 15. Galaxies (Roeder, 1990)
+
+![](img/ds_galaxies.png)
+
+## 16. Palmer Penguins
+
+![](img/ds_penguins.png)
+
+## 17. Berkeley Segmentation Dataset (BSDS500)
+
+![](img/ds_bsds.png)
+
+## 18. Fashion MNIST
+
+![](img/ds_fashion_mnist.png)
+
+## 19. PBMC 3k (single cell RNA sequencing)
+
+![](img/ds_pbmc.png)
+
+## 20. Human Activity Recognition Using Smartphones
+
+![](img/ds_har.png)
+
+## 21. COIL 20
+
+![](img/ds_coil20.png)
 
 # Reminders on parameter estimation
 
