@@ -11,10 +11,11 @@ area pandoc leaves under a slide title, so a figure never has to be resized.
 import sys
 from pathlib import Path
 
-import numpy as np
 import matplotlib
+import numpy as np
 
 matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 from matplotlib import font_manager
 from matplotlib.patches import (
     Circle,
@@ -23,7 +24,6 @@ from matplotlib.patches import (
     FancyBboxPatch,
     Rectangle,
 )
-import matplotlib.pyplot as plt
 
 W, H, DPI = 9.0, 3.7075, 400
 
