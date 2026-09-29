@@ -1,8 +1,9 @@
-Project:
+# Datasets Suggestions
 Students must submit an individual project report.
 The report should be ~5 pages long on the topic of their choice.
 The project must involve at least one of the techniques seen during this course.
-Here are some suggestions for datasets; Feel free to use another one of your choice.
+Here are some suggestions for datasets;
+Feel free to use another one of your choice.
 
 1. **Stars CYG OB1**
     * **Size:** 47 observations, 2 variables
