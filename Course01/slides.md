@@ -25,12 +25,7 @@ date: Week 1 — Lecture
 - T. Hastie, R. Tibshirani, J. Friedman — *The Elements of Statistical Learning* (2009)
 - C. M. Bishop — *Pattern Recognition and Machine Learning* (2006)
 
-Slides, labs, data and announcements live on Edunao.\
-The slides are not comprehensive.
-
-## Where it is used
-
-![](img/applications.png)
+Slides, labs, data and announcements live on GitHub.
 
 ## Grading
 
@@ -126,6 +121,10 @@ You will write your findings in a report of ~5 pages.
 
 ![](img/ds_coil20.png)
 
+## Where Machine Learning is used
+
+![](img/applications.png)
+
 # Reminders on parameter estimation
 
 ## Learning is estimating parameters
@@ -196,7 +195,7 @@ You will write your findings in a report of ~5 pages.
 
 ![](img/eq_posterior.png)
 
-## What  is a "cost"?
+## From parameter predicted distribution to value
 
 ![](img/cost_idea.png)
 
@@ -246,7 +245,7 @@ You will write your findings in a report of ~5 pages.
 
 ![](img/discriminative_vs_generative.png)
 
-## Bayes classifier as a MAP rule
+## Bayes classifier
 
 ![](img/eq_bayes_classifier.png)
 
@@ -316,7 +315,7 @@ You will write your findings in a report of ~5 pages.
 
 ![](img/dimred_vs_clustering.png)
 
-## What that looks like in practice
+## Typical tasks
 
 ![](img/unsupervised_apps.png)
 
