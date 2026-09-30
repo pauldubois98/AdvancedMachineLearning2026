@@ -1139,8 +1139,7 @@ def cost_idea(fig):
         xytext=(answer, 0.55),
         arrowprops={"arrowstyle": "<|-|>", "color": RED, "lw": 1.6},
     )
-    plot.text(3.45, 0.1, r"$\theta - \hat\theta$", color=RED, fontsize=13,
-              ha="center")
+    # plot.text(3.45, 0.1, r"$\theta - \hat\theta$", color=RED, fontsize=13, ha="center")
     plot.text(answer + 0.12, post.max() * 1.02, r"answer $\hat\theta$",
               color=GREEN, fontsize=12, ha="left")
     plot.text(-1.6, post.max() * 0.55, r"$\theta$'s distribution",
@@ -1154,31 +1153,20 @@ def cost_idea(fig):
     ax.text(
         x0,
         3.25,
-        r"$c(\theta, \hat\theta)$  :  what it costs to answer $\hat{\theta}$",
+        r"$c(\hat{\theta}, a)$  :  what it costs to answer $\hat{\theta}$",
         ha="left",
         va="center",
         color=INK,
         fontsize=14,
     )
     ax.text(
-        x0+1,
+        x0+0.75,
         2.88,
-        r"when the truth turns out to be $\theta$",
+        r"when the truth turns out to be $a$",
         ha="left",
         va="center",
         color=INK,
-        fontsize=12.5,
-    )
-    ax.text(
-        x0,
-        2.2,
-        r"$\theta$ is unknown"
-        "\nthe average cost over the posterior is:",
-        ha="left",
-        va="center",
-        color=INK,
-        fontsize=12.5,
-        linespacing=1.6,
+        fontsize=14,
     )
     ax.text(
         x0 + 1.95,
@@ -1520,7 +1508,7 @@ def mse_divisor(fig):
     side.text(
         0.0,
         0.34,
-        r"the sum is smallest at $c = n+1$",
+        r"sum is smallest at $c = n+1$",
         transform=side.transAxes,
         fontsize=13,
         color=PURPLE,
@@ -1897,7 +1885,7 @@ def eq_bayes_classifier(fig):
     ax = canvas(fig)
     equation(
         ax,
-        r"$\hat{C}(x) \;=\; \arg\max_k\ P(C = k \,|\, X = x)"
+        r"$\hat{C}(x) \;=\; \arg\max_k\ P(X = x \,|\, C = k)"
         r"\;=\; \arg\max_k\ \frac{f_k(x)\,\pi_k}"
         r"{\sum_{i=1}^{K} f_i(x)\,\pi_i}"
         r"\;=\; \arg\max_k\ f_k(x)\,\pi_k$",
@@ -2141,7 +2129,7 @@ def naive_bayes_gaussian(fig):
     titles = [
         "1.  choose a density",
         "2.  estimate it per class",
-        "3.  classify by MAP",
+        "3.  classify",
     ]
     for ax, title in zip(axes, titles):
         ax.set_title(title, pad=10, fontsize=13)
@@ -2271,9 +2259,9 @@ def lda_fit_steps(fig):
         fig,
         3,
         titles=[
-            "1.  the labelled data",
-            r"2.  one Gaussian per class, one shared $\Sigma$",
-            "3.  the MAP rule",
+            "1.  labelled data",
+           r"2.  one Gaussian per class, one shared $\Sigma$",
+            "3.  classification rule",
         ],
         colors=[INK, INK, INK],
         gridspec_kw=dict(left=0.03, right=0.98, top=0.84, bottom=0.22, wspace=0.12),
@@ -2517,7 +2505,7 @@ def lda_qda_cost(fig):
 def lda_derivation(fig):
     ax = canvas(fig)
     lines = [
-        (r"$\hat{C}(x) = \arg\max_k\ P(C=k|X=x)$", INK),
+        (r"$\hat{C}(x) = \arg\max_k\ P(X=x|C=k)$", INK),
         (
             r"$= \arg\max_k\ f_k(x)\,\pi_k = \arg\max_k\ \log\left[f_k(x)\,\pi_k\right]$",
             INK,
