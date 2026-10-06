@@ -18,3 +18,5 @@ Feel free to use another one of your choice.
 - Session 1:
   - [Slides (.pptx)](Course01/slides.pptx)
   - [Notebook](Course01/numpy_LDA_QDA.ipynb)
+- Session 2:
+  - [Slides (.pptx)](Course02/slides.pptx)
