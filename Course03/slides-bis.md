@@ -90,3 +90,100 @@ date: Week 3 — Lecture
 
 ![](img-bis/boosting_overfit.png)
 
+## Boosting as an additive model
+
+![](img-bis/additive_model.png)
+
+## Boosting is gradient descent in function space
+
+![](img-bis/eq_boosting.png)
+
+# Shrinkage
+
+## Shrinkage
+
+![](img-bis/shrinkage.png)
+
+## The learning rate is a regulariser
+
+![](img-bis/learning_rate.png)
+
+# XGBoost
+
+## Regularisation inside the tree objective
+
+![](img-bis/eq_xgboost.png)
+
+## Splitting candidates
+
+![](img-bis/xgb_split_search.png)
+
+## Loss simplification for one leaf
+
+![](img-bis/eq_leaf_objective.png)
+
+## Scoring candidate splits
+
+![](img-bis/xgb_leaf_score.png)
+
+## Gradient and Hessian
+
+![](img-bis/xgb_gh.png)
+
+## Summing trees to get the prediction
+
+![](img-bis/xgb_leaf_predict.png)
+
+# LightGBM
+
+## Bin each feature once
+
+![](img-bis/lgbm_bins.png)
+
+## Finding the optimal cut in one sweep
+
+![](img-bis/lgbm_prefix.png)
+
+## Scan bin edges, not rows
+
+![](img-bis/lgbm_binned_scan.png)
+
+## A child's histogram is the parent minus its sibling
+
+![](img-bis/lgbm_subtract.png)
+
+## Leaf-wise growth: spend every split where it pays most
+
+![](img-bis/lgbm_leafwise.png)
+
+## GOSS: sample the rows that are already fitted
+
+![](img-bis/lgbm_goss.png)
+
+# CatBoost
+
+## Categories: the target statistic problem
+
+![](img-bis/cat_example.png)
+
+## The encoding leaks the label
+
+![](img-bis/cat_leak_why.png)
+
+## Ordered target statistics: use only what came before
+
+![](img-bis/cat_chain.png)
+
+## Ordered target statistics: the correlation is gone
+
+![](img-bis/cat_ordered_ts.png)
+
+## Oblivious trees: one split per level
+
+![](img-bis/cat_oblivious.png)
+
+# The three of them
+
+## XGBoost, LightGBM, CatBoost
+
+![](img-bis/gbm_compare.png)
