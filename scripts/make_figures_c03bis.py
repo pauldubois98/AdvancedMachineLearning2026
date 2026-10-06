@@ -4,8 +4,10 @@
 One function per figure, registered under the stem the slide deck asks for.
 All figures share one canvas (9 x 3.7075 in), which is exactly the content
 area pandoc leaves under a slide title, so a figure never has to be resized.
-The figures themselves are ported from Course03/imports/figs.py; the helpers
-are the ones from Course01, so the deck matches the others.
+The tree and forest figures are ported from Course03/imports/figs.py; the
+boosting-family ones are imported straight from Course03/imports/figs2.py and
+only have their typeface changed. The helpers are the ones from Course01, so
+the deck matches the others.
 
     python3 scripts/make_figures_c03bis.py Course03/img-bis [stem ...]
 """
@@ -49,8 +51,7 @@ def _use_lato():
     return "Lato" if "Lato" in families else "DejaVu Sans"
 
 
-plt.rcParams.update(
-    {
+RC = {
         "font.family": _use_lato(),
         "font.size": 12,
         "mathtext.fontset": "cm",
@@ -70,8 +71,44 @@ plt.rcParams.update(
         "lines.linewidth": 2.2,
         "figure.facecolor": "white",
         "savefig.facecolor": "white",
-    }
-)
+}
+
+_DEFAULTS = plt.rcParams.copy()          # pristine, before anyone touches them
+plt.rcParams.update(RC)
+
+
+# --------------------------------------------------------------------------
+# the boosting half of the deck is drawn by Course03/imports/figs2.py, which is
+# imported rather than copied out: it saves (and pads) its own files, and it
+# brings its own rcParams — savefig.bbox="tight" above all, which would crop
+# the figures drawn here off their canvas. So it is imported under the pristine
+# defaults, its settings are kept aside, and ours are what stays in force.
+# --------------------------------------------------------------------------
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent
+                       / "Course03" / "imports"))
+
+with matplotlib.rc_context(_DEFAULTS):
+    import figs2  # noqa: E402  (its rcParams land as it loads)
+
+    IMPORT_RC = plt.rcParams.copy()
+    IMPORT_RC["font.family"] = RC["font.family"]
+    IMPORT_RC["mathtext.fontset"] = RC["mathtext.fontset"]
+
+# boosting_stages and bagging_vs_boosting also exist in figs2; the deck keeps
+# the versions ported below from imports/figs.py
+IMPORTED = {
+    name: getattr(figs2, f"fig_{name}")
+    for name in (
+        "additive_model", "eq_boosting", "shrinkage", "learning_rate",
+        "eq_xgboost", "xgb_split_search", "eq_leaf_objective", "xgb_leaf_score",
+        "xgb_gh", "xgb_leaf_predict",
+        "lgbm_bins", "lgbm_prefix", "lgbm_binned_scan", "lgbm_subtract",
+        "lgbm_leafwise", "lgbm_goss",
+        "cat_example", "cat_leak_why", "cat_chain", "cat_ordered_ts",
+        "cat_oblivious",
+        "gbm_compare",
+    )
+}
 
 
 # --------------------------------------------------------------------------
@@ -1090,14 +1127,18 @@ def zoo(fig):
 def main(argv):
     out = Path(argv[1] if len(argv) > 1 else "Course03/img-bis")
     out.mkdir(parents=True, exist_ok=True)
-    wanted = argv[2:] or sorted(FIGURES)
+    wanted = argv[2:] or sorted({**FIGURES, **IMPORTED})
     for stem in wanted:
-        if stem not in FIGURES:
+        if stem in FIGURES:
+            fig = plt.figure(figsize=(W, H), dpi=DPI)
+            FIGURES[stem](fig)
+            fig.savefig(out / f"{stem}.png", dpi=DPI)
+            plt.close(fig)
+        elif stem in IMPORTED:
+            with matplotlib.rc_context(IMPORT_RC):
+                IMPORTED[stem](out)       # it saves, and pads, its own file
+        else:
             raise SystemExit(f"unknown figure: {stem}")
-        fig = plt.figure(figsize=(W, H), dpi=DPI)
-        FIGURES[stem](fig)
-        fig.savefig(out / f"{stem}.png", dpi=DPI)
-        plt.close(fig)
         print(f"  {stem}.png")
 
 
