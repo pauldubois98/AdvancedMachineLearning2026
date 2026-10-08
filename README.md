@@ -20,3 +20,4 @@ Feel free to use another one of your choice.
   - [Notebook](Course01/numpy_LDA_QDA.ipynb)
 - Session 2:
   - [Slides (.pptx)](Course02/slides.pptx)
+  - [Notebook](Course02/lab2.ipynb)
