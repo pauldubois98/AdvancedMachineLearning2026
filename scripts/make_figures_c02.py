@@ -347,6 +347,74 @@ def why_linear(fig):
                 fontsize=11, linespacing=1.6)
 
 
+@figure("linreg_multi")
+def linreg_multi(fig):
+    rng = np.random.default_rng(2)
+    n = 90
+    x1 = rng.uniform(25, 145, n)
+    x2 = rng.uniform(0, 8, n)
+    y = 1.7 * x1 + 14 * x2 + 40 + rng.normal(0, 22, n)
+
+    ax = canvas(fig)
+    equation(ax, r"$\hat y \;=\; w_1x_1+w_2x_2+\cdots+w_px_p+b$", x=6.55, y=2.85,
+             size=19)
+    note(ax, "one weight per column\n"
+             "each weight = “how much $\\hat y$ moves\n"
+             "when this column moves by 1, all else fixed”",
+         x=6.55, y=1.75, size=12.5)
+    note(ax, "NB: units of the columns matter",
+         x=6.55, y=0.65, color=GOLD, size=12.5)
+
+    plot = fig.add_axes([0.0, 0.0, 0.48, 1.0], projection="3d")
+    plot.scatter(x1, x2, y, s=14, color=BLUE, alpha=0.75, depthshade=False)
+    g1, g2 = np.meshgrid(np.linspace(25, 145, 12), np.linspace(0, 8, 12))
+    plot.plot_surface(g1, g2, 1.7 * g1 + 14 * g2 + 40, color=PURPLE, alpha=0.25,
+                      edgecolor=PURPLE, linewidth=0.4)
+    plot.set_xlabel("surface", labelpad=-8)
+    plot.set_ylabel("floor", labelpad=-8)
+    plot.set_zlabel("price", labelpad=-8)
+    plot.set_xticklabels([])
+    plot.set_yticklabels([])
+    plot.set_zticklabels([])
+    plot.set_title("2 features → a plane", pad=0)
+    plot.view_init(18, -60)
+
+
+@figure("linreg_basis")
+def linreg_basis(fig):
+    rng = np.random.default_rng(0)
+    x = np.sort(rng.uniform(0, 1, 45))
+    y = np.sin(2 * np.pi * x) + rng.normal(0, 0.2, 45)
+    grid = np.linspace(0, 1, 400)
+
+    axes = panels(
+        fig,
+        3,
+        titles=[r"$x$ only", r"$x, x^2, x^3$", r"up to $x^{12}$"],
+        sharey=True,
+        gridspec_kw=dict(left=0.06, right=0.98, top=0.86, bottom=0.22, wspace=0.10),
+    )
+    for ax, d in zip(axes, (1, 3, 12)):
+        p = np.polynomial.Polynomial.fit(x, y, d)
+        ax.scatter(x, y, s=18, color=BLUE, alpha=0.65, edgecolor="white",
+                   linewidth=0.4, zorder=3)
+        ax.plot(grid, p(grid), color=PURPLE, lw=2.6)
+        ax.set_xlabel(r"$x$")
+        ax.set_ylim(-2.0, 2.0)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        despine(ax, keep=("bottom", "left"))
+    axes[0].set_ylabel(r"$y$")
+    fig.text(
+        0.5,
+        0.045,
+        r"the same least squares, on the columns $\phi(x) = (x, x^2, \dots, x^d)$",
+        ha="center",
+        color=MUTED,
+        fontsize=12,
+    )
+
+
 @figure("eq_linear_model")
 def eq_linear_model(fig):
     ax = canvas(fig)
@@ -1950,7 +2018,7 @@ def eq_mm(fig):
         color=GREEN,
         fontsize=19,
     )
-    note(ax, r"$\rho$ has a quadratic upper bound minimised by IRLS step",
+    note(ax, r"$\rho$ has a quadratic lower bound minimised by IRLS step",
          y=0.55)
 
 
@@ -2428,7 +2496,7 @@ def eq_logistic_irls(fig):
         ax.text(3.05, y, left, ha="center", va="center", color=BLUE, fontsize=14)
         ax.text(6.75, y, right, ha="center", va="center", color=GREEN, fontsize=14)
 
-    ax.text(6.75, 2.03, r"$[L\beta]_i = -y_i\,\beta^{T}x_i$   \|   "
+    ax.text(6.75, 2.03, r"$[L\beta]_i = -y_i\,\beta^{T}x_i$   |   "
                         r"$L = -\mathrm{Diag}(y)X$",
             ha="center", va="center", color=MUTED, fontsize=11)
     ax.text(6.75, 0.40, r"$\Omega(\beta) = L^{T}\mathrm{Diag}"
