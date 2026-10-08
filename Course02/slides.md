@@ -23,6 +23,14 @@ date: Week 2 — Lecture
 
 ![](img/why_linear.png)
 
+## More columns: the line becomes a plane
+
+![](img/linreg_multi.png)
+
+## "Linear" means linear in the *weights*
+
+![](img/linreg_basis.png)
+
 ## Model via matrix multiplication
 
 ![](img/eq_linear_model.png)
