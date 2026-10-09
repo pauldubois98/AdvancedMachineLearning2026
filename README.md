@@ -27,3 +27,5 @@ Feel free to use another one of your choice.
 - Session 3:
   - [Slides (.pptx)](Course03/slides.pptx)
   - [Slides bis (.pptx)](Course03/slides-bis.pptx)
+- Session 4:
+  - [Slides (.pptx)](Course04/slides.pptx)
