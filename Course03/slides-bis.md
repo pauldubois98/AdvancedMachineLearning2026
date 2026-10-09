@@ -182,8 +182,6 @@ date: Week 3 — Lecture
 
 ![](img-bis/cat_oblivious.png)
 
-# The three of them
-
 ## XGBoost, LightGBM, CatBoost
 
 ![](img-bis/gbm_compare.png)
