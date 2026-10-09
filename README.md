@@ -24,3 +24,6 @@ Feel free to use another one of your choice.
   - [Slides bis (.pptx)](Course02/high_dimensions.pptx)
   - [Notebook](Course02/lab2.ipynb)
   - [Notebook - solutions](Course02/lab2_solutions.ipynb)
+- Session 3:
+  - [Slides (.pptx)](Course03/slides.pptx)
+  - [Slides bis (.pptx)](Course03/slides-bis.pptx)
