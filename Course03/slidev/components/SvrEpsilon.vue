@@ -58,7 +58,7 @@ const nowSv = computed(() => model.value.sv.length)
         }))"
         :x-domain="[-3.3, 3.3]" :y-domain="[-2.6, 2.6]"
         :x-ticks="[-3, -2, -1, 0, 1, 2, 3]" :y-ticks="[-2, -1, 0, 1, 2]"
-        x-label="x" :title="`${label} — ε = ${eps.toFixed(2)}`" :title-color="tone"
+        x-label="x" :title="`${label}, ε = ${eps.toFixed(2)}`" :title-color="tone"
       />
       <LineChart
         :series="[{ points: sweep.pts, color: GREEN, width: 2.4 }]"
@@ -78,7 +78,7 @@ const nowSv = computed(() => model.value.sv.length)
         ]"
       />
       <p class="note">
-        a wider tube means fewer support vectors and a flatter fit — ε buys
+        a wider tube means fewer support vectors and a flatter fit: ε buys
         sparsity, and pays for it in resolution.
       </p>
     </div>

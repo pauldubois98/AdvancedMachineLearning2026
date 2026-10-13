@@ -34,7 +34,7 @@ const f = computed(() => (probe.value ? model.decision(probe.value) : null))
           </p>
           <p>
             ŷ = <strong :style="{ color: f > 0 ? RED : BLUE }">{{ f > 0 ? '+1' : '−1' }}</strong>
-            <span class="sub"> — the labels are ±1 here, so y<sub>i</sub> f(x<sub>i</sub>) &gt; 0 means “right”</span>
+            <span class="sub">; the labels are ±1 here, so y<sub>i</sub> f(x<sub>i</sub>) &gt; 0 means “right”</span>
           </p>
         </template>
       </div>

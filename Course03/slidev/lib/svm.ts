@@ -77,7 +77,7 @@ export interface Svc {
   predict(x: number[]): number
   /** linear kernel only */
   w: number[] | null
-  /** 2/||w||, the width of the street — linear kernel only */
+  /** 2/||w||, the width of the street; linear kernel only */
   marginWidth: number | null
 }
 
@@ -315,7 +315,7 @@ export function accuracy(model: Svc, X: number[][], y: number[]): number {
 }
 
 /**
- * k-fold cross-validated accuracy, stratified by class — sklearn's default
+ * k-fold cross-validated accuracy, stratified by class, as sklearn does
  * for a classifier. Unstratified folds would be useless here: the toy datasets
  * are generated one class after the other, so a block fold could hold a
  * single class.

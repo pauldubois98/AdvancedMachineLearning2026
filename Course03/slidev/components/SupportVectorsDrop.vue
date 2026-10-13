@@ -52,7 +52,7 @@ const shift = computed(() => {
         <p :style="{ color: GREEN }">y<sub>i</sub> f(x<sub>i</sub>) = 1</p>
         <p class="sub">on the margin, α<sub>i</sub> &gt; 0</p>
         <p :style="{ color: BLUE }">y<sub>i</sub> f(x<sub>i</sub>) &gt; 1</p>
-        <p class="sub">further away, α<sub>i</sub> = 0 — the point can be thrown away</p>
+        <p class="sub">further away, α<sub>i</sub> = 0; the point can be thrown away</p>
       </div>
       <p class="note">
         {{ full.sv.length }} of {{ data.X.length }} points decide everything.

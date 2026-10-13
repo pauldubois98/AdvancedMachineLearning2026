@@ -1,5 +1,5 @@
 <!-- svm_similarity: a kernel is a similarity, and the prediction is a vote of
-     similarities — one bump per support vector. γ sets how far a point's
+     similarities, one bump per support vector. γ sets how far a point's
      influence reaches. -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
@@ -63,11 +63,11 @@ const reach = computed(() => Math.sqrt(1 / gamma.value)) // where k drops to 1/e
       <Knob v-model="gamma" :min="0.05" :max="20" log label="γ" :color="GREEN" />
       <Readout :items="[{ label: 'reach (k = 1/e)', value: reach.toFixed(2), color: GREEN }]" />
       <p class="note">
-        <span :style="{ color: BLUE }">small γ</span>: far points still count as similar —
+        <span :style="{ color: BLUE }">small γ</span>: far points still count as similar;
         the sum is smooth, each support vector speaks for a wide region.
       </p>
       <p class="note">
-        <span :style="{ color: RED }">large γ</span>: only near neighbours count —
+        <span :style="{ color: RED }">large γ</span>: only near neighbours count;
         the bumps stop overlapping and every point becomes its own island.
       </p>
     </div>

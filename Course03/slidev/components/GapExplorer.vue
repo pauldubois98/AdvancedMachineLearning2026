@@ -47,7 +47,7 @@ const separable = computed(() => wrong.value.length === 0)
           a gap exists: the hard-margin problem has a solution
         </template>
         <template v-else-if="soft">
-          no line gets everything right — the {{ wrong.length }} circled points are
+          no line gets everything right; the {{ wrong.length }} circled points are
           the ones the soft margin gives up on
         </template>
         <template v-else>

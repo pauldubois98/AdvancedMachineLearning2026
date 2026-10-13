@@ -33,17 +33,17 @@ const separated = computed(() => t.value > 0.5)
       <Knob v-model="t" :min="0" :max="1" :step="0.01" label="morph into Φ-space" :digits="2" :color="GREEN" />
       <p class="state">
         <template v-if="t < 0.02">
-          <strong>the XOR classes</strong> — no line separates them in (x₁, x₂)
+          <strong>the XOR classes</strong>: no line separates them in (x₁, x₂)
         </template>
         <template v-else-if="t > 0.98">
-          <strong :style="{ color: GREEN }">in the (Φ₁, Φ₂) plane</strong> — separable,
+          <strong :style="{ color: GREEN }">in the (Φ₁, Φ₂) plane</strong>: separable,
           by one horizontal line
         </template>
         <template v-else>moving the points to (Φ₁, Φ₂) = (√2·x₁, √2·x₁x₂)…</template>
       </p>
       <p class="note">
         the SVM never computes Φ: the dual only ever asks for ⟨Φ(x), Φ(x′)⟩,
-        which here is (1 + x<sup>T</sup>x′)² — a polynomial kernel.
+        which here is (1 + x<sup>T</sup>x′)², a polynomial kernel.
       </p>
     </div>
   </div>

@@ -132,7 +132,7 @@ table.plain td { padding: 0.28rem 0.6rem 0.28rem 0; border-bottom: 1px solid #ee
  * hides the dialog by shifting the container up by 5rem (-top-20). fuse.js
  * >= 7.1 answers an *empty* query with every record, so with the dialog shut
  * the list of all slides is still painted and hangs down the right-hand side
- * of every slide. Keep the list for the open dialog only — it is open exactly
+ * of every slide. Keep the list for the open dialog only: it is open exactly
  * when it is not shifted away, and when focus is inside it.                 */
 #slidev-goto-dialog.-top-20 .autocomplete-list,
 #slidev-goto-dialog:not(:focus-within) .autocomplete-list {

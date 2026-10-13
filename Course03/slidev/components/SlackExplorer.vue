@@ -77,7 +77,7 @@ const arrows = computed(() => {
           { label: 'cost C·Σξ', value: (C * total).toFixed(1), color: RED },
         ]"
       />
-      <p class="note">and we pay C for every unit of ξ — the arrows show the five worst</p>
+      <p class="note">and we pay C for every unit of ξ; the arrows show the five worst</p>
     </div>
   </div>
 </template>

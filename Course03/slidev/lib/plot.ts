@@ -215,7 +215,7 @@ export function strokePath(
   ctx.restore()
 }
 
-/** Blue circles, red triangles, green squares — one marker per class, as
+/** Blue circles, red triangles, green squares: one marker per class, as
  *  in the deck. */
 export function drawPoints(
   fr: Frame,

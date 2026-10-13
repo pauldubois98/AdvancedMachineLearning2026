@@ -49,14 +49,14 @@ for (let i = 0; i <= 120; i++) {
           along w: L is a parabola, lowest at w = α = {{ argminW.toFixed(2) }}
         </li>
         <li :style="{ color: GREEN }">
-          along α: L is a straight line —
+          along α: L is a straight line;
           <template v-if="alphaDirection === 'down'">w &gt; 1, so raising α lowers L: the constraint is loose, α wants to be 0</template>
           <template v-else-if="alphaDirection === 'up'">w &lt; 1, so raising α raises L without bound: the constraint is violated</template>
           <template v-else>w = 1 exactly, so α does not change L at all</template>
         </li>
       </ul>
       <p class="saddle" :class="{ on: Math.abs(w - 1) < 0.04 && Math.abs(alpha - 1) < 0.04 }">
-        a saddle, not a peak — at (ŵ, α̂) = (1, 1):
+        a saddle, not a peak. At (ŵ, α̂) = (1, 1):
         min<sub>w</sub> max<sub>α</sub> L = max<sub>α</sub> min<sub>w</sub> L = 0.5
         <button @click="w = 1; alpha = 1">go there</button>
       </p>

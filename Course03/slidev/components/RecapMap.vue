@@ -15,7 +15,7 @@ const stages = [
   },
   {
     color: GREEN, title: 'go to the dual', sub: 'only xᵢᵀxⱼ left',
-    detail: 'Rewriting the problem in the multipliers α leaves the data appearing only through inner products — and only the support vectors keep a non-zero α.',
+    detail: 'Rewriting the problem in the multipliers α leaves the data appearing only through inner products, and only the support vectors keep a non-zero α.',
   },
   {
     color: PURPLE, title: 'swap in a kernel', sub: 'k(xᵢ, xⱼ)',

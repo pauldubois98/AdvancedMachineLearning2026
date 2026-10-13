@@ -1,8 +1,8 @@
 ---
 theme: default
-title: Session 3 — Support Vector Machines
+title: "Session 3: Support Vector Machines"
 info: |
-  Advanced Machine Learning · MSc DSBA · 2026 — Paul Dubois
+  Advanced Machine Learning · MSc DSBA · 2026 · Paul Dubois
   Interactive companion to Course03/slides.pptx.
 class: text-center
 highlighter: shiki
@@ -25,7 +25,7 @@ Advanced Machine Learning · MSc DSBA · 2026
 
 Paul Dubois
 
-<div class="note mt-8">Week 3 — Lecture · every figure here is live: move the sliders</div>
+<div class="note mt-8">Week 3 lecture · every figure here is live: move the sliders</div>
 
 ---
 layout: section
@@ -373,7 +373,7 @@ $$ \min_{w,b}\ \ \underbrace{\frac{1}{2}\|w\|^2}_{\textcolor{#00ab0e}{\text{make
 
 <div class="note text-center mt-8">
 
-the margin is the penalty, the hinge is the loss — one more regularised fit
+the margin is the penalty, the hinge is the loss; one more regularised fit
 
 </div>
 

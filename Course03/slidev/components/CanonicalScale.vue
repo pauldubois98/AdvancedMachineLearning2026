@@ -1,6 +1,6 @@
 <!-- canonical: (w, b) and (sw, sb) are the same boundary. Scaling only moves
      the f = ±1 lines, so we are free to fix the scale by demanding
-     min_i |f(x_i)| = 1 — and then the margin is exactly 2/||w||. -->
+     min_i |f(x_i)| = 1, and then the margin is exactly 2/||w||. -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { sepBlobs, toPm1 } from '../lib/data'
@@ -79,7 +79,7 @@ const rings = computed(() =>
         is 2/‖w‖ = {{ (2 / norm).toFixed(2) }}
       </p>
       <p v-else class="note">
-        the same line, the same data — only the <em>values</em> of f changed.
+        the same line, the same data; only the <em>values</em> of f changed.
         The dashed f = ±1 lines moved, so 2/‖w‖ is not yet the margin.
         <button @click="s = 1 / minAbsF * s">fix the scale</button>
       </p>

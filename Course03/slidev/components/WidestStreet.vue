@@ -88,7 +88,7 @@ function snap() {
       <div class="box" :class="{ bad: fit.wrong > 0 }">
         <template v-if="fit.wrong">
           <p class="big" :style="{ color: RED }">{{ fit.wrong }} point{{ fit.wrong > 1 ? 's' : '' }} on the wrong side</p>
-          <p class="sub">no street at all — the line has to separate first</p>
+          <p class="sub">no street at all; the line has to separate first</p>
         </template>
         <template v-else>
           <p class="big" :style="{ color: GOLD }">street {{ fit.width.toFixed(2) }} wide</p>
@@ -103,7 +103,7 @@ function snap() {
         <button class="snap" @click="snap">snap to it</button>
       </div>
       <p v-if="showBest" class="sub green">
-        the SVM line — street {{ bestWidth.toFixed(2) }} wide, equally close to both clouds;
+        the SVM line: street {{ bestWidth.toFixed(2) }} wide, equally close to both clouds;
         the circled points are the support vectors
       </p>
     </div>

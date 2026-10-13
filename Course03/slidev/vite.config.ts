@@ -3,7 +3,7 @@ import { viteSingleFile } from 'vite-plugin-singlefile'
 
 // The deck is published as ONE self-contained file, Course03/interactive.html:
 // scripts, styles and fonts are all inlined, so it works both from GitHub Pages
-// and from a file:// URL — a browser refuses to load ES modules next to a local
+// and from a file:// URL: a browser refuses to load ES modules next to a local
 // file, so a split build opens blank when the file is double-clicked.
 export default defineConfig({
   plugins: [

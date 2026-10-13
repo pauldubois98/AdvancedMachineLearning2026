@@ -20,7 +20,7 @@ const verdict = computed(() =>
   n.value <= 10000
     ? { text: 'any kernel is fine', color: GREEN }
     : n.value <= 100000
-      ? { text: 'kernel SVM is painful — budget hours, or subsample', color: GOLD }
+      ? { text: 'kernel SVM is painful: budget hours, or subsample', color: GOLD }
       : { text: 'LinearSVC, or a different model altogether', color: RED },
 )
 

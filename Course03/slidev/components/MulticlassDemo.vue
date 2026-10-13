@@ -1,5 +1,5 @@
 <!-- multiclass: the SVM only knows how to say ±1, so K classes are reduced to
-     a set of two-class problems — one against all, or one against one. -->
+     a set of two-class problems: one against all, or one against one. -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { threeBlobs } from '../lib/data'
@@ -86,7 +86,7 @@ const fits = computed(() => (mode.value === 'ova' ? K : mode.value === 'ovo' ? (
           </p>
         </template>
         <template v-else-if="mode === 'ova'">
-          <p class="head" :style="{ color: BLUE }">K fits — class k against everything else</p>
+          <p class="head" :style="{ color: BLUE }">K fits: class k against everything else</p>
           <p class="eq">k̂ = arg max<sub>k</sub> f<sub>k</sub>(x)</p>
           <p class="note">
             cheap: K fits in all. But each fit sees an unbalanced problem, and the
@@ -95,7 +95,7 @@ const fits = computed(() => (mode.value === 'ova' ? K : mode.value === 'ovo' ? (
           </p>
         </template>
         <template v-else>
-          <p class="head" :style="{ color: GREEN }">K(K−1)/2 fits — every pair, then a majority vote</p>
+          <p class="head" :style="{ color: GREEN }">K(K−1)/2 fits: every pair, then a majority vote</p>
           <p class="note">
             each fit is small and balanced, but there are {{ (K * (K - 1)) / 2 }} of
             them here and ~K²/2 in general. This is what scikit-learn's SVC does.
