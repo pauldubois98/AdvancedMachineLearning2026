@@ -150,19 +150,19 @@ Course03/slidev/node_modules: Course03/slidev/package.json
 	cd Course03/slidev && npm install --no-audit --no-fund
 	@touch $@
 
-# The deck ships as one committed file plus its assets, because the Pages
+# The deck ships as ONE committed, self-contained file, because the Pages
 # workflow uploads the repository as it stands and never runs a build:
 #   Course03/interactive.html  ->  <pages>/Course03/interactive.html
-# Relative asset URLs and hash routing keep it working wherever it is mounted.
+# Everything is inlined, so the same file also opens straight from disk — a
+# browser blocks ES modules loaded next to a file:// page, which is why a
+# split build opens blank when the file is double-clicked.
 Course03/interactive.html: $(C03_SLIDEV_SRC) Course03/slidev/vite.config.ts \
                            Course03/slidev/node_modules
 	cd Course03/slidev && npm run build
-	rm -rf Course03/interactive-assets
-	cp -r Course03/slidev/dist/interactive-assets Course03/interactive-assets
 	cp Course03/slidev/dist/index.html $@
 
 clean-interactive:
-	rm -rf Course03/slidev/dist Course03/interactive-assets Course03/interactive.html
+	rm -rf Course03/slidev/dist Course03/interactive.html
 
 clean-slides:
 	rm -f $(SLIDE_TARGETS)

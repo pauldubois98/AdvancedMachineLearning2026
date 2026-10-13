@@ -12,6 +12,10 @@ drawings:
 transition: slide-left
 mdc: true
 routerMode: hash
+# the deck must also run with no network: no webfont fetch, no remote favicon
+fonts:
+  provider: none
+favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fff'/%3E%3Cpath d='M4 26 L28 6' stroke='%231b1b1b' stroke-width='2.5'/%3E%3Cpath d='M4 19 L21 2 M11 30 L28 13' stroke='%239aa0a6' stroke-width='1.6' stroke-dasharray='3 3'/%3E%3Ccircle cx='9' cy='9' r='3' fill='%232b6cb0'/%3E%3Ccircle cx='23' cy='23' r='3' fill='%23c53030'/%3E%3C/svg%3E"
 layout: cover
 ---
 

@@ -126,3 +126,28 @@ table.plain td { padding: 0.28rem 0.6rem 0.28rem 0; border-bottom: 1px solid #ee
 .narrow table { font-size: 0.86rem; }
 .narrow td, .narrow th { text-align: center; }
 .narrow td:first-child, .narrow th:first-child { text-align: left; }
+
+/* --- Slidev's "go to slide" dialog -------------------------------------- *
+ * Goto.vue renders its result list whenever fuse.js returns matches, and
+ * hides the dialog by shifting the container up by 5rem (-top-20). fuse.js
+ * >= 7.1 answers an *empty* query with every record, so with the dialog shut
+ * the list of all slides is still painted and hangs down the right-hand side
+ * of every slide. Keep the list for the open dialog only — it is open exactly
+ * when it is not shifted away, and when focus is inside it.                 */
+#slidev-goto-dialog.-top-20 .autocomplete-list,
+#slidev-goto-dialog:not(:focus-within) .autocomplete-list {
+  display: none;
+}
+
+/* the dialog itself reads as a floating panel, not a white rectangle bleeding
+   into the slide */
+#slidev-goto-dialog > div {
+  border-radius: 0.4rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+#slidev-goto-dialog .autocomplete-list {
+  border-radius: 0.4rem;
+}
+#slidev-goto-input {
+  width: 100%;
+}

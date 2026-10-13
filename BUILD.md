@@ -22,11 +22,11 @@ make clean-slides clean-figures
 
 `make interactive` serves Course03's interactive companion deck (sliders for C,
 gamma, epsilon, the kernel). `make interactive-build` writes the published copy,
-`Course03/interactive.html` plus `Course03/interactive-assets/`, which **are
-committed**: the Pages workflow uploads the repository as it stands and never
+a single self-contained `Course03/interactive.html`, which **is committed**: the Pages workflow uploads the repository as it stands and never
 runs a build, so the deck is only as fresh as the last `make interactive-build`
 that was committed. It is served at
-<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html>.
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html>,
+and the same file opens offline by double-clicking it.
 Both need `node` and `npm`; see `Course03/slidev/README.md`.
 
 `make slides` needs `pandoc`; the figures need `numpy`, `matplotlib`, `scipy`, `scikit-learn` and the Lato font (`fonts-lato`).

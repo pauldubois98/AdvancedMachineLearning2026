@@ -12,11 +12,17 @@ make interactive          # dev server with hot reload, from the repo root
 make interactive-build    # rebuild the published copy (commit the result)
 ```
 
-`make interactive-build` writes `Course03/interactive.html` and
-`Course03/interactive-assets/`, one level up. Those two are **committed to the
-repository**, because `.github/workflows/static.yml` uploads the repo as it
-stands and never runs a build — so after changing a slide, rebuild *and commit*
-or the published deck stays on the old version.
+`make interactive-build` writes `Course03/interactive.html` one level up: a
+single self-contained file, scripts, styles and fonts inlined (2.6 MB, 1.3 MB
+over the wire). It is **committed to the repository**, because
+`.github/workflows/static.yml` uploads the repo as it stands and never runs a
+build — so after changing a slide, rebuild *and commit*, or the published deck
+stays on the old version.
+
+Being one file also means it runs with no server at all: double-click it, open
+it from a USB stick, or mail it to a student. A split build cannot do that —
+browsers refuse to load ES modules next to a `file://` page, and the deck opens
+blank.
 
 The deck uses `routerMode: hash` and a relative `--base`, so the single HTML
 file works from any path without server rewrites; deep links look like
