@@ -9,6 +9,7 @@ scripts/make_figures_cNN.py   every figure of course NN, one function per stem
 scripts/make_figures_datasets.py   Course01's suggested-dataset slides (ds_*)
 scripts/fit_pptx.py       post-processes pandoc's output (autofit, centred statements)
 Makefile                  figures -> pptx
+Course03/slidev/          Course03 as an interactive Slidev deck (npm)
 ```
 
 ## Building
@@ -18,6 +19,15 @@ make figures     # only what changed
 make slides      # CourseNN/slides.md -> CourseNN/slides.pptx
 make clean-slides clean-figures
 ```
+
+`make interactive` serves Course03's interactive companion deck (sliders for C,
+gamma, epsilon, the kernel). `make interactive-build` writes the published copy,
+`Course03/interactive.html` plus `Course03/interactive-assets/`, which **are
+committed**: the Pages workflow uploads the repository as it stands and never
+runs a build, so the deck is only as fresh as the last `make interactive-build`
+that was committed. It is served at
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html>.
+Both need `node` and `npm`; see `Course03/slidev/README.md`.
 
 `make slides` needs `pandoc`; the figures need `numpy`, `matplotlib`, `scipy`, `scikit-learn` and the Lato font (`fonts-lato`).
 The `ds_*` figures are drawn from the real datasets: the first build downloads them (about 370 MB) into `.cache/datasets/`, later builds reuse that cache.

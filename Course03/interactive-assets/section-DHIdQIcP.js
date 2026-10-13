@@ -1,0 +1,1 @@
+import{o as t,a as s,b as o,al as a}from"./modules/vue-DC8KhVUo.js";import{u as l}from"./context-Cf4-ITA1.js";const r={class:"slidev-layout section w-full h-full grid"},c={class:"my-auto text-center"},u={__name:"section",setup(n){return l(),(e,i)=>(t(),s("div",r,[o("div",c,[a(e.$slots,"default")])]))}};export{u as _};

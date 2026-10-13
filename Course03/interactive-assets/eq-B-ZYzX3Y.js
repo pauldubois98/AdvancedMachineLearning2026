@@ -1,0 +1,1 @@
+import{o,a as s,al as t}from"./modules/vue-DC8KhVUo.js";import{u as a}from"./context-Cf4-ITA1.js";const r={class:"slidev-layout eq"},i={__name:"eq",setup(l){return a(),(e,n)=>(o(),s("div",r,[t(e.$slots,"default")]))}};export{i as _};
