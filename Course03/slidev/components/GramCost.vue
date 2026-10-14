@@ -58,8 +58,8 @@ function dur(s: number): string {
       x-label="training points n" y-label="fit time (s)"
       title="20 features"
       :labels="[
-        { x: 2e6, y: 3e5, text: 'SVC (RBF)', color: RED, size: 12, anchor: 'end' },
-        { x: 2e6, y: 0.02, text: 'LinearSVC', color: GREEN, size: 12, anchor: 'end' },
+        { x: 2.5e6, y: 3e5, text: 'SVC (RBF)', color: RED, size: 12, anchor: 'end' },
+        { x: 2e6, y: 1e2, text: 'LinearSVC', color: GREEN, size: 12, anchor: 'end' },
       ]"
     />
     <div class="side">

@@ -42,11 +42,8 @@ const stateColor = computed(() => (m.value < 0 ? '#c53030' : m.value < 1 ? GOLD 
       x-label="margin  y·f(x)" y-label="loss of one point"
       title="the hinge loss" :title-color="GREEN"
       :labels="[
-        { x: 2.05, y: 1.45, text: 'squared', color: GOLD, size: 12 },
-        { x: 1.4, y: 0.55, text: 'logistic', color: BLUE, size: 12 },
-        { x: 0.15, y: 2.3, text: 'hinge', color: GREEN, size: 12 },
         { x: 0.9, y: 0.08, text: '0 / 1', color: INK, size: 11 },
-        { x: 1.05, y: 2.75, text: 'margin 1', color: MUTED, size: 11 },
+        { x: 1.05, y: 2.75, text: 'margin', color: MUTED, size: 11 },
       ]"
     />
     <div class="side">
