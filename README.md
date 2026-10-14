@@ -28,5 +28,6 @@ Feel free to use another one of your choice.
   - [Slides (.pptx)](Course03/slides.pptx)
   - [Slides — interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html) (same lecture, with sliders for C, γ, ε and the kernel)
   - [Slides bis (.pptx)](Course03/slides-bis.pptx)
+  - [Slides bis — interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)
 - Session 4:
   - [Slides (.pptx)](Course04/slides.pptx)

@@ -7,7 +7,7 @@ import {
   Domain, contour, dataDomain, drawBand, drawLine, drawPoints, equalise,
   frame, paintField, paintRegions, ringPoints, sampleField, strokePath,
 } from '../lib/plot'
-import { GREEN, INK, RED, BLUE } from '../lib/theme'
+import { GREEN, INK, MUTED, RED, BLUE } from '../lib/theme'
 
 const props = withDefaults(
   defineProps<{
@@ -15,11 +15,21 @@ const props = withDefaults(
     y: number[]
     /** f(x1, x2); when absent only the points are drawn */
     decision?: ((x: number, y: number) => number) | null
+    /** an already-sampled field, for panels that cache it between frames */
+    grid?: Float64Array | Float32Array | null
+    gridRes?: number
+    /** further decision functions, drawn as thin boundaries only: the tree
+     *  boundaries a forest is about to average */
+    extraContours?: ((x: number, y: number) => number)[]
     /** flat class map instead of the shaded field (multiclass slides) */
     regions?: ((x: number, y: number) => number) | null
     regionColors?: readonly string[]
     /** indices to circle, e.g. the support vectors */
     rings?: { idx: number[]; color?: string; size?: number; width?: number }[]
+    /** straight segments in data coordinates: the cuts of a tree partition */
+    segments?: { from: [number, number]; to: [number, number]; color?: string; width?: number; dash?: number[] }[]
+    /** filled rectangles under everything else: the leaves of a tree */
+    boxes?: { x0: number; x1: number; y0: number; y1: number; color: string; alpha?: number }[]
     /** straight lines y = a x + c */
     lines?: { a: number; c: number; color?: string; width?: number; dash?: number[] }[]
     /** a shaded street around a straight line */
@@ -42,7 +52,8 @@ const props = withDefaults(
     titleColor?: string
   }>(),
   {
-    decision: null, regions: null, rings: () => [], lines: () => [], band: null,
+    decision: null, grid: null, gridRes: 0, regions: null, rings: () => [], lines: () => [], band: null,
+    segments: () => [], boxes: () => [], extraContours: () => [],
     arrows: () => [], domain: null, margins: true, boundary: true, aspect: 'equal',
     res: 130, pointSize: 22, pointAlpha: 1, fieldAlpha: 0.7, pad: 0.7,
     regionColors: () => ['#dce7f2', '#f6dcdc', '#d9efdb'], probe: null,
@@ -73,6 +84,15 @@ function draw() {
   const fr = frame(el, d)
   lastFrame = fr
 
+  for (const b of props.boxes) {
+    const { ctx } = fr
+    ctx.save()
+    ctx.globalAlpha = b.alpha ?? 1
+    ctx.fillStyle = b.color
+    ctx.fillRect(fr.sx(b.x0), fr.sy(b.y1), fr.sx(b.x1) - fr.sx(b.x0), fr.sy(b.y0) - fr.sy(b.y1))
+    ctx.restore()
+  }
+
   if (props.regions) {
     const res = Math.min(props.res, 160)
     const [x0, x1, y0, y1] = d
@@ -83,14 +103,22 @@ function draw() {
         labels[j * res + i] = props.regions(x0 + ((x1 - x0) * i) / (res - 1), yy)
     }
     paintRegions(fr, labels, res, props.regionColors)
-  } else if (props.decision) {
-    const g = sampleField(props.decision, d, props.res)
-    paintField(fr, g, props.res, props.fieldAlpha)
-    if (props.boundary) strokePath(fr, contour(g, props.res, 0, d), INK, 1.8)
+  } else if (props.grid || props.decision) {
+    const res = props.grid ? props.gridRes : props.res
+    const g = props.grid
+      ? (props.grid instanceof Float64Array ? props.grid : Float64Array.from(props.grid))
+      : sampleField(props.decision!, d, res)
+    paintField(fr, g, res, props.fieldAlpha)
+    if (props.boundary) strokePath(fr, contour(g, res, 0, d), INK, 1.8)
     if (props.margins) {
-      strokePath(fr, contour(g, props.res, -1, d), INK, 1.1, [5, 4])
-      strokePath(fr, contour(g, props.res, 1, d), INK, 1.1, [5, 4])
+      strokePath(fr, contour(g, res, -1, d), INK, 1.1, [5, 4])
+      strokePath(fr, contour(g, res, 1, d), INK, 1.1, [5, 4])
     }
+  }
+
+  for (const f of props.extraContours) {
+    const res = Math.min(props.res, 110)
+    strokePath(fr, contour(sampleField(f, d, res), res, 0, d), MUTED, 1, [])
   }
 
   if (props.band)
@@ -98,6 +126,8 @@ function draw() {
       props.band.color ?? '#b7791f', props.band.alpha ?? 0.3)
   for (const l of props.lines)
     drawLine(fr, l.a, l.c, l.color ?? INK, l.width ?? 2, l.dash ?? [])
+  for (const s of props.segments)
+    strokePath(fr, [[s.from, s.to]], s.color ?? INK, s.width ?? 2, s.dash ?? [])
 
   drawPoints(fr, props.X, props.y, props.pointSize, props.pointAlpha, props.palette)
   for (const r of props.rings)

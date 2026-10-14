@@ -98,7 +98,7 @@ C04_FIGURES := $(foreach f,$(C04_STEMS),Course04/img/$(f).png)
 
 
 .PHONY: slides figures clean-slides clean-figures \
-        interactive interactive-build clean-interactive
+        interactive interactive-bis interactive-build clean-interactive
 slides: $(SLIDE_TARGETS)
 
 figures: $(C01_FIGURES) $(DS_FIGURES) $(C02_FIGURES) $(C03_FIGURES) \
@@ -133,18 +133,25 @@ Course04/slides.pptx: $(C04_FIGURES)
 	pandoc $< -o $@ --slide-level=2 --resource-path=$(dir $<)
 	python3 scripts/fit_pptx.py $@
 
-# Course03's interactive companion: the same lecture as a Slidev deck, where
-# the figures are recomputed in the browser as the sliders move.
+# Course03's interactive companions: the same two lectures as Slidev decks,
+# where the figures are recomputed in the browser as the sliders move. One npm
+# project holds both: they share style.css, the components and the lib, and
+# differ only in their slides*.md.
 # Needs node and npm; the first run installs into Course03/slidev/node_modules.
-C03_SLIDEV_SRC := Course03/slidev/slides.md Course03/slidev/style.css \
-                  $(wildcard Course03/slidev/components/*.vue) \
-                  $(wildcard Course03/slidev/layouts/*.vue) \
-                  $(wildcard Course03/slidev/lib/*.ts)
+C03_SLIDEV_SHARED := Course03/slidev/style.css \
+                     $(wildcard Course03/slidev/components/*.vue) \
+                     $(wildcard Course03/slidev/layouts/*.vue) \
+                     $(wildcard Course03/slidev/lib/*.ts)
+C03_SLIDEV_SRC := Course03/slidev/slides.md $(C03_SLIDEV_SHARED)
+C03_SLIDEV_BIS_SRC := Course03/slidev/slides-bis.md $(C03_SLIDEV_SHARED)
 
 interactive: Course03/slidev/node_modules
 	cd Course03/slidev && npm run dev
 
-interactive-build: Course03/interactive.html
+interactive-bis: Course03/slidev/node_modules
+	cd Course03/slidev && npm run dev-bis
+
+interactive-build: Course03/interactive.html Course03/interactive-bis.html
 
 Course03/slidev/node_modules: Course03/slidev/package.json
 	cd Course03/slidev && npm install --no-audit --no-fund
@@ -161,8 +168,14 @@ Course03/interactive.html: $(C03_SLIDEV_SRC) Course03/slidev/vite.config.ts \
 	cd Course03/slidev && npm run build
 	cp Course03/slidev/dist/index.html $@
 
+Course03/interactive-bis.html: $(C03_SLIDEV_BIS_SRC) Course03/slidev/vite.config.ts \
+                               Course03/slidev/node_modules
+	cd Course03/slidev && npm run build-bis
+	cp Course03/slidev/dist-bis/index.html $@
+
 clean-interactive:
-	rm -rf Course03/slidev/dist Course03/interactive.html
+	rm -rf Course03/slidev/dist Course03/slidev/dist-bis \
+	       Course03/interactive.html Course03/interactive-bis.html
 
 clean-slides:
 	rm -f $(SLIDE_TARGETS)

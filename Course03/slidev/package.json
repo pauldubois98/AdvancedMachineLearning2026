@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "slidev --open",
+    "dev-bis": "slidev slides-bis.md --open",
     "build": "slidev build --base ./ --out dist",
+    "build-bis": "slidev build slides-bis.md --base ./ --out dist-bis",
     "export": "slidev export"
   },
   "dependencies": {

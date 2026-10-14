@@ -347,3 +347,10 @@ export function drawBand(
 }
 
 export const sigmoid = (z: number) => 1 / (1 + Math.exp(-z))
+
+/** The inverse of the sigmoid `paintField` applies, so a probability field can
+ *  be handed to it unchanged: shade(x) = p. */
+export function logit(p: number): number {
+  const q = Math.min(1 - 1e-6, Math.max(1e-6, p))
+  return Math.log(q / (1 - q))
+}

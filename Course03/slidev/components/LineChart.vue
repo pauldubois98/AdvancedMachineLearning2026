@@ -23,6 +23,8 @@ const props = withDefaults(
     series: Series[]
     /** shaded vertical band(s), in data coordinates */
     bands?: { x0: number; x1: number; color?: string; alpha?: number }[]
+    /** histogram bars: x is the centre, w the width, both in data units */
+    bars?: { x: number; y: number; w: number; color?: string; alpha?: number; label?: string; y0?: number }[]
     /** shaded region between two curves */
     ribbons?: { points: [number, number, number][]; color?: string; alpha?: number }[]
     dots?: { x: number; y: number; color?: string; r?: number; hollow?: boolean; marker?: 'circle' | 'triangle' }[]
@@ -43,7 +45,7 @@ const props = withDefaults(
     pad?: { l: number; r: number; t: number; b: number }
   }>(),
   {
-    bands: () => [], ribbons: () => [], dots: () => [], vlines: () => [],
+    bands: () => [], bars: () => [], ribbons: () => [], dots: () => [], vlines: () => [],
     hlines: () => [], labels: () => [], xLabel: '', yLabel: '', axes: true,
     logX: false, logY: false, title: '', titleColor: INK,
     pad: () => ({ l: 46, r: 14, t: 10, b: 34 }),
@@ -112,6 +114,18 @@ const paths = computed(() => props.series.map((s) => ({ d: path(s), s })))
         :x="tx(b.x0)" :y="pad.t" :width="Math.max(0, tx(b.x1) - tx(b.x0))" :height="inner.h"
         :style="{ fill: b.color || '#00ab0e', fillOpacity: b.alpha ?? 0.1 }"
       />
+      <template v-for="(b, i) in bars" :key="`bar${i}`">
+        <rect
+          :x="tx(b.x - b.w / 2)" :y="Math.min(ty(b.y), ty(b.y0 ?? 0))"
+          :width="Math.max(0, tx(b.x + b.w / 2) - tx(b.x - b.w / 2))"
+          :height="Math.abs(ty(b.y) - ty(b.y0 ?? 0))"
+          :style="{ fill: b.color || '#2b6cb0', fillOpacity: b.alpha ?? 0.8 }"
+        />
+        <text
+          v-if="b.label" :x="tx(b.x)" :y="ty(b.y) + (b.y >= (b.y0 ?? 0) ? -5 : 13)"
+          class="mid" :style="{ fill: '#9aa0a6', fontSize: '10.5px' }"
+        >{{ b.label }}</text>
+      </template>
       <path
         v-for="(r, i) in ribbons" :key="`r${i}`"
         :d="ribbon(r)"
