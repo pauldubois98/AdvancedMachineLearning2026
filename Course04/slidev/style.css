@@ -1,0 +1,153 @@
+/* The look of the printed deck: Lato, ink on white, coloured accents. */
+:root {
+  --ink: #1b1b1b;
+  --muted: #9aa0a6;
+  --blue: #2b6cb0;
+  --green: #00ab0e;
+  --red: #c53030;
+  --purple: #6b46c1;
+  --gold: #b7791f;
+  --grid: #cccfd2;
+}
+
+.slidev-layout {
+  font-family: Lato, 'Helvetica Neue', system-ui, sans-serif;
+  color: var(--ink);
+  background: #fff;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.slidev-layout h2 {
+  font-size: 1.55rem;
+  margin: 0 0 0.7rem;
+  line-height: 1.2;
+}
+
+/* --- figure slides: the figure eats the remaining height --- */
+.slidev-layout.fig {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2.5rem 1.6rem;
+}
+.slidev-layout.fig > h2 {
+  flex: 0 0 auto;
+}
+.slidev-layout.fig > *:not(h2) {
+  flex: 1 1 0;
+  min-height: 0;
+}
+.slidev-layout.fig > p:not(h2) {
+  flex: 0 0 auto;
+}
+
+/* --- equation slides --- */
+.slidev-layout.eq {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4.6rem 3rem 2rem;
+}
+.slidev-layout.eq h2 {
+  position: absolute;
+  top: 2rem;
+  left: 2.5rem;
+  margin: 0;
+}
+/* content inside a div is markdown-parsed when blank lines surround it,
+   which wraps it in <p>: those must not add vertical rhythm of their own */
+.slidev-layout.eq p { margin: 0.1rem 0; }
+.slidev-layout.eq .katex-display {
+  margin: 0.55rem 0;
+}
+
+/* KaTeX at a size that reads from the back of the room */
+.katex-display > .katex {
+  font-size: 1.35em;
+}
+
+/* the grey lines the printed figures use under a statement */
+.note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.lead {
+  font-size: 0.95rem;
+}
+em.hl-green { color: var(--green); font-style: normal; }
+em.hl-blue { color: var(--blue); font-style: normal; }
+em.hl-red { color: var(--red); font-style: normal; }
+em.hl-gold { color: var(--gold); font-style: normal; }
+em.hl-purple { color: var(--purple); font-style: normal; }
+
+/* two columns of notes under an equation */
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2.5rem;
+  margin-top: 0.6rem;
+}
+.cols h4 { font-weight: 600; margin: 0 0 0.25rem; font-size: 0.95rem; }
+.cols ul { margin: 0; padding-left: 1.1rem; font-size: 0.85rem; line-height: 1.55; }
+.cols p { margin: 0.1rem 0; }
+
+table.plain { border-collapse: collapse; font-size: 0.86rem; width: 100%; }
+table.plain th {
+  text-align: left; font-weight: 400; color: var(--muted);
+  border-bottom: 1px solid var(--grid); padding: 0.2rem 0.6rem 0.25rem 0;
+  font-size: 0.8rem;
+}
+table.plain td { padding: 0.28rem 0.6rem 0.28rem 0; border-bottom: 1px solid #eef0f2; vertical-align: top; }
+
+/* markdown tables, styled like the printed figures' rules */
+.slidev-layout table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.86rem;
+}
+.slidev-layout th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--muted);
+  border-bottom: 1px solid var(--grid);
+  padding: 0.2rem 0.7rem 0.25rem 0;
+  font-size: 0.8rem;
+}
+.slidev-layout td {
+  padding: 0.3rem 0.7rem 0.3rem 0;
+  border-bottom: 1px solid #eef0f2;
+  vertical-align: top;
+}
+.narrow table { font-size: 0.86rem; }
+.narrow td, .narrow th { text-align: center; }
+.narrow td:first-child, .narrow th:first-child { text-align: left; }
+
+/* --- Slidev's "go to slide" dialog -------------------------------------- *
+ * Goto.vue renders its result list whenever fuse.js returns matches, and
+ * hides the dialog by shifting the container up by 5rem (-top-20). fuse.js
+ * >= 7.1 answers an *empty* query with every record, so with the dialog shut
+ * the list of all slides is still painted and hangs down the right-hand side
+ * of every slide. Keep the list for the open dialog only: it is open exactly
+ * when it is not shifted away, and when focus is inside it.                 */
+#slidev-goto-dialog.-top-20 .autocomplete-list,
+#slidev-goto-dialog:not(:focus-within) .autocomplete-list {
+  display: none;
+}
+
+/* the dialog itself reads as a floating panel, not a white rectangle bleeding
+   into the slide */
+#slidev-goto-dialog > div {
+  border-radius: 0.4rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+#slidev-goto-dialog .autocomplete-list {
+  border-radius: 0.4rem;
+}
+#slidev-goto-input {
+  width: 100%;
+}

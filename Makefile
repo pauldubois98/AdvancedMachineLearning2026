@@ -98,7 +98,8 @@ C04_FIGURES := $(foreach f,$(C04_STEMS),Course04/img/$(f).png)
 
 
 .PHONY: slides figures clean-slides clean-figures \
-        interactive interactive-bis interactive-build clean-interactive
+        interactive interactive-bis interactive-c04 interactive-build \
+        clean-interactive
 slides: $(SLIDE_TARGETS)
 
 figures: $(C01_FIGURES) $(DS_FIGURES) $(C02_FIGURES) $(C03_FIGURES) \
@@ -151,10 +152,18 @@ interactive: Course03/slidev/node_modules
 interactive-bis: Course03/slidev/node_modules
 	cd Course03/slidev && npm run dev-bis
 
-interactive-build: Course03/interactive.html Course03/interactive-bis.html
+interactive-c04: Course04/slidev/node_modules
+	cd Course04/slidev && npm run dev
+
+interactive-build: Course03/interactive.html Course03/interactive-bis.html \
+                   Course04/interactive.html
 
 Course03/slidev/node_modules: Course03/slidev/package.json
 	cd Course03/slidev && npm install --no-audit --no-fund
+	@touch $@
+
+Course04/slidev/node_modules: Course04/slidev/package.json
+	cd Course04/slidev && npm install --no-audit --no-fund
 	@touch $@
 
 # The deck ships as ONE committed, self-contained file, because the Pages
@@ -173,9 +182,22 @@ Course03/interactive-bis.html: $(C03_SLIDEV_BIS_SRC) Course03/slidev/vite.config
 	cd Course03/slidev && npm run build-bis
 	cp Course03/slidev/dist-bis/index.html $@
 
+# Course04's companion is its own npm project: nothing is shared with
+# Course03, so either deck can be rebuilt without touching the other.
+C04_SLIDEV_SRC := Course04/slidev/slides.md Course04/slidev/style.css \
+                  $(wildcard Course04/slidev/components/*.vue) \
+                  $(wildcard Course04/slidev/layouts/*.vue) \
+                  $(wildcard Course04/slidev/lib/*.ts)
+
+Course04/interactive.html: $(C04_SLIDEV_SRC) Course04/slidev/vite.config.ts \
+                           Course04/slidev/node_modules
+	cd Course04/slidev && npm run build
+	cp Course04/slidev/dist/index.html $@
+
 clean-interactive:
-	rm -rf Course03/slidev/dist Course03/slidev/dist-bis \
-	       Course03/interactive.html Course03/interactive-bis.html
+	rm -rf Course03/slidev/dist Course03/slidev/dist-bis Course04/slidev/dist \
+	       Course03/interactive.html Course03/interactive-bis.html \
+	       Course04/interactive.html
 
 clean-slides:
 	rm -f $(SLIDE_TARGETS)

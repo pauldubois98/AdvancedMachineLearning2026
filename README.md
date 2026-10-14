@@ -26,8 +26,9 @@ Feel free to use another one of your choice.
   - [Notebook - solutions](Course02/lab2_solutions.ipynb)
 - Session 3:
   - [Slides (.pptx)](Course03/slides.pptx)
-  - [Slides — interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html) (same lecture, with sliders for C, γ, ε and the kernel)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html) (same lecture, with sliders for C, γ, ε and the kernel)
   - [Slides bis (.pptx)](Course03/slides-bis.pptx)
-  - [Slides bis — interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)
+  - [Slides bis - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)
 - Session 4:
   - [Slides (.pptx)](Course04/slides.pptx)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html) (same lecture, with sliders for K, the linkage and the cut, ε, MinPts and C_min)
