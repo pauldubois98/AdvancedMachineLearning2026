@@ -137,7 +137,7 @@ layout: eq
 | <em class="hl-purple">complete</em> vs <em class="hl-purple">partial</em> | | everything is clustered, or some points are left out |
 | <em class="hl-gold">homogeneous</em> vs <em class="hl-gold">heterogeneous</em> | | same size, shape and density, or not |
 
-<div class="note mt-4">a method answers all five questions, whether you asked it to or not</div>
+<div class="note mt-4">A method answers all five questions</div>
 
 </div>
 
@@ -177,8 +177,7 @@ $D : E \times E \to \mathbb{R}^{+}$
 </div>
 </div>
 
-<div class="mt-6">every clustering method reads the data through this function, and
-nothing else</div>
+<div class="mt-6">Every clustering method reads the data through this function</div>
 
 ---
 layout: fig
