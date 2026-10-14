@@ -70,7 +70,7 @@ const gap = computed(() => at.value.test - at.value.train)
         ]"
       />
       <p class="note">
-        more label noise pushes the best depth left: the noisier the labels, the
+        More label noise pushes the best depth left: the noisier the labels, the
         less of the data is worth fitting. min_samples_leaf prunes from the other end.
       </p>
     </div>

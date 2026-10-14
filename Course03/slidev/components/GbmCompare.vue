@@ -52,7 +52,7 @@ const dim = (k: string) => focus.value !== 'all' && focus.value !== k
         ]"
       />
       <p class="note">
-        the objective, the gain and the leaf value are the same three formulas in all
+        The objective, the gain and the leaf value are the same three formulas in all
         three libraries; what differs is how much of the data each one is willing to
         look at, and in what order it spends its splits.
       </p>

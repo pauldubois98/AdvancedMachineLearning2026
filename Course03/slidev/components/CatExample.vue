@@ -58,12 +58,12 @@ const leaks = computed(() => {
       </table>
       <p class="note" :style="{ color: leaveOut ? GREEN : RED }">
         <template v-if="!leaveOut">
-          each row's own Buy is one of the values averaged into its own encoding
+          Each row's own Buy is one of the values averaged into its own encoding.
         </template>
         <template v-else>
-          leaving the row out takes your own answer out of your own average, and hands
+          Leaving the row out takes your own answer out of your own average, and hands
           you the opposite one instead: customer 3, the only French customer who did not
-          buy, now carries the highest encoding of the three
+          buy, now carries the highest encoding of the three.
         </template>
       </p>
     </div>
@@ -81,12 +81,12 @@ const leaks = computed(() => {
         <Knob v-model="a" :min="0" :max="10" label="prior weight a" :digits="1" :color="MUTED" />
       </div>
       <p class="note">
-        the prior weight a pulls every category toward the base rate {{ prior.toFixed(1) }},
+        The prior weight a pulls every category toward the base rate {{ prior.toFixed(1) }},
         which is a smoothing, not a fix: with a = 10 the German rows read 0.33 instead
         of 0.00, and still differ from the French ones by exactly their labels.
       </p>
       <p class="note red" v-if="!leaveOut">
-        both German customers are handed the same number, and that number is their answer
+        Both German customers are handed the same number, and that number is their answer.
       </p>
     </div>
   </div>

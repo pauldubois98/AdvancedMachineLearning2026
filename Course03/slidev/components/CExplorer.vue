@@ -67,9 +67,9 @@ const svSeries = sweep.map((p) => [p.C, p.nsv / data.X.length] as [number, numbe
           ]"
         />
         <p class="note" :style="{ color: tone }">
-          <template v-if="C < 0.2">soft: a wide street, violations tolerated</template>
-          <template v-else-if="C > 20">hard: a narrow street, fits the training points</template>
-          <template v-else>in between: the usual compromise</template>
+          <template v-if="C < 0.2">Soft: a wide street, violations tolerated.</template>
+          <template v-else-if="C > 20">Hard: a narrow street that fits the training points.</template>
+          <template v-else>In between: the usual compromise.</template>
         </p>
       </div>
     </div>

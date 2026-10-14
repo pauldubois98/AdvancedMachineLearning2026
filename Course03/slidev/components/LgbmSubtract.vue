@@ -67,7 +67,7 @@ const counts = computed(() => {
         />
       </div>
       <p class="note">
-        the two children's histograms add up to the parent's, bin by bin. LightGBM
+        The two children's histograms add up to the parent's, bin by bin. LightGBM
         fills whichever child has fewer rows and subtracts for the other, so a level
         costs the smaller halves only.
       </p>

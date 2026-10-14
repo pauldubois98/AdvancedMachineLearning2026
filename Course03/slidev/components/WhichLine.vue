@@ -64,10 +64,10 @@ const band = computed(() => {
       </div>
       <p class="note" :style="{ color: show ? INK : RED }">
         <template v-if="show">
-          the widest street belongs to line {{ widest + 1 }}; that is the one the SVM picks
+          The widest street belongs to line {{ widest + 1 }}; that is the one the SVM picks.
         </template>
         <template v-else>
-          the training error cannot choose between them; something else has to
+          The training error cannot choose between them; something else has to.
         </template>
       </p>
     </div>

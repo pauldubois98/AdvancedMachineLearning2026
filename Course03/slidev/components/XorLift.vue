@@ -42,7 +42,7 @@ const separated = computed(() => t.value > 0.5)
         <template v-else>moving the points to (Φ₁, Φ₂) = (√2·x₁, √2·x₁x₂)…</template>
       </p>
       <p class="note">
-        the SVM never computes Φ: the dual only ever asks for ⟨Φ(x), Φ(x′)⟩,
+        The SVM never computes Φ: the dual only ever asks for ⟨Φ(x), Φ(x′)⟩,
         which here is (1 + x<sup>T</sup>x′)², a polynomial kernel.
       </p>
     </div>

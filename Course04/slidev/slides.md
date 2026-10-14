@@ -25,7 +25,7 @@ Advanced Machine Learning · MSc DSBA · 2026
 
 Paul Dubois
 
-<div class="note mt-8">Week 4 lecture · every figure here is live: move the sliders</div>
+<div class="note mt-8">Week 4 lecture</div>
 
 ---
 layout: section
@@ -57,12 +57,12 @@ layout: eq
 
 <div class="apps">
 
-| | input | what a cluster becomes |
-|---|---|---|
-| <em class="hl-blue">market segmentation</em> | purchase history | segments to target |
-| <em class="hl-green">image segmentation</em> | pixels, voxels | blood, muscle, tumour |
-| <em class="hl-purple">text mining</em> | e-mails, documents | folders, themes |
-| <em class="hl-gold">anomaly detection</em> | transactions, logs | what fits nowhere |
+| | | input | what a cluster becomes |
+|---|---|---|---|
+| <UseCaseIcon kind="market" /> | <em class="hl-blue">market segmentation</em> | purchase history | segments to target |
+| <UseCaseIcon kind="image" /> | <em class="hl-green">image segmentation</em> | pixels, voxels | blood, muscle, tumour |
+| <UseCaseIcon kind="text" /> | <em class="hl-purple">text mining</em> | e-mails, documents | folders, themes |
+| <UseCaseIcon kind="anomaly" /> | <em class="hl-gold">anomaly detection</em> | transactions, logs | what fits nowhere |
 
 <div class="note mt-4">Same algorithm gives four different ideas of what a group is.</div>
 
@@ -70,7 +70,8 @@ layout: eq
 
 <style>
 .apps { font-size: 1.05rem; padding-top: 1rem; }
-.apps td { padding: 0.55rem 0.9rem 0.55rem 0; }
+.apps td { padding: 0.55rem 0.9rem 0.55rem 0; vertical-align: middle; }
+.apps td:first-child { width: 1%; padding-right: 1.4rem; }
 </style>
 
 ---

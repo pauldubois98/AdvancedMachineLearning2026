@@ -70,7 +70,7 @@ const value = computed(() => VALUES[bits.value.index])
         <Knob v-model="x7" :min="0" :max="8" label="x₇ of this row" :digits="1" :color="PURPLE" />
       </div>
       <p class="note">
-        every node of a level uses the same split, so the path is not a walk: it is two
+        Every node of a level uses the same split, so the path is not a walk: it is two
         comparisons that produce two bits, and the bits are an array index. No branching,
         no pointer chasing, the same instructions for every row. This is why CatBoost
         predicts so fast, and it costs accuracy per tree, which it pays back in trees.

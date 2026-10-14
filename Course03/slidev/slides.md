@@ -25,7 +25,7 @@ Advanced Machine Learning · MSc DSBA · 2026
 
 Paul Dubois
 
-<div class="note mt-8">Week 3 lecture · every figure here is live: move the sliders</div>
+<div class="note mt-8">Week 3 lecture</div>
 
 ---
 layout: section
@@ -71,9 +71,9 @@ $y_i f(x_i) > 0$
 
 </div>
 
-<div class="note text-center">if correctly classified</div>
+<div class="note text-center">If correctly classified.</div>
 
-<div class="note text-center mt-8">the margin of the classifier is twice the smallest of these</div>
+<div class="note text-center mt-8">The margin of the classifier is twice the smallest of these.</div>
 
 ---
 layout: fig
@@ -89,7 +89,7 @@ layout: eq
 
 ## Optimization problem
 
-<div class="note text-center">widen the street while keeping points out of it</div>
+<div class="note text-center">Widen the street while keeping points out of it.</div>
 
 $$ \min_{w,\,b}\ \ \frac{1}{2}\|w\|^2 \qquad \mathrm{subject\ to}\qquad y_i\,(w^{T}x_i + b) \geq 1, \quad i = 1,\dots,n $$
 
@@ -114,7 +114,7 @@ layout: eq
 
 ## Lagrangian to α ≥ 0 constraints
 
-<div class="note text-center">an inequality can be made into an equality</div>
+<div class="note text-center">An inequality can be made into an equality.</div>
 
 $$ g_i(w, b) = y_i(w^{T}x_i + b) - 1 \;\geq\; 0 \qquad \Longleftrightarrow \qquad g_i(w, b) - s_i^2 = 0, \quad s_i \in \mathbb{R} $$
 
@@ -122,7 +122,7 @@ $$ \tilde{L}(w, b, \alpha, s) = \frac{1}{2}\|w\|^2 - \sum_i \alpha_i\left[g_i(w,
 
 <div class="note text-center">
 
-$\alpha_i$ are free in sign
+The $\alpha_i$ are free in sign.
 
 </div>
 
@@ -133,7 +133,7 @@ $\alpha_i$ are free in sign
 
 $\alpha_i = 0$ &nbsp;or&nbsp; $s_i = 0$
 
-<span class="note">complementary slackness: zero multiplier, or a point on the margin</span>
+<span class="note">Complementary slackness: zero multiplier, or a point on the margin.</span>
 
 </div>
 <div>
@@ -142,7 +142,7 @@ $\alpha_i = 0$ &nbsp;or&nbsp; $s_i = 0$
 
 $\alpha_i \geq 0$
 
-<span class="note">$s_i = 0$ has to be a minimum, not a maximum</span>
+<span class="note">$s_i = 0$ has to be a minimum, not a maximum.</span>
 
 </div>
 </div>
@@ -166,7 +166,7 @@ the constraint on point $i$: &nbsp; $g_i(w,b) = y_i(w^{T}x_i + b) - 1 \;\geq\; 0
 
 <span class="text-[var(--gold)]">$g_i - s_i^2 = 0, \quad s_i \in \mathbb{R}$</span>
 
-<span class="note">allowed when some $s_i$ exists</span>
+<span class="note">Allowed when some $s_i$ exists.</span>
 
 </div>
 <div>
@@ -175,7 +175,7 @@ the constraint on point $i$: &nbsp; $g_i(w,b) = y_i(w^{T}x_i + b) - 1 \;\geq\; 0
 
 <span class="text-[var(--green)]">$\max_{\alpha_i \geq 0}\ \left(-\alpha_i g_i\right)$</span>
 
-<span class="note">allowed when the charge is zero</span>
+<span class="note">Allowed when the charge is zero.</span>
 
 </div>
 </div>
@@ -217,7 +217,7 @@ $\partial L/\partial w = 0 \;\Rightarrow\; w = \sum_i \alpha_i y_i x_i \qquad \p
 
 <div class="note text-center">
 
-put these back into $L$: $w$ and $b$ are gone
+Put these back into $L$: $w$ and $b$ are gone.
 
 </div>
 
@@ -251,7 +251,7 @@ layout: eq
 
 <div class="note text-center">
 
-from $\hat\alpha$, everything else follows
+From $\hat\alpha$, everything else follows.
 
 </div>
 
@@ -271,7 +271,7 @@ from $\hat\alpha$, everything else follows
 
 <span class="text-[var(--green)]">$f(x) = \sum_{SV} \hat\alpha_i y_i\, \langle x_i,\, x\rangle + \hat{b}$</span>
 
-<span class="note">the prediction asks only for inner products of $x$ with the support vectors</span>
+<span class="note">The prediction asks only for inner products of $x$ with the support vectors.</span>
 
 </div>
 </div>
@@ -280,8 +280,8 @@ from $\hat\alpha$, everything else follows
 
 | storing | cost | when it breaks |
 | --- | --- | --- |
-| <span class="text-[var(--gold)]">$\hat{w}$</span> | $d$ numbers | <span class="note">hopeless if $x$ lives in a huge space</span> |
-| <span class="text-[var(--green)]">the $\hat\alpha_i$</span> | one per support vector | <span class="note">the sum stays finite</span> |
+| <span class="text-[var(--gold)]">$\hat{w}$</span> | $d$ numbers | <span class="note">Hopeless if $x$ lives in a huge space.</span> |
+| <span class="text-[var(--green)]">the $\hat\alpha_i$</span> | one per support vector | <span class="note">The sum stays finite.</span> |
 
 </div>
 
@@ -337,7 +337,7 @@ subject to $\quad y_i(w^{T}x_i + b) \geq 1 - \xi_i, \quad \xi_i \geq 0$
 
 <div class="note text-center">
 
-$C$ sets the exchange rate between the two
+$C$ sets the exchange rate between the two.
 
 </div>
 
@@ -351,7 +351,7 @@ $$ \max_{\alpha}\ \sum_i \alpha_i - \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_
 
 <div class="note text-center">
 
-the same dual as before, with the multipliers capped at $C$
+The same dual as before, with the multipliers capped at $C$.
 
 </div>
 
@@ -373,7 +373,7 @@ $$ \min_{w,b}\ \ \underbrace{\frac{1}{2}\|w\|^2}_{\textcolor{#00ab0e}{\text{make
 
 <div class="note text-center mt-8">
 
-the margin is the penalty, the hinge is the loss; one more regularised fit
+The margin is the penalty, the hinge is the loss: one more regularised fit.
 
 </div>
 
@@ -430,12 +430,12 @@ $$ \textcolor{#00ab0e}{k(x, x') \;=\; \langle \Phi(x),\, \Phi(x')\rangle} $$
 <div class="cols mt-4 text-center note">
 <div>
 
-implicit space can be infinite
+The implicit space can be infinite.
 
 </div>
 <div>
 
-cost follows $n$, not the dimension
+The cost follows $n$, not the dimension.
 
 </div>
 </div>
@@ -468,7 +468,7 @@ So that the dual stays convex (hence the solution stays unique)
 
 </div>
 
-<div class="note text-center mt-4">sums and products of kernels are kernels</div>
+<div class="note text-center mt-4">Sums and products of kernels are kernels.</div>
 
 ---
 layout: eq
@@ -517,7 +517,7 @@ layout: eq
 
 <div class="note text-center">
 
-replace every $x_i^{T}x_j$ by $k(x_i, x_j)$, and nothing else changes
+Replace every $x_i^{T}x_j$ by $k(x_i, x_j)$, and nothing else changes.
 
 </div>
 
@@ -562,7 +562,7 @@ layout: eq
 </div>
 </div>
 
-<div class="note text-center mt-8">"instance-based method": stores data (not parameters)</div>
+<div class="note text-center mt-8">An "instance-based method": it stores data, not parameters.</div>
 
 ---
 layout: fig
@@ -600,13 +600,13 @@ layout: eq
 
 ## Regression in the dual
 
-<div class="note text-center">a point can miss the tube from above or from below</div>
+<div class="note text-center">A point can miss the tube from above or from below.</div>
 
 $$ \min\ \frac{1}{2}\|w\|^2 + C\sum_i \left(\xi_i + \xi_i^{*}\right) \qquad \mathrm{s.t.}\qquad |y_i - f(x_i)| \leq \varepsilon + \xi_i^{(*)} $$
 
 <div class="note text-center">
 
-two slacks, so two multipliers: $\alpha_i$ above and $\alpha_i^{*}$ below
+Two slacks, so two multipliers: $\alpha_i$ above and $\alpha_i^{*}$ below.
 
 </div>
 

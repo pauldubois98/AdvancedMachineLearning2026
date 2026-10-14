@@ -85,9 +85,9 @@ const at = computed(() =>
         <Readout :items="at" />
       </div>
       <p class="note">
-        <span v-if="curves.length < ETAS.length">measuring… {{ curves.length }}/{{ ETAS.length }} runs</span>
+        <span v-if="curves.length < ETAS.length">Measuring… {{ curves.length }}/{{ ETAS.length }} runs</span>
         <span v-else>
-          the dots are each run's best. Halving η roughly doubles the trees you need:
+          The dots are each run's best. Halving η roughly doubles the trees you need:
           they are not two knobs, they are a budget and how finely you spend it.
         </span>
       </p>

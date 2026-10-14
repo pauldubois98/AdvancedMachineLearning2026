@@ -25,7 +25,7 @@ Advanced Machine Learning · MSc DSBA · 2026
 
 Paul Dubois
 
-<div class="note mt-8">Week 3 lecture · every figure here is live: move the sliders</div>
+<div class="note mt-8">Week 3 lecture</div>
 
 ---
 layout: section
@@ -269,7 +269,7 @@ layout: eq
 
 ## Loss simplification for one leaf
 
-<div class="note text-center">expand to second order in the new tree, drop the constant, then add the rows up leaf by leaf</div>
+<div class="note text-center">Expand to second order in the new tree, drop the constant, then add the rows up leaf by leaf.</div>
 
 $$ \mathcal{L}^{(m)} \;\simeq\; \sum_{j=1}^{T}\left[\,G_j\,w_j + \frac{1}{2}\left(H_j + \lambda\right)w_j^{2}\,\right] \;+\; \gamma T \qquad G_j = \sum_{i \in I_j} g_i,\quad H_j = \sum_{i \in I_j} h_i $$
 

@@ -81,7 +81,7 @@ const fits = computed(() => (mode.value === 'ova' ? K : mode.value === 'ovo' ? (
         <template v-if="mode === 'none'">
           <p class="head">the SVM only knows how to say ±1</p>
           <p class="note">
-            with K classes there is no single two-class problem to solve, so the
+            With K classes there is no single two-class problem to solve, so the
             problem is cut into several of them.
           </p>
         </template>
@@ -89,7 +89,7 @@ const fits = computed(() => (mode.value === 'ova' ? K : mode.value === 'ovo' ? (
           <p class="head" :style="{ color: BLUE }">K fits: class k against everything else</p>
           <p class="eq">k̂ = arg max<sub>k</sub> f<sub>k</sub>(x)</p>
           <p class="note">
-            cheap: K fits in all. But each fit sees an unbalanced problem, and the
+            Cheap: K fits in all. But each fit sees an unbalanced problem, and the
             scores f<sub>k</sub> come from different models, so comparing them is a
             leap of faith.
           </p>
@@ -97,7 +97,7 @@ const fits = computed(() => (mode.value === 'ova' ? K : mode.value === 'ovo' ? (
         <template v-else>
           <p class="head" :style="{ color: GREEN }">K(K−1)/2 fits: every pair, then a majority vote</p>
           <p class="note">
-            each fit is small and balanced, but there are {{ (K * (K - 1)) / 2 }} of
+            Each fit is small and balanced, but there are {{ (K * (K - 1)) / 2 }} of
             them here and ~K²/2 in general. This is what scikit-learn's SVC does.
           </p>
         </template>

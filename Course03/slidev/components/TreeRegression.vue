@@ -72,8 +72,8 @@ const truthMse = computed(() => {
         ]"
       />
       <p class="note">
-        the training error falls all the way to zero; the error against the dashed
-        curve turns around, because past some depth the staircase is fitting noise
+        The training error falls all the way to zero; the error against the dashed
+        curve turns around, because past some depth the staircase is fitting noise.
       </p>
     </div>
   </div>

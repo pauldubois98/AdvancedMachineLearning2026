@@ -83,7 +83,7 @@ const floorErr = computed(() => (mean.value.length ? mean.value[MAX - 1][1] : 0)
         />
       </div>
       <p class="note">
-        the curve flattens, it never turns back up: a tree added to a forest can
+        The curve flattens, it never turns back up: a tree added to a forest can
         only move the average, never fit the training rows harder. Flat is fine,
         you just pay for it in time.
       </p>

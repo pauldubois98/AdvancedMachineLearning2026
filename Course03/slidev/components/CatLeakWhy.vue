@@ -50,7 +50,7 @@ const diag = computed(() => rows.value.map((r) => [r.enc, r.p] as [number, numbe
         :labels="[{ x: 0.02, y: 0.95, text: 'dashed: the base rate a useless feature would sit on', color: MUTED, size: 11 }]"
       />
       <p class="note">
-        when P(Buy = 1 | encoding) equals the encoding itself, the feature is a readout
+        When P(Buy = 1 | encoding) equals the encoding itself, the feature is a readout
         of the label it was built from. A tree splitting on it scores beautifully on the
         training rows and knows nothing about a new customer, whose encoding is computed
         without their label, and so lands on the flat line instead.

@@ -104,7 +104,7 @@ const p = computed(() => 1 / (1 + Math.exp(-F.value)))
         ]"
       />
       <p class="note">
-        one g and one h per row, recomputed once for each new tree. A row the model
+        One g and one h per row, recomputed once for each new tree. A row the model
         already has right has a small g: it barely pulls the next tree at all.
       </p>
     </div>

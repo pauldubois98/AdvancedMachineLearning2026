@@ -78,7 +78,7 @@ const nowSv = computed(() => model.value.sv.length)
         ]"
       />
       <p class="note">
-        a wider tube means fewer support vectors and a flatter fit: ε buys
+        A wider tube means fewer support vectors and a flatter fit: ε buys
         sparsity, and pays for it in resolution.
       </p>
     </div>

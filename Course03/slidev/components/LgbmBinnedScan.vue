@@ -60,7 +60,7 @@ const lost = computed(() => maxExact - binned.value.bestGain)
         />
       </div>
       <p class="note">
-        the binning is an approximation, and with a handful of bins it is a visible one.
+        The binning is an approximation, and with a handful of bins it is a visible one.
         Push the slider up and the two curves close: at LightGBM's 255 bins the gap is
         invisible, and the scan is still over 255 candidates instead of n − 1.
       </p>

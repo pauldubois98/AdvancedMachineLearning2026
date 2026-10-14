@@ -83,7 +83,7 @@ const rss = computed(() => {
         <Readout :items="[{ label: 'training error', value: rss.toFixed(4), color: BLUE }]" />
       </div>
       <p class="note">
-        each tree is fitted to the residuals of the sum so far, never to y. Push m up
+        Each tree is fitted to the residuals of the sum so far, never to y. Push m up
         and the right panel flattens onto zero: that is the whole algorithm.
       </p>
     </div>

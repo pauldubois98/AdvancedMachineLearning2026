@@ -80,7 +80,7 @@ function dur(s: number): string {
       </div>
       <p class="verdict" :style="{ color: verdict.color }">{{ verdict.text }}</p>
       <p class="note">
-        the kernel fit grows like n² to n³, and the Gram matrix like n².
+        The kernel fit grows like n² to n³, and the Gram matrix like n².
         Rules of thumb: below ~10 000 points, any kernel; above that, LinearSVC.
       </p>
     </div>

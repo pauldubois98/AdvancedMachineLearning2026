@@ -46,7 +46,7 @@ const sqrtP = computed(() => Math.round(Math.sqrt(Math.round(p.value))))
         >x<sub>{{ c }}</sub></span>
         <span class="best" :style="{ color: GREEN }">best: x<sub>{{ r.winner + 1 }}</sub></span>
       </div>
-      <p class="note red">a new draw at every node, not once per tree</p>
+      <p class="note red">A new draw at every node, not once per tree.</p>
     </div>
     <div class="side">
       <h4>at every split, the tree</h4>

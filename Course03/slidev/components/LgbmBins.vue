@@ -65,7 +65,7 @@ const edgeLines = computed(() => bins.value.edges.map((e) => ({ x: e, color: '#e
         />
       </div>
       <p class="note">
-        one pass over the rows fills the histogram, and the pass is over whatever
+        One pass over the rows fills the histogram, and the pass is over whatever
         number of rows you have; the scan that follows is over bins, and LightGBM
         uses 255 of them whether there are a thousand rows or a billion.
       </p>

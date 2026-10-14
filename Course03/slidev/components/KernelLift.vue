@@ -141,12 +141,12 @@ const split = computed(() => {
         ]"
       />
       <p class="note">
-        no straight line works in the plane. One dimension up, a flat plane
+        No straight line works in the plane. One dimension up, a flat plane
         separates the two rings, and back in 2D that plane is a circle.
       </p>
       <p class="note strong">
-        the kernel computes the lifted inner products without ever building the
-        extra column
+        The kernel computes the lifted inner products without ever building the
+        extra column.
       </p>
     </div>
   </div>

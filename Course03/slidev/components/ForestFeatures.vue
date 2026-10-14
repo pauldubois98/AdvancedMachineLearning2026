@@ -70,8 +70,8 @@ const done = computed(() => points.value.length === MF_KS.length)
         ]"
       />
       <p class="note">
-        <span v-if="!done">measuring… {{ points.length }}/{{ MF_KS.length }} forests fitted</span>
-        <span v-else-if="best">√p is a default, not a law: here the best is {{ best.k }}</span>
+        <span v-if="!done">Measuring… {{ points.length }}/{{ MF_KS.length }} forests fitted</span>
+        <span v-else-if="best">√p is a default, not a law: here the best is {{ best.k }}.</span>
       </p>
     </div>
   </div>

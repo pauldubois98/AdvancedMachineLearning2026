@@ -72,7 +72,7 @@ const at = computed(() => {
       <Readout :items="[{ label: 'candidates to try', value: `${N_BINS - 1}, one per bin edge`, color: GREEN }]" />
     </div>
     <p class="note">
-      one sweep fills both running rows; after that every candidate split is a single
+      One sweep fills both running rows; after that every candidate split is a single
       subtraction, which is why the cost of the scan stops depending on the rows.
     </p>
   </div>

@@ -64,7 +64,7 @@ const agreement = computed(() => {
         />
       </div>
       <p class="note">
-        same 300 points, a different draw of them: the boundary moves a long way for
+        Same 300 points, a different draw of them: the boundary moves a long way for
         a change of a few rows. A shallow tree twitches less, and fits less; that is
         the trade the next section buys its way out of.
       </p>

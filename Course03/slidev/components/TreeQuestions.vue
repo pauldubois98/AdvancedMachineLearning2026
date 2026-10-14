@@ -93,7 +93,7 @@ const cuts = computed(() => [
             { label: 'rows per leaf', value: tree.rows.map((r) => r.length).join(' / ') },
           ]"
         />
-        <p class="note">the questions are axis-aligned, so the boxes are too</p>
+        <p class="note">The questions are axis-aligned, so the boxes are too.</p>
       </div>
     </div>
   </div>

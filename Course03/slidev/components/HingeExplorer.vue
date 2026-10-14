@@ -69,8 +69,8 @@ const stateColor = computed(() => (m.value < 0 ? '#c53030' : m.value < 1 ? GOLD 
         </tbody>
       </table>
       <p class="note">
-        the hinge is the only one that charges <em>nothing</em> once the point is
-        past the margin; that is what makes most α<sub>i</sub> zero
+        The hinge is the only one that charges <em>nothing</em> once the point is
+        past the margin; that is what makes most α<sub>i</sub> zero.
       </p>
     </div>
   </div>

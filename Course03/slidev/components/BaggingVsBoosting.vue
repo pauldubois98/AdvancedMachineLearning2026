@@ -63,7 +63,7 @@ const errB = computed(() => errors((x) => boost.value.raw([x])))
       <div>
         <h4 :style="{ color: GREEN }">forest, parallel</h4>
         <p class="note">
-          every tree is deep and fitted to a bootstrap sample of the data, so each one
+          Every tree is deep and fitted to a bootstrap sample of the data, so each one
           is already close on average and only noisy. Averaging attacks the
           <em class="hl-green">variance</em>; the first tree is as unbiased as the last.
         </p>
@@ -71,7 +71,7 @@ const errB = computed(() => errors((x) => boost.value.raw([x])))
       <div>
         <h4 :style="{ color: GOLD }">boosting, sequential</h4>
         <p class="note">
-          every tree is a stump fitted to what the sum so far got wrong, so the fit
+          Every tree is a stump fitted to what the sum so far got wrong, so the fit
           starts far too simple and is corrected round by round. Adding trees attacks
           the <em class="hl-gold">bias</em>.
         </p>

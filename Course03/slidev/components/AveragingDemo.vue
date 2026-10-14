@@ -87,7 +87,7 @@ const predicted = computed(() => Math.sqrt(varianceOfAverage(Math.round(M.value)
         />
       </div>
       <p class="note">
-        both histograms are centred on zero: averaging leaves the bias exactly where
+        Both histograms are centred on zero: averaging leaves the bias exactly where
         it was, and only shrinks the spread. Push ρ up and the shrinking stops.
       </p>
     </div>

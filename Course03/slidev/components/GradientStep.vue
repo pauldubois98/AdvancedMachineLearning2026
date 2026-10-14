@@ -88,7 +88,7 @@ const r = computed(() => -gradAt(F.value))
         />
       </div>
       <p class="note">
-        this row's true answer is y = 1. With squared loss the pseudo-residual is
+        This row's true answer is y = 1. With squared loss the pseudo-residual is
         exactly y − F, the plain residual; with the other losses it is not, and that
         is the only thing that changes. The tree is always fitted to r, and added as
         F<sub>m</sub> = F<sub>m−1</sub> + η h<sub>m</sub>.

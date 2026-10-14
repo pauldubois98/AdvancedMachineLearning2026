@@ -43,7 +43,7 @@ const xs = computed(() => {
     <div class="controls">
       <Knob v-model="M" :min="2" :max="8" :step="1" label="trees in the picture, M" :digits="0" :color="GREEN" />
       <p class="note">
-        a real forest sets M to a few hundred; the picture stops at eight for room.
+        A real forest sets M to a few hundred; the picture stops at eight for room.
         Nothing in the recipe changes with M, which is why more trees never hurts.
       </p>
     </div>

@@ -72,7 +72,7 @@ const node = computed(() => {
       />
     </div>
     <p class="note">
-      a candidate split is one (feature, threshold) pair; the node takes the one with
+      A candidate split is one (feature, threshold) pair; the node takes the one with
       the largest gain, and stays a leaf if no candidate gets the gain above zero.
     </p>
   </div>

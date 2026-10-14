@@ -43,16 +43,16 @@ const terms = computed(() => {
     <div class="cols">
       <div>
         <h4 :style="{ color: GREEN }">σ² : refit one tree on a fresh sample</h4>
-        <p class="note">how far does its prediction jump? Divided by M, so it vanishes.</p>
+        <p class="note">How far does its prediction jump? Divided by M, so it vanishes.</p>
       </div>
       <div>
         <h4 :style="{ color: RED }">ρ : take two trees of the forest</h4>
-        <p class="note">do they get the same rows wrong? Divided by nothing.</p>
+        <p class="note">Do they get the same rows wrong? Divided by nothing.</p>
       </div>
     </div>
     <p class="note center">
-      deep unstable trees make σ² big; trees grown on the same rows and the same
-      columns make ρ big
+      Deep unstable trees make σ² big; trees grown on the same rows and the same
+      columns make ρ big.
     </p>
   </div>
 </template>

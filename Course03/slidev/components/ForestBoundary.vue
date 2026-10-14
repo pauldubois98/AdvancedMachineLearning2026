@@ -74,7 +74,7 @@ const acc = computed(() => ({
         />
       </div>
       <p class="note">
-        same bias, less and less variance: the staircase does not become a curve,
+        Same bias, less and less variance: the staircase does not become a curve,
         a hundred staircases averaged do. Allowing both columns makes the trees
         more alike, and the averaging buys less.
       </p>

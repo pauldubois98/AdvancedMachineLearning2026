@@ -98,8 +98,8 @@ const verdict = computed(() =>
           ]"
         />
         <p class="note">
-          a split is good when both children are purer: the score of a split is the
-          impurity of its children, weighted by how many rows each one gets
+          A split is good when both children are purer: the score of a split is the
+          impurity of its children, weighted by how many rows each one gets.
         </p>
       </div>
     </div>

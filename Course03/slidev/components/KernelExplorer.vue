@@ -84,15 +84,15 @@ function preset(t: KernelType, g: number, c: number) {
       </div>
       <p class="note" :style="{ color: gamma > 20 && usesGamma ? RED : MUTED }">
         <template v-if="usesGamma && gamma > 20">
-          big γ: each point is treated as an island; almost every point becomes a
-          support vector, and the boundary wraps the training set
+          Big γ: each point is treated as an island; almost every point becomes a
+          support vector, and the boundary wraps the training set.
         </template>
         <template v-else-if="type === 'linear'">
-          one straight boundary, whatever the data looks like
+          One straight boundary, whatever the data looks like.
         </template>
         <template v-else>
           γ sets how far one point's influence reaches; C still sets how much
-          violation is allowed
+          violation is allowed.
         </template>
       </p>
     </div>

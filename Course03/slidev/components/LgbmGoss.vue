@@ -100,7 +100,7 @@ const bestSamp = computed(() => cuts[sampled.value.indexOf(Math.max(...sampled.v
         />
       </div>
       <p class="note">
-        rows with a small gradient are already fitted, so dropping most of them costs
+        Rows with a small gradient are already fitted, so dropping most of them costs
         little; but dropping them changes the class balance of the sample, which is
         what the (1−a)/b factor puts back. Switch it off and the gain curve, and the
         split it picks, drift away.

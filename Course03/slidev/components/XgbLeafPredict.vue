@@ -44,8 +44,8 @@ const tree1 = computed(() => model.value.trees[0])
         title="tree 1: the splits only decide WHICH leaf"
       />
       <p class="note center">
-        the thick path is where this row goes; the leaf value at the end of it is the
-        tree's whole contribution for this row
+        The thick path is where this row goes; the leaf value at the end of it is the
+        tree's whole contribution for this row.
       </p>
     </div>
     <div class="right">

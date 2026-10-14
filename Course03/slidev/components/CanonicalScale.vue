@@ -75,11 +75,11 @@ const rings = computed(() =>
         </tr>
       </table>
       <p v-if="canonical" class="note green">
-        canonical choice: the support vectors sit exactly on f = ±1, and the margin
-        is 2/‖w‖ = {{ (2 / norm).toFixed(2) }}
+        Canonical choice: the support vectors sit exactly on f = ±1, and the margin
+        is 2/‖w‖ = {{ (2 / norm).toFixed(2) }}.
       </p>
       <p v-else class="note">
-        the same line, the same data; only the <em>values</em> of f changed.
+        The same line, the same data; only the <em>values</em> of f changed.
         The dashed f = ±1 lines moved, so 2/‖w‖ is not yet the margin.
         <button @click="s = 1 / minAbsF * s">fix the scale</button>
       </p>

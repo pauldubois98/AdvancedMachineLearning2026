@@ -45,7 +45,7 @@ const label = computed(() => (depth.value >= 13 ? 'unlimited' : `depth ${depth.v
           ]"
         />
         <p class="note">
-          deep enough and the training accuracy hits 100%: the tree can always carve
+          Deep enough and the training accuracy hits 100%: the tree can always carve
           one box per row. The test accuracy is what stops improving first.
         </p>
       </div>

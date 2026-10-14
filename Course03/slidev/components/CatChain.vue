@@ -74,7 +74,7 @@ const walked = computed(() => {
       <Readout :items="[{ label: 'prior p', value: prior.toFixed(1), color: MUTED }]" />
     </div>
     <p class="note">
-      the first row of a country has no history at all and gets the prior; later rows
+      The first row of a country has no history at all and gets the prior; later rows
       get more of their own country's record. The row's own Buy is never in its own
       numerator, and a different ordering gives a different, equally valid encoding,
       which is why CatBoost keeps several permutations rather than one.

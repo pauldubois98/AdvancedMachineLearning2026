@@ -71,7 +71,7 @@ const live = computed(() => ({
         />
       </div>
       <p class="note">
-        the black curve is the ρ on the slider; the coloured ones are fixed values.
+        The black curve is the ρ on the slider; the coloured ones are fixed values.
         Past a few hundred trees, more trees buy nothing: what is left is the floor.
       </p>
     </div>

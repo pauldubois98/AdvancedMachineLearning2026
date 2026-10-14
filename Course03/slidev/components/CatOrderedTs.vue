@@ -68,7 +68,7 @@ const panels = computed(() => [
         />
       </div>
       <p class="note">
-        read one bar: of the rows whose encoding lands there, what share actually
+        Read one bar: of the rows whose encoding lands there, what share actually
         bought? A feature that knows nothing keeps every bar on the dashed base rate.
         The leak gets worse the rarer the category: drop the slider to 5 categories,
         with 120 rows each, and even the greedy encoding has almost nothing left to leak.

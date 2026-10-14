@@ -65,7 +65,7 @@ const depthOf = (t: GrownTree) => Math.max(...t.leaves.map((l) => l.depth))
         />
       </div>
       <p class="note">
-        at the same number of leaves, best-first always reaches an objective at least
+        At the same number of leaves, best-first always reaches an objective at least
         as low: it spends every split where it pays most. It pays for that with depth,
         which is why LightGBM limits num_leaves rather than max_depth, and why a
         leaf-wise tree over-fits more readily on small data.

@@ -94,7 +94,7 @@ const yDomain = computed<[number, number]>(() => {
         ]"
       />
       <p class="note">
-        the training error keeps falling whatever you do, and reaches zero. The test
+        The training error keeps falling whatever you do, and reaches zero. The test
         curve has a bottom, and climbs back out of it. Raise η or the depth and that
         bottom arrives sooner: every knob that makes a round count for more also
         makes over-fitting arrive earlier.

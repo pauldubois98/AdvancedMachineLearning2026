@@ -44,15 +44,15 @@ const separable = computed(() => wrong.value.length === 0)
       />
       <p class="note" :style="{ color: separable ? GREEN : RED }">
         <template v-if="separable">
-          a gap exists: the hard-margin problem has a solution
+          A gap exists: the hard-margin problem has a solution.
         </template>
         <template v-else-if="soft">
-          no line gets everything right; the {{ wrong.length }} circled points are
-          the ones the soft margin gives up on
+          No line gets everything right; the {{ wrong.length }} circled points are
+          the ones the soft margin gives up on.
         </template>
         <template v-else>
-          with no slack allowed the constraints cannot all hold at once:
-          the hard-margin problem has no solution at all
+          With no slack allowed the constraints cannot all hold at once:
+          the hard-margin problem has no solution at all.
         </template>
       </p>
     </div>

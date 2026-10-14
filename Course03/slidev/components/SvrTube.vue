@@ -85,7 +85,7 @@ const lossCurves = computed(() => [
       />
     </div>
     <p class="note">
-      close enough is free: a point inside the tube costs nothing and gets no
+      Close enough is free: a point inside the tube costs nothing and gets no
       multiplier. Only the circled points hold the fit up.
     </p>
   </div>

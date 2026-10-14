@@ -81,7 +81,7 @@ const best = computed(() =>
         />
       </div>
       <p class="note">
-        more columns allowed: stronger trees, and more alike. Too diverse or too
+        More columns allowed: stronger trees, and more alike. Too diverse or too
         alike both lose, and the winner sits in between.
       </p>
     </div>

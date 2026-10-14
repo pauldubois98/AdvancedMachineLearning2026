@@ -72,7 +72,7 @@ const useOfX1 = computed(() => {
         </p>
       </div>
       <p class="note">
-        both features separate the classes equally well. The RBF only sees
+        Both features separate the classes equally well. The RBF only sees
         ‖x − x′‖, so whichever feature carries the larger numbers decides
         everything, until both are put on the same scale.
       </p>

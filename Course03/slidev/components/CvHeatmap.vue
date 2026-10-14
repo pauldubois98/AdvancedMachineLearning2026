@@ -115,7 +115,7 @@ function cellColor(v: number | null) {
         ]"
       />
       <p class="note">
-        too small a γ and the boundary is nearly straight; too large and every
+        Too small a γ and the boundary is nearly straight; too large and every
         point is its own island. C and γ trade against each other, so they are
         searched together.
       </p>
