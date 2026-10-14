@@ -64,7 +64,7 @@ layout: eq
 | <em class="hl-purple">text mining</em> | e-mails, documents | folders, themes |
 | <em class="hl-gold">anomaly detection</em> | transactions, logs | what fits nowhere |
 
-<div class="note mt-4">the same algorithm, four very different ideas of what a group is</div>
+<div class="note mt-4">Same algorithm gives four different ideas of what a group is.</div>
 
 </div>
 
@@ -137,7 +137,7 @@ layout: eq
 | <em class="hl-purple">complete</em> vs <em class="hl-purple">partial</em> | | everything is clustered, or some points are left out |
 | <em class="hl-gold">homogeneous</em> vs <em class="hl-gold">heterogeneous</em> | | same size, shape and density, or not |
 
-<div class="note mt-4">A method answers all five questions</div>
+<div class="note mt-4">A method answers all five questions.</div>
 
 </div>
 
@@ -274,7 +274,7 @@ find the $K$ centres that make this as small as possible
 
 <div class="note mt-4">
 
-$P(n, K) = \frac{1}{K!}\sum_{k=0}^{K}(-1)^{K-k}\binom{K}{k} k^{\,n}$ partitions to try: the exact problem is NP-hard
+There are $P(n, K) = \frac{1}{K!}\sum_{k=0}^{K}(-1)^{K-k}\binom{K}{k} k^{\,n}$ partitions to try, so the exact problem is NP-hard.
 
 </div>
 
@@ -329,7 +329,7 @@ layout: eq
 
 <div class="note mt-4">
 
-all of them still need $K$
+All of them still need $K$.
 
 </div>
 
@@ -513,8 +513,8 @@ $$ D(C_i, C_j) = \frac{D(C_a, C_j) + D(C_b, C_j)}{2} $$
 
 <div>a distance computed from the previous step, never from the points again</div>
 
-<div class="note mt-4">one average per merge, which is why hierarchical clustering
-can afford to rebuild the whole table at every step</div>
+<div class="note mt-4">Each merge costs one average, so hierarchical clustering
+can afford to rebuild the whole table at every step.</div>
 
 ---
 layout: fig
@@ -555,7 +555,7 @@ layout: eq
 | <em class="hl-green">average</em> | does not break large clusters | prefers round clusters |
 | <em class="hl-purple">Ward</em> | balanced, k-means-like clusters | prefers round clusters of similar size |
 
-<div class="note mt-4">linkage is a second modelling choice, as consequential as the distance</div>
+<div class="note mt-4">Linkage is a second modelling choice, as consequential as the distance.</div>
 
 </div>
 
@@ -801,7 +801,7 @@ $$ d_{\mathrm{mreach}-k}(x_i, x_j) = \max\left(\mathrm{core}_k(x_i),\ \mathrm{co
 </div>
 </div>
 
-<div class="note mt-4">islands and sea: the sea is widened, the land does not move</div>
+<div class="note mt-4">Islands and sea: the sea widens, the land does not move.</div>
 
 ---
 layout: fig
@@ -986,8 +986,8 @@ layout: eq
 
 <div class="note mt-4">
 
-the distance comes first: every row above reads the data through $D$, and none
-of them can repair a bad one
+The distance comes first: every row above reads the data through $D$, and none
+of them can repair a bad one.
 
 </div>
 
