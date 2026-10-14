@@ -138,6 +138,8 @@ an esbuild bundle and reading them back in Python:
 - **UnoCSS attributify** rewrites a bare `opacity="1"` on an SVG element into
   the utility class `opacity-1`, i.e. 1%. Use `stroke-opacity` / `fill-opacity`.
 - **`preserveAspectRatio="none"`** stretches an SVG to its box, which squashes
-  text. `BarTree.vue` measures the box and undoes it on the labels.
+  text. A chart that fills its box takes its viewBox from `useFitBox`
+  (`lib/fitbox.ts`), which measures the box and gives the viewBox the same
+  aspect ratio; a hand-drawn figure uses `xMidYMid meet` instead.
 - **A `.value` in a template** is wrong twice over: Vue unwraps refs there, so
   `kept.value` compiles to `kept.value.value` and throws at render time.

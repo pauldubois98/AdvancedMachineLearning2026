@@ -155,6 +155,9 @@ Everything else matches it cell for cell.
   an SVG element.** Slidev runs UnoCSS with attributify, which reads
   `opacity="1"` as the utility `opacity-1` and renders it at *1%*. `LineChart.vue`
   therefore sets every paint property through `:style`.
+- **`preserveAspectRatio="none"`** stretches an SVG to its box, which squashes
+  text. `LineChart.vue` takes its viewBox from `useFitBox` (`lib/fitbox.ts`),
+  which measures the box and gives the viewBox the same aspect ratio.
 - Inline `$math$` inside a raw HTML block is not parsed. Leave a blank line after
   the opening tag and before the closing one, and markdown-it (and KaTeX) will
   see it.

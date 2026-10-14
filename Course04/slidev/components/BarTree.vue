@@ -1,7 +1,8 @@
 <!-- HDBSCAN's condensed tree: one bar per cluster, as wide as the number of
      points still inside it and as tall as the stretch of lambda it survives. -->
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useFitBox } from '../lib/fitbox'
 import { CondensedCluster } from '../lib/density'
 import { INK, MUTED } from '../lib/theme'
 
@@ -23,28 +24,11 @@ const props = withDefaults(
   },
 )
 
-const W = 600
-const H = 320
-
-/** The svg is stretched to fill its box (preserveAspectRatio="none"), which
- *  squashes text horizontally. Measure the box and undo it on the labels. */
 const svg = ref<SVGSVGElement | null>(null)
-const squash = ref(1)
-let ro: ResizeObserver | null = null
-function measure() {
-  const el = svg.value
-  if (!el || !el.clientWidth || !el.clientHeight) return
-  squash.value = (el.clientWidth / W) / (el.clientHeight / H)
-}
-onMounted(() => {
-  measure()
-  ro = new ResizeObserver(measure)
-  if (svg.value) ro.observe(svg.value)
-})
-onBeforeUnmount(() => ro?.disconnect())
+const { W, H } = useFitBox(svg, 600, 320)
 const pad = { l: 54, r: 10, t: 12, b: 16 }
-const tx = (v: number) => pad.l + v * (W - pad.l - pad.r)
-const ty = (v: number) => pad.t + Math.min(1, v / props.lamMax) * (H - pad.t - pad.b)
+const tx = (v: number) => pad.l + v * (W.value - pad.l - pad.r)
+const ty = (v: number) => pad.t + Math.min(1, v / props.lamMax) * (H.value - pad.t - pad.b)
 
 /** every cluster gets a horizontal slot, children inside their parent */
 const pos = computed(() => {
@@ -146,7 +130,7 @@ const ticks = computed(() => {
       <line :x1="pad.l" :x2="pad.l" :y1="pad.t" :y2="H - pad.b" :style="{ stroke: INK, strokeWidth: 1.1 }" />
       <template v-for="(t, i) in ticks" :key="`t${i}`">
         <line :x1="pad.l - 4" :x2="pad.l" :y1="ty(t)" :y2="ty(t)" :style="{ stroke: INK, strokeWidth: 1 }" />
-        <g :transform="`translate(${pad.l - 7}, ${ty(t) + 4}) scale(${1 / squash}, 1)`">
+        <g :transform="`translate(${pad.l - 7}, ${ty(t) + 4})`">
           <text class="tick end">{{ t }}</text>
         </g>
       </template>
@@ -172,7 +156,7 @@ const ticks = computed(() => {
       />
       <g
         v-for="(t, i) in tags" :key="`g${i}`"
-        :transform="`translate(${tx(t.x)}, ${ty(t.y) + 4}) scale(${1 / squash}, 1)`"
+        :transform="`translate(${tx(t.x)}, ${ty(t.y) + 4})`"
       >
         <text
           :style="{ fill: t.color, fontSize: '10.5px', textAnchor: 'middle', paintOrder: 'stroke', stroke: '#fff', strokeWidth: '3px', strokeLinejoin: 'round' }"
@@ -180,7 +164,7 @@ const ticks = computed(() => {
       </g>
       <text
         v-if="yLabel"
-        :transform="`translate(13, ${(pad.t + H - pad.b) / 2}) rotate(-90) scale(1, ${1 / squash})`"
+        :transform="`translate(13, ${(pad.t + H - pad.b) / 2}) rotate(-90)`"
         class="axis-label mid"
       >{{ yLabel }}</text>
     </svg>

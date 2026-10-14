@@ -17,7 +17,7 @@ const winner = computed(() => (area(bars.value[0]) >= area(bars.value[1]) ? 0 : 
 <template>
   <div class="wrap">
     <div class="chart">
-      <svg viewBox="0 0 400 300" preserveAspectRatio="none">
+      <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
         <line x1="44" x2="44" y1="12" y2="272" stroke="#1b1b1b" stroke-width="1.1" />
         <template v-for="t in [0, 0.8, 1.6, 2.4, 3.2]" :key="t">
           <line :x1="40" :x2="44" :y1="12 + (t / lamMax) * 260" :y2="12 + (t / lamMax) * 260" stroke="#1b1b1b" />

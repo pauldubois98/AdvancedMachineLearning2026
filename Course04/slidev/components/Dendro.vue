@@ -1,7 +1,8 @@
 <!-- A dendrogram drawn from a linkage: one staple per merge, height on the y
      axis, plus the horizontal lines the cut slides put across it. -->
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { useFitBox } from '../lib/fitbox'
 import { Linkage, dendrogram } from '../lib/hier'
 import { GRID, INK, MUTED } from '../lib/theme'
 
@@ -25,17 +26,17 @@ const props = withDefaults(
   },
 )
 
-const W = 600
-const H = 320
+const svg = ref<SVGSVGElement | null>(null)
+const { W, H } = useFitBox(svg, 600, 320)
 const pad = computed(() => ({
   l: 46, r: 10, t: 10, b: props.leafLabels ? 26 : 14,
 }))
 const tree = computed(() => dendrogram(props.Z))
 const top = computed(() => props.yMax ?? (tree.value.maxHeight * 1.05 || 1))
 const xMax = computed(() => 10 * (props.Z.length + 1))
-const tx = (v: number) => pad.value.l + (v / xMax.value) * (W - pad.value.l - pad.value.r)
+const tx = (v: number) => pad.value.l + (v / xMax.value) * (W.value - pad.value.l - pad.value.r)
 const ty = (v: number) =>
-  pad.value.t + (1 - v / top.value) * (H - pad.value.t - pad.value.b)
+  pad.value.t + (1 - v / top.value) * (H.value - pad.value.t - pad.value.b)
 
 const paths = computed(() =>
   tree.value.links.map((l) => ({
@@ -64,7 +65,7 @@ function niceStep(raw: number): number {
 <template>
   <figure class="chart">
     <figcaption v-if="title" :style="{ color: titleColor }" v-html="title" />
-    <svg :viewBox="`0 0 ${W} ${H}`" preserveAspectRatio="none">
+    <svg ref="svg" :viewBox="`0 0 ${W} ${H}`" preserveAspectRatio="none">
       <line
         :x1="pad.l" :x2="pad.l" :y1="pad.t" :y2="H - pad.b"
         :style="{ stroke: INK, strokeWidth: 1.1 }"

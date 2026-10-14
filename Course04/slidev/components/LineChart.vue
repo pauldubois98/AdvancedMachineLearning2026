@@ -5,7 +5,8 @@
 // attributify, which rewrites opacity="1" into the utility class opacity-1,
 // i.e. 1% opacity, and the curve all but disappears. stroke-opacity and
 // fill-opacity are not utility names, so they survive.
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { useFitBox } from '../lib/fitbox'
 import { GRID, INK, MUTED } from '../lib/theme'
 
 export interface Series {
@@ -52,13 +53,13 @@ const props = withDefaults(
   },
 )
 
-const W = 600
-const H = 320
+const svg = ref<SVGSVGElement | null>(null)
+const { W, H } = useFitBox(svg, 600, 320)
 // curves are clipped to the plot box, the way matplotlib's axes limits clip
 const clipId = `lc-clip-${Math.random().toString(36).slice(2, 9)}`
 const inner = computed(() => ({
-  w: W - props.pad.l - props.pad.r,
-  h: H - props.pad.t - props.pad.b,
+  w: W.value - props.pad.l - props.pad.r,
+  h: H.value - props.pad.t - props.pad.b,
 }))
 const tx = (v: number) => {
   const [a, b] = props.xDomain
@@ -102,7 +103,7 @@ const paths = computed(() => props.series.map((s) => ({ d: path(s), s })))
 <template>
   <figure class="chart">
     <figcaption v-if="title" :style="{ color: titleColor }" v-html="title" />
-    <svg :viewBox="`0 0 ${W} ${H}`" preserveAspectRatio="none">
+    <svg ref="svg" :viewBox="`0 0 ${W} ${H}`" preserveAspectRatio="none">
       <defs>
         <clipPath :id="clipId">
           <rect :x="pad.l" :y="0" :width="inner.w" :height="pad.t + inner.h" />

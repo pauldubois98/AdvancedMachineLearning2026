@@ -21,7 +21,7 @@ const Y = (l: number) => 14 + ((l - 0.3) / (lamMax - 0.3)) * 252
 <template>
   <div class="wrap">
     <div class="chart">
-      <svg viewBox="0 0 400 300" preserveAspectRatio="none">
+      <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
         <line x1="44" x2="44" y1="14" y2="266" stroke="#1b1b1b" stroke-width="1.1" />
         <template v-for="t in [0.5, 1, 1.5, 2, 2.5, 3]" :key="t">
           <line :x1="40" :x2="44" :y1="Y(t)" :y2="Y(t)" stroke="#1b1b1b" />
