@@ -429,7 +429,7 @@ def clustering_apps(fig):
         ax.text(5.60, y, out, ha="left", va="center", color=INK, fontsize=12)
         if i:
             ax.plot([0.60, 8.40], [y + 0.35, y + 0.35], color=GRID, lw=0.9)
-    note(ax, "the same algorithm, four very different ideas of what a group is",
+    note(ax, "Same algorithm, four very different ideas of what a group is",
          y=0.30)
 
 
