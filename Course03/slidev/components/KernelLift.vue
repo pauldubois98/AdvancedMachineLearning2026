@@ -1,6 +1,7 @@
 <!-- svm_kernel: a circle in 2D is a flat plane one dimension up.
-     The first slider tilts the view from flat 2D to the lifted 3D picture;
-     the second slides the cutting plane, and the circle it leaves behind. -->
+     The first slider tilts the view from flat 2D, through the lifted 3D
+     picture, to almost side-on; the second slides the cutting plane, and the
+     circle it cuts out of the lifted points. -->
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { rings } from '../lib/data'
@@ -10,93 +11,110 @@ import { BLUE, GREEN, INK, MUTED, RED } from '../lib/theme'
 const data = rings(150, 1)
 const z = data.X.map(([a, b]) => a * a + b * b)
 
-const tilt = ref(0)     // 0 = seen from straight above, 1 = the lifted view
+const tilt = ref(0)     // 0 = seen from straight above, 1 = almost side-on
 const height = ref(2.2) // where the plane cuts
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 let queued = 0
 
-/** Interpolate between a top-down view and matplotlib's view_init(16, -62). */
-function project(x: number, y: number, zz: number, t: number): [number, number] {
-  const elev = ((90 - 74 * t) * Math.PI) / 180
+/** Interpolate between a top-down view and an almost side-on one, passing
+ *  through matplotlib's view_init(16, -62) on the way. */
+function view(t: number) {
+  const elev = ((90 - 86 * t) * Math.PI) / 180
   const azim = ((-62 * t) * Math.PI) / 180
-  const ca = Math.cos(azim), sa = Math.sin(azim)
-  const xr = x * ca - y * sa
-  const yr = x * sa + y * ca
-  const ce = Math.cos(elev), se = Math.sin(elev)
-  // z only shows up as the view tilts away from vertical
-  const sx = xr
-  const sy = yr * se - (zz - 2.5) * ce * 0.55
-  return [sx, sy]
+  return { ca: Math.cos(azim), sa: Math.sin(azim), ce: Math.cos(elev), se: Math.sin(elev) }
+}
+type View = ReturnType<typeof view>
+function project(x: number, y: number, zz: number, v: View): [number, number] {
+  const xr = x * v.ca - y * v.sa
+  const yr = x * v.sa + y * v.ca
+  // z only shows up as the view tilts away from vertical; up is up
+  return [xr, yr * v.se + (zz - 2.5) * v.ce * 0.55]
+}
+/** how close a point is to the eye, to paint back to front */
+function nearness(x: number, y: number, zz: number, v: View): number {
+  const yr = x * v.sa + y * v.ca
+  return -yr * v.ce + zz * v.se
 }
 
 function draw() {
   const el = canvas.value
   if (!el || !el.clientWidth) return
-  const t = tilt.value
+  const v = view(tilt.value)
+  const h = height.value
   const fr = frame(el, [-3.6, 3.6, -3.4, 3.4])
   const { ctx } = fr
   const P = (x: number, y: number, zz: number) => {
-    const [sx, sy] = project(x, y, zz, t)
+    const [sx, sy] = project(x, y, zz, v)
     return [fr.sx(sx), fr.sy(sy)] as [number, number]
   }
 
-  // the cutting plane, drawn as a grid so the tilt reads
+  function points(below: boolean) {
+    const idx = data.X.map((_, i) => i).filter((i) => (z[i] <= h) === below)
+    idx.sort((a, b) => nearness(data.X[a][0], data.X[a][1], z[a], v) - nearness(data.X[b][0], data.X[b][1], z[b], v))
+    for (const i of idx) {
+      const [px, py] = P(data.X[i][0], data.X[i][1], z[i])
+      ctx.fillStyle = data.y[i] === 1 ? RED : BLUE
+      ctx.beginPath()
+      if (data.y[i] === 1) {
+        ctx.moveTo(px, py - 4.4)
+        ctx.lineTo(px + 3.9, py + 3.1)
+        ctx.lineTo(px - 3.9, py + 3.1)
+        ctx.closePath()
+      } else ctx.arc(px, py, 3.4, 0, 2 * Math.PI)
+      ctx.fill()
+    }
+  }
+
+  // seen from above, the plane hides what is under it: paint the points
+  // below it first, then the plane, then the points above
+  points(true)
+
+  // the cutting plane, filled lightly and drawn as a grid so the tilt reads
+  const lim = 2.9
   ctx.save()
+  ctx.fillStyle = MUTED
+  ctx.globalAlpha = 0.22
+  ctx.beginPath()
+  for (const [a, b] of [[-lim, -lim], [lim, -lim], [lim, lim], [-lim, lim]]) {
+    const p = P(a, b, h)
+    ctx.lineTo(p[0], p[1])
+  }
+  ctx.closePath()
+  ctx.fill()
   ctx.strokeStyle = MUTED
-  ctx.globalAlpha = 0.5
+  ctx.globalAlpha = 0.6
   ctx.lineWidth = 0.8
-  const lim = 2.6
   for (let i = 0; i <= 8; i++) {
-    const v = -lim + (2 * lim * i) / 8
-    ctx.beginPath()
-    let p = P(v, -lim, height.value)
-    ctx.moveTo(p[0], p[1])
-    p = P(v, lim, height.value)
-    ctx.lineTo(p[0], p[1])
-    ctx.stroke()
-    ctx.beginPath()
-    p = P(-lim, v, height.value)
-    ctx.moveTo(p[0], p[1])
-    p = P(lim, v, height.value)
-    ctx.lineTo(p[0], p[1])
-    ctx.stroke()
+    const u = -lim + (2 * lim * i) / 8
+    for (const [a0, b0, a1, b1] of [[u, -lim, u, lim], [-lim, u, lim, u]]) {
+      ctx.beginPath()
+      let p = P(a0, b0, h)
+      ctx.moveTo(p[0], p[1])
+      p = P(a1, b1, h)
+      ctx.lineTo(p[0], p[1])
+      ctx.stroke()
+    }
   }
   ctx.restore()
 
-  // the circle the plane leaves behind, down on the x1-x2 floor
-  const r = Math.sqrt(Math.max(0, height.value))
+  // the circle where the plane cuts the paraboloid z = x1² + x2²: on the
+  // plane itself, and straight above the 2D decision boundary
+  const r = Math.sqrt(Math.max(0, h))
   ctx.save()
   ctx.strokeStyle = GREEN
-  ctx.lineWidth = 2.2
+  ctx.lineWidth = 2.4
   ctx.beginPath()
   for (let i = 0; i <= 120; i++) {
     const a = (2 * Math.PI * i) / 120
-    const [px, py] = P(r * Math.cos(a), r * Math.sin(a), 0)
+    const [px, py] = P(r * Math.cos(a), r * Math.sin(a), h)
     if (i === 0) ctx.moveTo(px, py)
     else ctx.lineTo(px, py)
   }
   ctx.stroke()
   ctx.restore()
 
-  // points, painted back to front so the lifted view looks right
-  const order = data.X.map((_, i) => i).sort((a, b) => {
-    const pa = project(data.X[a][0], data.X[a][1], z[a], t)
-    const pb = project(data.X[b][0], data.X[b][1], z[b], t)
-    return pb[1] - pa[1]
-  })
-  for (const i of order) {
-    const [px, py] = P(data.X[i][0], data.X[i][1], z[i] * t)
-    ctx.fillStyle = data.y[i] === 1 ? RED : BLUE
-    ctx.beginPath()
-    if (data.y[i] === 1) {
-      ctx.moveTo(px, py - 4.4)
-      ctx.lineTo(px + 3.9, py + 3.1)
-      ctx.lineTo(px - 3.9, py + 3.1)
-      ctx.closePath()
-    } else ctx.arc(px, py, 3.4, 0, 2 * Math.PI)
-    ctx.fill()
-  }
+  points(false)
 }
 
 function schedule() {

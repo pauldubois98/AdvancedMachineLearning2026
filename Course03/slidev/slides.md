@@ -602,7 +602,15 @@ layout: eq
 
 <div class="note text-center">A point can miss the tube from above or from below.</div>
 
-$$ \min\ \frac{1}{2}\|w\|^2 + C\sum_i \left(\xi_i + \xi_i^{*}\right) \qquad \mathrm{s.t.}\qquad |y_i - f(x_i)| \leq \varepsilon + \xi_i^{(*)} $$
+$$ \min_{w,\, b,\, \xi,\, \xi^{*}}\ \frac{1}{2}\|w\|^2 + C\sum_i \left(\xi_i + \xi_i^{*}\right) $$
+
+$$ \mathrm{s.t.}\qquad y_i - f(x_i) \leq \varepsilon + \xi_i, \qquad f(x_i) - y_i \leq \varepsilon + \xi_i^{*}, \qquad \xi_i,\, \xi_i^{*} \geq 0 $$
+
+<div class="note text-center">
+
+$\xi_i = \max\left(0,\ y_i - f(x_i) - \varepsilon\right)$ is how far $y_i$ lies above the tube, and $\xi_i^{*} = \max\left(0,\ f(x_i) - y_i - \varepsilon\right)$ how far below it (at the optimum).
+
+</div>
 
 <div class="note text-center">
 
