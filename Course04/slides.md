@@ -23,6 +23,18 @@ date: Week 4 — Lecture
 
 ![](img/clustering_apps.png)
 
+## Image segmentation, on a real photo
+
+![](img/use_image.png)
+
+## Text mining, on real posts
+
+![](img/use_text.png)
+
+## Anomaly detection, on real server logs
+
+![](img/use_anomaly.png)
+
 ## What a cluster can mean
 
 ![](img/cluster_types.png)

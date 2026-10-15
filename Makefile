@@ -92,7 +92,8 @@ C04_STEMS := agglomerative_steps algo_compare cluster_distinctions cluster_types
              linkage_update mountain_idea mountain_props mountain_steps mreach_effect \
              mreach_example mreach_intuition mst_build mst_step mst_to_hierarchy \
              partitional_vs_hierarchical stability_example stability_idea \
-             subtractive_clustering ward_idea wpgma wpgma_vs_upgma
+             subtractive_clustering use_anomaly use_image use_text \
+             ward_idea wpgma wpgma_vs_upgma
 
 C04_FIGURES := $(foreach f,$(C04_STEMS),Course04/img/$(f).png)
 
@@ -120,7 +121,7 @@ $(C03_FIGURES): scripts/make_figures_c03.py
 $(C03BIS_FIGURES): scripts/make_figures_c03bis.py Course03/imports/figs2.py
 	python3 scripts/make_figures_c03bis.py Course03/img-bis
 
-$(C04_FIGURES): scripts/make_figures_c04.py
+$(C04_FIGURES): scripts/make_figures_c04.py $(wildcard Course04/data/*.json)
 	python3 scripts/make_figures_c04.py Course04/img
 
 
@@ -187,7 +188,8 @@ Course03/interactive-bis.html: $(C03_SLIDEV_BIS_SRC) Course03/slidev/vite.config
 C04_SLIDEV_SRC := Course04/slidev/slides.md Course04/slidev/style.css \
                   $(wildcard Course04/slidev/components/*.vue) \
                   $(wildcard Course04/slidev/layouts/*.vue) \
-                  $(wildcard Course04/slidev/lib/*.ts)
+                  $(wildcard Course04/slidev/lib/*.ts) \
+                  $(wildcard Course04/data/*.json)
 
 Course04/interactive.html: $(C04_SLIDEV_SRC) Course04/slidev/vite.config.ts \
                            Course04/slidev/node_modules

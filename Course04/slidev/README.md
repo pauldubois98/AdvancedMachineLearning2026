@@ -36,10 +36,17 @@ any path without server rewrites; deep links look like `interactive.html#/36`.
 
 ## What is live
 
+Three of the use-case slides run on real data: `Course04/data/*.json`, written by
+`scripts/make_realdata_c04.py` (which downloads the raw files) and committed, so
+both decks build offline and the printed figures read the very same rows.
+
 | slide | knobs |
 | --- | --- |
 | No labels | the spread of the groups, and the K asked for |
 | Two ways to simplify a table | q columns kept, K rows kept, on the same table |
+| Image segmentation, on a real photo | K, the number of colours the photo is painted with |
+| Text mining, on real posts | K, on 1,000 newsgroup posts, with each centre's heaviest words |
+| Anomaly detection, on real server logs | K, and how many of the farthest connections to flag |
 | What a cluster can mean | blur the blobs together, ε for the density panel |
 | Partitional or hierarchical | pull the sub-groups apart until the nesting shows |
 | Exclusive or overlapping | the width of the shared zone |

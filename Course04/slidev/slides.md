@@ -78,6 +78,30 @@ layout: eq
 layout: fig
 ---
 
+## Image segmentation, on a real photo
+
+<UseImage />
+
+---
+layout: fig
+---
+
+## Text mining, on real posts
+
+<UseText />
+
+---
+layout: fig
+---
+
+## Anomaly detection, on real server logs
+
+<UseAnomaly />
+
+---
+layout: fig
+---
+
 ## What a cluster can mean
 
 <ClusterTypes />

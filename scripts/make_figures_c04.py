@@ -433,6 +433,166 @@ def clustering_apps(fig):
          y=0.30)
 
 
+# --------------------------------------------------------------------------
+# the four use cases, on real data (Course04/data, from make_realdata_c04.py)
+# --------------------------------------------------------------------------
+DATA = Path(__file__).resolve().parent.parent / "Course04" / "data"
+
+
+def _real(name):
+    import json
+
+    with open(DATA / f"{name}.json") as f:
+        return json.load(f)
+
+
+def _kmeans(X, k, seed=0):
+    from sklearn.cluster import KMeans
+
+    return KMeans(k, n_init=10, random_state=seed).fit(X)
+
+
+def _credit(fig, text):
+    fig.text(0.985, 0.012, text, ha="right", va="bottom", color=MUTED, fontsize=8)
+
+
+@figure("use_image")
+def use_image(fig):
+    from sklearn.datasets import load_sample_image
+
+    img = load_sample_image("flower.jpg").astype(float) / 255
+    h, w, _ = img.shape
+    px = img.reshape(-1, 3)
+    rng = np.random.default_rng(0)
+    sample = px[rng.choice(len(px), 4000, replace=False)]
+    axes = fig.subplots(
+        1, 3, gridspec_kw=dict(left=0.02, right=0.98, top=0.88, bottom=0.12, wspace=0.06),
+    )
+    axes[0].imshow(img)
+    axes[0].set_title("the photo, 640 × 427 pixels", color=INK, pad=8, fontsize=12.5)
+    for ax, k, color in [(axes[1], 3, GREEN), (axes[2], 8, GREEN)]:
+        km = _kmeans(sample, k)
+        quant = km.cluster_centers_[km.predict(px)].reshape(h, w, 3)
+        ax.imshow(quant)
+        ax.set_title(f"K = {k} colours", color=color, pad=8, fontsize=12.5)
+        # the palette: one swatch per centre, as wide as its share of the pixels
+        share = np.bincount(km.predict(px), minlength=k) / len(px)
+        order = np.argsort(-share)
+        x = 0.0
+        for c in order:
+            ax.add_patch(Rectangle((x * w, h + 14), share[c] * w, 22,
+                                   color=km.cluster_centers_[c], clip_on=False))
+            x += share[c]
+    for ax in axes:
+        ax.set_xlim(0, w)
+        ax.set_ylim(h, 0)
+        _bare(ax)
+    caption_row(fig, axes, [
+        "each pixel is a point (r, g, b)",
+        "each pixel painted in its centre's colour",
+        "the bar: the centres, sized by their pixels",
+    ], y=0.115)
+    _credit(fig, "photo: flickr/vultilion, CC BY 2.0 (scikit-learn sample image)")
+
+
+def _newsgroups():
+    from scipy.sparse import csr_matrix
+
+    d = _real("newsgroups")
+    rows = d["rows"]
+    ptr = np.cumsum([0] + [len(r[0]) for r in rows])
+    T = csr_matrix((np.concatenate([r[1] for r in rows]),
+                    np.concatenate([r[0] for r in rows]).astype(int), ptr),
+                   shape=(len(rows), len(d["vocab"])))
+    return d, T
+
+
+@figure("use_text")
+def use_text(fig):
+    d, T = _newsgroups()
+    group = np.array(d["group"])
+    vocab = np.array(d["vocab"])
+    km = _kmeans(T, 4)
+    # one card per cluster, in the order of the newsgroup each one mostly holds
+    main = [np.bincount(group[km.labels_ == c], minlength=4).argmax() for c in range(4)]
+    ax = canvas(fig)
+    ax.text(W / 2, 3.50, f"{len(group):,} newsgroup posts, each a TF-IDF vector over "
+            f"{len(vocab)} words;  k-means, K = 4", ha="center", va="center",
+            color=INK, fontsize=12.5)
+    for i, c in enumerate(np.argsort(main)):
+        x = 0.25 + i * 2.18
+        color = CLUSTER_COLORS[i]
+        m = km.labels_ == c
+        box(ax, x, 0.62, 1.98, 2.48, color, "", lw=1.6)
+        ax.text(x + 0.99, 2.88, f"cluster {i + 1},  {m.sum()} posts", ha="center",
+                va="center", color=color, fontsize=12, weight="bold")
+        top = vocab[np.argsort(-km.cluster_centers_[c])[:8]]
+        for j, word in enumerate(top):
+            ax.text(x + 0.99, 2.55 - j * 0.20, word, ha="center", va="center",
+                    color=INK, fontsize=11.5)
+        counts = np.bincount(group[m], minlength=4)
+        g = counts.argmax()
+        ax.text(x + 0.99, 0.80, f"{counts[g]} of {m.sum()} from\n{d['groups'][g]}",
+                ha="center", va="center", color=MUTED, fontsize=9.5, linespacing=1.3)
+    note(ax, "Each cluster is listed by the 8 heaviest words of its centre. "
+             "k-means never saw which newsgroup a post came from.", y=0.30, size=11)
+    _credit(fig, "data: 20 Newsgroups, headers and quotes removed")
+
+
+def _http_flags(X, k, n_flag=30, big=0.05):
+    """k-means, then each connection's distance to the nearest centre of a cluster
+    holding at least 5% of the points: a tight crowd of attacks would otherwise
+    earn a centre of its own and look normal."""
+    km = _kmeans(X, k)
+    size = np.bincount(km.labels_, minlength=k)
+    centres = km.cluster_centers_[size >= big * len(X)]
+    dist = np.sqrt(((X[:, None] - centres[None]) ** 2).sum(-1)).min(1)
+    flagged = np.argsort(-dist)[:n_flag]
+    return km, flagged
+
+
+@figure("use_anomaly")
+def use_anomaly(fig):
+    d = _real("http")
+    X = np.array(d["X"])
+    attack = np.array(d["attack"], dtype=bool)
+    km, flagged = _http_flags(X, 2)
+    hits = attack[flagged].sum()
+
+    ax = fig.add_axes([0.11, 0.20, 0.48, 0.66])
+    for c in range(2):
+        m = (km.labels_ == c) & ~attack
+        ax.scatter(X[m, 1], X[m, 2], s=8, color=CLUSTER_COLORS[c], alpha=0.45,
+                   edgecolors="none", zorder=2)
+    ax.scatter(X[attack, 1], X[attack, 2], s=26, marker="x", color=RED, lw=1.4,
+               zorder=4)
+    ax.scatter(X[flagged, 1], X[flagged, 2], s=170, facecolors="none",
+               edgecolors=GOLD, lw=1.4, zorder=3)
+    for c in range(2):
+        ax.plot(*km.cluster_centers_[c, 1:], "X", color=CLUSTER_COLORS[c], ms=13,
+                mec="white", mew=1.4, zorder=5)
+    ticks = np.log([100, 1000, 10000, 100000])
+    ax.set_xticks(ticks, ["100 B", "1 kB", "10 kB", "100 kB"])
+    ax.set_yticks(ticks, ["100 B", "1 kB", "10 kB", "100 kB"])
+    ax.set_xlim(4.3, 11.8)
+    ax.set_xlabel("bytes sent by the client")
+    ax.set_ylabel("bytes sent back")
+    ax.set_title(f"{len(X):,} connections to a web server, k-means with K = 2",
+                 color=INK, pad=10, fontsize=12.5)
+
+    side = fig.add_axes([0.65, 0.20, 0.33, 0.66])
+    side.axis("off")
+    side.text(0, 0.95, "the score", color=GOLD, fontsize=12.5, weight="bold", va="top")
+    side.text(0, 0.80, "distance to the nearest centre;\nthe 30 farthest are ringed",
+              color=INK, fontsize=11, va="top", linespacing=1.5)
+    side.text(0, 0.50, "the check", color=RED, fontsize=12.5, weight="bold", va="top")
+    side.text(0, 0.35, f"{hits} of the 30 are real attacks (×),\n"
+                       "a denial of service: huge requests\nthat fit no group of users",
+              color=INK, fontsize=11, va="top", linespacing=1.5)
+    side.text(0, -0.02, "k-means never saw the labels", color=MUTED, fontsize=10.5)
+    _credit(fig, "data: KDD Cup 1999, http connections")
+
+
 @figure("cluster_types")
 def cluster_types(fig):
     rng = np.random.default_rng(7)
