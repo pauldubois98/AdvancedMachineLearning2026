@@ -249,6 +249,14 @@ for every clustering of the same data
 layout: fig
 ---
 
+## Within and between, drawn
+
+<JwJbPicture />
+
+---
+layout: fig
+---
+
 ## What a good clustering looks like
 
 <GoodClustering />

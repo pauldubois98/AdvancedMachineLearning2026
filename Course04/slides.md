@@ -73,6 +73,10 @@ date: Week 4 — Lecture
 
 ![](img/eq_inertia.png)
 
+## Within and between, drawn
+
+![](img/jw_jb_picture.png)
+
 ## What a good clustering looks like
 
 ![](img/good_clustering.png)

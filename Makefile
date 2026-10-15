@@ -86,7 +86,7 @@ C04_STEMS := agglomerative_steps algo_compare cluster_distinctions cluster_types
              exclusive_vs_overlapping extract_example good_clustering \
              hamming_distance hard_vs_fuzzy hdbscan_hierarchy hdbscan_idea \
              hdbscan_props hdbscan_result hdbscan_steps hierarchical_props \
-             hierarchy_idea homogeneous_vs_heterogeneous inertia_defined \
+             hierarchy_idea homogeneous_vs_heterogeneous inertia_defined jw_jb_picture \
              kmeans_algorithm kmeans_alternatives kmeans_init kmeans_limits \
              linkage_compare linkage_definitions linkage_dendrograms linkage_props \
              linkage_update mountain_idea mountain_props mountain_steps mreach_effect \

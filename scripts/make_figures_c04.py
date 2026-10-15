@@ -16,7 +16,7 @@ import numpy as np
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
+from matplotlib import font_manager, patheffects
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
 from matplotlib.patches import (
     Circle,
@@ -1144,6 +1144,80 @@ def good_clustering(fig):
         ax.set_xlim(-4, 4)
         ax.set_ylim(-3, 3.6)
         _bare(ax)
+
+
+@figure("jw_jb_picture")
+def jw_jb_picture(fig):
+    """J_w and J_b drawn: spokes from each point to its own centre, and from
+    each centre to the centre of all the data, counted n_i times."""
+    rng = np.random.default_rng(5)
+    X, labels = _blobs(rng, [(-1.9, -1.0), (1.9, -0.8), (0.0, 1.9)], 0.52, 50)
+    m = X.mean(0)
+    keys = sorted(set(labels))
+    mu = {k: X[labels == k].mean(0) for k in keys}
+    n = {k: int((labels == k).sum()) for k in keys}
+    jw = sum(((X[labels == k] - mu[k]) ** 2).sum() for k in keys)
+    jb = sum(n[k] * ((mu[k] - m) ** 2).sum() for k in keys)
+
+    def outward(k, pts=22):
+        """A label offset that points away from m, clear of every spoke."""
+        d = mu[k] - m
+        d = d / (np.linalg.norm(d) or 1.0)
+        return dict(xytext=tuple(pts * d), textcoords="offset points",
+                    ha="left" if d[0] > 0.3 else "right" if d[0] < -0.3 else "center",
+                    va="bottom" if d[1] > 0.3 else "top" if d[1] < -0.3 else "center")
+
+    halo = [patheffects.withStroke(linewidth=3, foreground="white")]
+
+    axes = fig.subplots(
+        1, 2,
+        gridspec_kw=dict(left=0.03, right=0.97, top=0.86, bottom=0.21, wspace=0.12),
+    )
+    left, right = axes
+    for k in keys:
+        color = CLUSTER_COLORS[k]
+        for p in X[labels == k]:
+            left.plot([p[0], mu[k][0]], [p[1], mu[k][1]], color=color, lw=0.7,
+                      alpha=0.5, zorder=1)
+    _scatter_clusters(left, X, labels, s=12)
+    for k in keys:
+        left.plot(*mu[k], "X", color=CLUSTER_COLORS[k], ms=13, mec="white",
+                  mew=1.4, zorder=5)
+        left.annotate(rf"$m_{k + 1}$", mu[k], color=CLUSTER_COLORS[k],
+                      fontsize=13, zorder=6, path_effects=halo, **outward(k, 30))
+    left.set_title(r"$J_w$: each point to the centre $m_i$ of its own cluster",
+                   color=BLUE, pad=10, fontsize=12.5)
+
+    right.scatter(X[:, 0], X[:, 1], s=10, color=MUTED, alpha=0.25,
+                  edgecolors="none", zorder=1)
+    for k in keys:
+        color = CLUSTER_COLORS[k]
+        # a spoke counted n_i times is drawn n_i times as thick
+        right.plot([mu[k][0], m[0]], [mu[k][1], m[1]], color=color,
+                   lw=0.6 + n[k] / 12, solid_capstyle="round", zorder=3)
+        right.plot(*mu[k], "X", color=color, ms=13, mec="white", mew=1.4, zorder=5)
+        right.annotate(rf"$m_{k + 1}$,  $n_{k + 1} = {n[k]}$", mu[k],
+                       color=color, fontsize=11.5, zorder=6, path_effects=halo,
+                       **outward(k))
+    right.plot(*m, "X", color=INK, ms=15, mec="white", mew=1.6, zorder=6)
+    right.annotate(r"$m$", m, xytext=(16, 0), textcoords="offset points",
+                   ha="left", va="center", color=INK, fontsize=13, zorder=6,
+                   path_effects=halo)
+    right.set_title(r"$J_b$: each centre $m_i$ to the centre $m$ of all the data",
+                    color=GREEN, pad=10, fontsize=12.5)
+
+    for ax in axes:
+        ax.set_xlim(-4.4, 4.4)
+        ax.set_ylim(-3.2, 3.8)
+        ax.set_aspect("equal")
+        _bare(ax)
+    caption_row(fig, axes, [
+        rf"the squared lengths of all spokes:  $J_w$ = {jw:.0f}",
+        rf"each squared spoke, $n_i$ times:  $J_b$ = {jb:.0f}",
+    ], y=0.15)
+    fig.text(0.5, 0.03, rf"$J_w + J_b$ = {jw + jb:.0f}, the total inertia, "
+                         "whatever the clustering",
+             ha="center", color=MUTED, fontsize=11)
 
 
 # ==========================================================================
