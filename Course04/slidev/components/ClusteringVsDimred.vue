@@ -16,32 +16,41 @@ const run = computed(() => kmeans(data.value.X, k.value, 2, 6))
 const cells = computed(() =>
   Array.from({ length: N }, (_, i) => Array.from({ length: d }, (_, j) => (i * 7 + j * 3) % 5)),
 )
+/** one row per cluster: the centroid, i.e. the row that stands for its group */
+const centroids = computed(() =>
+  Array.from({ length: k.value }, (_, i) => Array.from({ length: d }, (_, j) => (i * 3 + j * 2 + 1) % 5)),
+)
 </script>
 
 <template>
   <div class="wrap">
     <div class="panels">
       <div class="matrices">
-        <div class="pair">
-          <div>
-            <div class="cap" :style="{ color: BLUE }">X ∈ ℝ<sup>N×d</sup></div>
-            <table class="grid">
-              <tr v-for="(row, i) in cells" :key="i">
-                <td v-for="(v, j) in row" :key="j" :style="{ background: `rgba(43,108,176,${0.12 + 0.12 * v})` }" />
-              </tr>
-            </table>
-          </div>
-          <div class="arrow">→<div class="small" :style="{ color: GREEN }">q &lt; d</div></div>
-          <div>
-            <div class="cap" :style="{ color: BLUE }">Z ∈ ℝ<sup>N×q</sup></div>
-            <table class="grid">
-              <tr v-for="(row, i) in cells" :key="i">
-                <td v-for="(v, j) in row.slice(0, q)" :key="j" :style="{ background: `rgba(43,108,176,${0.12 + 0.12 * v})` }" />
-              </tr>
-            </table>
-          </div>
+        <div class="cap" :style="{ color: BLUE }">X ∈ ℝ<sup>N×d</sup></div>
+        <div class="cap" />
+        <div class="cap" :style="{ color: BLUE }">Z ∈ ℝ<sup>N×q</sup></div>
+        <table class="grid">
+          <tr v-for="(row, i) in cells" :key="i">
+            <td v-for="(v, j) in row" :key="j" :style="{ background: `rgba(43,108,176,${0.12 + 0.12 * v})` }" />
+          </tr>
+        </table>
+        <div class="arrow">→<div class="small" :style="{ color: BLUE }">q &lt; d</div></div>
+        <table class="grid">
+          <tr v-for="(row, i) in cells" :key="i">
+            <td v-for="(v, j) in row.slice(0, q)" :key="j" :style="{ background: `rgba(43,108,176,${0.12 + 0.12 * v})` }" />
+          </tr>
+        </table>
+        <div class="note">dimension reduction: fewer columns, same rows</div>
+        <div class="arrow down">↓<span class="small" :style="{ color: GREEN }">K &lt; N</span></div>
+        <div class="cap c1" :style="{ color: GREEN }">C ∈ ℝ<sup>K×d</sup></div>
+        <!-- room for the largest K, so the panel does not jump as K moves -->
+        <div class="c1 rows">
+          <table class="grid">
+            <tr v-for="(row, i) in centroids" :key="i">
+              <td v-for="(v, j) in row" :key="j" :style="{ background: `color-mix(in srgb, ${clusterColor(i)} ${25 + 15 * v}%, white)` }" />
+            </tr>
+          </table>
         </div>
-        <div class="note mt-2">dimension reduction: fewer columns, same rows</div>
       </div>
       <ClusterPlot
         :X="data.X" :labels="run.labels" :point-size="3"
@@ -67,12 +76,18 @@ const cells = computed(() =>
 <style scoped>
 .wrap { display: grid; grid-template-rows: 1fr auto; gap: 0.6rem; height: 100%; min-height: 0; }
 .panels { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2rem; min-height: 0; align-items: center; }
-.matrices { display: flex; flex-direction: column; align-items: center; }
-.pair { display: flex; align-items: center; gap: 1.1rem; }
+.matrices {
+  display: grid; grid-template-columns: auto auto auto; gap: 0.25rem 1.1rem;
+  justify-content: center; justify-items: center; align-items: center;
+}
+.matrices .note { grid-column: 1 / -1; justify-self: center; margin: 0; }
+.matrices .down, .matrices .c1 { grid-column: 1; }
 .cap { font-size: 0.82rem; text-align: center; margin-bottom: 0.3rem; font-weight: 600; }
 .grid { border-collapse: collapse; width: auto; }
-.grid td { width: 15px; height: 13px; border: 1px solid #fff; padding: 0; }
+.grid td { width: 15px; height: 12px; border: 1px solid #fff; padding: 0; }
+.rows { height: calc(6 * 14px); align-self: start; }
 .arrow { font-size: 1.4rem; color: #9aa0a6; text-align: center; }
+.arrow.down { display: flex; align-items: center; gap: 0.4rem; line-height: 1; }
 .small { font-size: 0.78rem; }
 .controls { display: flex; gap: 1.6rem; align-items: center; flex-wrap: wrap; }
 .controls > :deep(.knob) { min-width: 12rem; }
