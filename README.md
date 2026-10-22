@@ -33,3 +33,4 @@ Feel free to use another one of your choice.
 - Session 4:
   - [Slides (.pptx)](Course04/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html) (same lecture, with sliders for K, the linkage and the cut, ε, MinPts and C_min)
+  - [Notebook](Course04/lab4.ipynb)
