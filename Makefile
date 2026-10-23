@@ -126,7 +126,7 @@ C05_FIGURES := $(foreach f,$(C05_STEMS),Course05/img/$(f).png)
 
 
 .PHONY: slides figures clean-slides clean-figures \
-        interactive interactive-bis interactive-c04 interactive-build \
+        interactive interactive-bis interactive-c04 interactive-c05 interactive-build \
         clean-interactive
 slides: $(SLIDE_TARGETS)
 
@@ -187,8 +187,11 @@ interactive-bis: Course03/slidev/node_modules
 interactive-c04: Course04/slidev/node_modules
 	cd Course04/slidev && npm run dev
 
+interactive-c05: Course05/slidev/node_modules
+	cd Course05/slidev && npm run dev
+
 interactive-build: Course03/interactive.html Course03/interactive-bis.html \
-                   Course04/interactive.html
+                   Course04/interactive.html Course05/interactive.html
 
 Course03/slidev/node_modules: Course03/slidev/package.json
 	cd Course03/slidev && npm install --no-audit --no-fund
@@ -196,6 +199,10 @@ Course03/slidev/node_modules: Course03/slidev/package.json
 
 Course04/slidev/node_modules: Course04/slidev/package.json
 	cd Course04/slidev && npm install --no-audit --no-fund
+	@touch $@
+
+Course05/slidev/node_modules: Course05/slidev/package.json
+	cd Course05/slidev && npm install --no-audit --no-fund
 	@touch $@
 
 # The deck ships as ONE committed, self-contained file, because the Pages
@@ -227,10 +234,24 @@ Course04/interactive.html: $(C04_SLIDEV_SRC) Course04/slidev/vite.config.ts \
 	cd Course04/slidev && npm run build
 	cp Course04/slidev/dist/index.html $@
 
+# Course05's companion, also its own npm project. Its data (the faces, the
+# posts, the toy matrices) is written by scripts/make_data_c05.py.
+C05_SLIDEV_SRC := Course05/slidev/slides.md Course05/slidev/style.css \
+                  $(wildcard Course05/slidev/components/*.vue) \
+                  $(wildcard Course05/slidev/layouts/*.vue) \
+                  $(wildcard Course05/slidev/lib/*.ts) \
+                  $(wildcard Course05/data/*.json)
+
+Course05/interactive.html: $(C05_SLIDEV_SRC) Course05/slidev/vite.config.ts \
+                           Course05/slidev/node_modules
+	cd Course05/slidev && npm run build
+	cp Course05/slidev/dist/index.html $@
+
 clean-interactive:
 	rm -rf Course03/slidev/dist Course03/slidev/dist-bis Course04/slidev/dist \
+	       Course05/slidev/dist \
 	       Course03/interactive.html Course03/interactive-bis.html \
-	       Course04/interactive.html
+	       Course04/interactive.html Course05/interactive.html
 
 clean-slides:
 	rm -f $(SLIDE_TARGETS)

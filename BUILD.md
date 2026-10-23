@@ -23,21 +23,30 @@ make clean-slides clean-figures
 
 `make interactive` serves Course03's interactive companion deck (sliders for C,
 gamma, epsilon, the kernel), `make interactive-bis` the trees-and-boosting one
-(depth, max_features, M, eta, lambda, gamma, bins), and `make interactive-c04`
-Course04's clustering one (K, the linkage and the cut, epsilon, MinPts, C_min).
-`make interactive-build` writes all three published copies, the single
+(depth, max_features, M, eta, lambda, gamma, bins), `make interactive-c04`
+Course04's clustering one (K, the linkage and the cut, epsilon, MinPts, C_min),
+and `make interactive-c05` Course05's NMF one (r, the loss, beta, the start, the
+mask, lambda, MU against ALS and HALS).
+`make interactive-build` writes all four published copies, the single
 self-contained files `Course03/interactive.html`,
-`Course03/interactive-bis.html` and `Course04/interactive.html`, which **are
+`Course03/interactive-bis.html`, `Course04/interactive.html` and
+`Course05/interactive.html`, which **are
 committed**: the Pages workflow uploads the repository as it stands and never
 runs a build, so a deck is only as fresh as the last `make interactive-build`
 that was committed. They are served at
 <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html>,
-<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html>
-and <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html>,
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html>,
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html>
+and <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html>,
 and the same files open offline by double-clicking them.
-All three need `node` and `npm`; see `Course03/slidev/README.md` and
-`Course04/slidev/README.md`. The two projects are independent: rebuilding one
-never touches the other.
+All four need `node` and `npm`; see `Course03/slidev/README.md`,
+`Course04/slidev/README.md` and `Course05/slidev/README.md`. The three projects
+are independent: rebuilding one never touches the others.
+
+Course05's interactive deck reads `Course05/data/*.json`, which
+`scripts/make_data_c05.py` writes from the same generators as the printed
+figures (and from the faces and posts in `.cache/`). Those files are committed,
+so the deck builds without the cache.
 
 Course05's figures read the Olivetti faces and 20 Newsgroups from the same `.cache/datasets/sklearn/` that Course01 fills; everything else they draw is computed in the script.
 
