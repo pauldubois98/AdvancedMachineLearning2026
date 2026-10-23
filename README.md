@@ -35,6 +35,7 @@ Feel free to use another one of your choice.
   - [Slides (.pptx)](Course04/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html) (same lecture, with sliders for K, the linkage and the cut, ε, MinPts and C_min)
   - [Notebook](Course04/lab4.ipynb)
+  - [Notebook - solutions](Course04/lab4_solutions.ipynb)
 - Session 5:
   - [Slides (.pptx)](Course05/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html) (same lecture, with NMF refitted live: r, the loss, β, the start, the mask, λ, and MU against ALS and HALS)
