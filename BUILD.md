@@ -39,6 +39,8 @@ All three need `node` and `npm`; see `Course03/slidev/README.md` and
 `Course04/slidev/README.md`. The two projects are independent: rebuilding one
 never touches the other.
 
+Course05's figures read the Olivetti faces and 20 Newsgroups from the same `.cache/datasets/sklearn/` that Course01 fills; everything else they draw is computed in the script.
+
 `make slides` needs `pandoc`; the figures need `numpy`, `matplotlib`, `scipy`, `scikit-learn` and the Lato font (`fonts-lato`).
 The `ds_*` figures are drawn from the real datasets: the first build downloads them (about 370 MB) into `.cache/datasets/`, later builds reuse that cache.
 
