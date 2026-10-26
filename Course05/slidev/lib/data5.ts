@@ -9,6 +9,7 @@ import layersJson from '../../data/layers.json'
 import ratingsJson from '../../data/ratings.json'
 import armsJson from '../../data/arms.json'
 import initJson from '../../data/init.json'
+import choosingJson from '../../data/choosing.json'
 import { Mat, f32, fromRows, mat, mul } from './mat'
 import { Rng } from './rng'
 
@@ -96,3 +97,18 @@ export function ratingsMask(hide: number): Mat {
 // ------------------------------------------------------------------- misc
 export const arms = fromRows(armsJson.X) // 2 x 140
 export const initRace = initJson as { faces: number; r: number; traces: Record<string, number[]> }
+
+// --------------------------------------------------------------- choosing
+/** rank-r HALS fits of the 300 small faces, r = 2 ... 48, precomputed: the
+ *  relative error, the parts (W columns), the weights (H rows), and each
+ *  part's cosine with its match in a fit from another start */
+export const choosing = choosingJson.fits.map((f) => {
+  const bin = atob(f.W)
+  const p = SIDE * SIDE
+  const W = Array.from({ length: f.r }, (_, k) => {
+    const out = new Float64Array(p)
+    for (let q = 0; q < p; q++) out[q] = bin.charCodeAt(k * p + q) / 255
+    return out
+  })
+  return { r: f.r, err: f.err, W, H: rows(f32(f.H), f.r), match: f.match as number[] }
+})

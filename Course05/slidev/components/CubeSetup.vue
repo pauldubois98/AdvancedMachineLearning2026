@@ -21,8 +21,8 @@ const spectrum = computed(() => bands.map((w, i) => [w, X.a[i * X.c + j.value]] 
     <div class="note top">The scene is a cube; the matrix is that cube, unfolded.</div>
     <div class="body">
       <div class="col">
-        <Tiles :items="[slice]" :side="size" ramp="x" :vmin="0" :vmax="vmax" :hi="null" :title="`the image at ${bands[b].toFixed(2)} µm`" :title-color="BLUE" />
-        <div class="cap">{{ size }} × {{ size }} pixels × {{ bands.length }} wavelengths: one image per wavelength</div>
+        <Tiles :items="[slice]" :side="size" ramp="x" :vmin="0" :vmax="vmax" :hi="null" :mark="[px, py]" :mark-color="BLUE" @pick="(x, y) => { px = x; py = y }" :title="`the image at ${bands[b].toFixed(2)} µm`" :title-color="BLUE" />
+        <div class="cap">{{ size }} × {{ size }} pixels × {{ bands.length }} wavelengths: one image per wavelength; click a pixel to read its spectrum</div>
       </div>
       <div class="col">
         <LineChart

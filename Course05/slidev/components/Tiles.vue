@@ -22,14 +22,20 @@ const props = withDefaults(
     title?: string
     titleColor?: string
     caption?: string
+    /** one pixel to point at, in the first tile: [x, y] */
+    mark?: [number, number] | null
+    markColor?: string
   }>(),
   {
     cols: 0, ramp: 'gray', vmin: null, vmax: null, signed: false, gap: 3, hi: null,
-    hiColor: '#1b1b1b', frame: '', title: '', titleColor: '#1b1b1b', caption: '',
+    hiColor: '#1b1b1b', frame: '', mark: null, markColor: '#1b1b1b', title: '', titleColor: '#1b1b1b', caption: '',
   },
 )
 
+const emit = defineEmits<{ pick: [x: number, y: number] }>()
 const canvas = ref<HTMLCanvasElement | null>(null)
+// where the first tile was drawn, for `mark` and for clicks
+let box = { x: 0, y: 0, s: 0 }
 let ro: ResizeObserver | null = null
 
 function draw() {
@@ -95,12 +101,47 @@ function draw() {
       ctx.lineWidth = 1
       ctx.strokeRect(x + 0.5, y + 0.5, s - 1, s - 1)
     }
+    if (idx === 0) box = { x, y, s }
     if (props.hi === idx) {
       ctx.strokeStyle = props.hiColor
       ctx.lineWidth = 2.2
       ctx.strokeRect(x - 1, y - 1, s + 2, s + 2)
     }
   })
+  if (props.mark) {
+    // the pixel, outlined, and a crosshair out to the tile's edges
+    const u = box.s / side
+    const [mx, my] = props.mark
+    const px = box.x + mx * u
+    const py = box.y + my * u
+    ctx.strokeStyle = props.markColor
+    ctx.lineWidth = 1
+    ctx.globalAlpha = 0.55
+    ctx.beginPath()
+    ctx.moveTo(box.x, py + u / 2); ctx.lineTo(px - u, py + u / 2)
+    ctx.moveTo(px + 2 * u, py + u / 2); ctx.lineTo(box.x + box.s, py + u / 2)
+    ctx.moveTo(px + u / 2, box.y); ctx.lineTo(px + u / 2, py - u)
+    ctx.moveTo(px + u / 2, py + 2 * u); ctx.lineTo(px + u / 2, box.y + box.s)
+    ctx.stroke()
+    ctx.globalAlpha = 1
+    ctx.lineWidth = 2
+    ctx.strokeStyle = '#ffffff'
+    ctx.strokeRect(px - u - 1, py - u - 1, 3 * u + 2, 3 * u + 2)
+    ctx.strokeStyle = props.markColor
+    ctx.strokeRect(px - u, py - u, 3 * u, 3 * u)
+  }
+}
+
+function onClick(e: MouseEvent) {
+  const el = canvas.value
+  if (!el || !box.s) return
+  const r = el.getBoundingClientRect()
+  // the slide is scaled: map back to the canvas's own pixels
+  const fx = ((e.clientX - r.left) * el.clientWidth) / r.width
+  const fy = ((e.clientY - r.top) * el.clientHeight) / r.height
+  const x = Math.floor(((fx - box.x) / box.s) * props.side)
+  const y = Math.floor(((fy - box.y) / box.s) * props.side)
+  if (x >= 0 && y >= 0 && x < props.side && y < props.side) emit('pick', x, y)
 }
 
 let queued = 0
@@ -114,13 +155,13 @@ onMounted(() => {
   if (canvas.value) ro.observe(canvas.value)
 })
 onBeforeUnmount(() => ro?.disconnect())
-watch(() => [props.items, props.hi, props.vmax, props.cols], schedule)
+watch(() => [props.items, props.hi, props.vmax, props.cols, props.mark], schedule)
 </script>
 
 <template>
   <figure class="tiles">
     <figcaption v-if="title" :style="{ color: titleColor }" v-html="title" />
-    <canvas ref="canvas" />
+    <canvas ref="canvas" :class="{ pickable: mark }" @click="onClick" />
     <div v-if="caption" class="cap" v-html="caption" />
   </figure>
 </template>
@@ -129,5 +170,6 @@ watch(() => [props.items, props.hi, props.vmax, props.cols], schedule)
 .tiles { display: flex; flex-direction: column; margin: 0; min-height: 0; height: 100%; }
 figcaption { text-align: center; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem; }
 canvas { flex: 1 1 0; min-height: 0; width: 100%; display: block; }
+.pickable { cursor: crosshair; }
 .cap { text-align: center; color: #9aa0a6; font-size: 0.72rem; margin-top: 0.2rem; line-height: 1.35; }
 </style>

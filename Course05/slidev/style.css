@@ -207,3 +207,13 @@ table.plain td { padding: 0.28rem 0.6rem 0.28rem 0; border-bottom: 1px solid #ee
 .controls { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; }
 .controls > .knob { min-width: 11rem; }
 .credit { text-align: right; color: #9aa0a6; font-size: 0.6rem; }
+
+/* Slidev's navigation bar (bottom left). On a tall window Slidev pins it over
+   the bottom of the slide; show it only on hover instead, and hide it
+   completely with `h` (setup/shortcuts.ts). Touch screens keep it pinned. */
+@media (hover: hover) {
+  #page-root .absolute.bottom-0.left-0.right-0 { opacity: 0 !important; }
+  #page-root .absolute.bottom-0.left-0.right-0:hover,
+  #page-root .absolute.bottom-0.left-0.right-0:focus-within { opacity: 1 !important; }
+}
+html.nav-hidden #page-root .absolute.bottom-0.left-0 { display: none; }

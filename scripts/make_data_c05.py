@@ -8,6 +8,7 @@ files are committed; re-run this only to change them (the faces and the posts
 are fetched into .cache/ on first use, which needs a network connection).
 
     python3 scripts/make_data_c05.py Course05/data
+    python3 scripts/make_data_c05.py Course05/data choosing   # one file only
 
 - faces.json      400 Olivetti faces shrunk to 32 x 32, as bytes; plus the
                   16 PCA components and a rank-16 NMF of the first 300
@@ -19,6 +20,9 @@ are fetched into .cache/ on first use, which needs a network connection).
 - ratings.json    the ratings toy, and the uniform draws that hide its cells
 - arms.json       the two-arm cloud of the initialization slide
 - init.json       the loss traces of the initialization race (64 x 64 faces)
+- choosing.json   rank-r fits of the 300 small faces for r = 2 ... 48: the
+                  error curve, the parts and weights, and how well each part
+                  comes back after a restart from another start
 """
 
 import base64
@@ -143,11 +147,42 @@ def init(out):
     dump(out, "init", {"faces": 200, "r": r, "traces": {k: r4(v) for k, v in runs.items()}})
 
 
+def choosing(out):
+    # the printed choosing_r slide, on the 32 x 32 faces: HALS from NNDSVD,
+    # 150 passes per r. Each part is matched (Hungarian, cosine) to the parts
+    # of a second fit from a random start: a part that does not come back is
+    # one a restart would not find again.
+    from scipy.optimize import linear_sum_assignment
+
+    imgs, _ = figs._faces(300)
+    X = imgs.reshape(300, 32, 2, 32, 2).mean((2, 4)).reshape(300, -1).T
+    fits = []
+    for r in (2, 4, 8, 12, 16, 24, 32, 48):
+        Wm, Hm = figs._order(*figs._hals(X, r, 150, init="nndsvd"))
+        Wb, _ = figs._hals(X, r, 150, seed=1)
+        unit = lambda M: M / np.maximum(np.linalg.norm(M, axis=0), 1e-12)
+        cos = unit(Wm).T @ unit(Wb)
+        rows, cols = linear_sum_assignment(-cos)
+        match = np.empty(r)
+        match[rows] = cos[rows, cols]
+        top = Wm.max(axis=0)
+        fits.append({
+            "r": r, "err": round(float(np.linalg.norm(X - Wm @ Hm) / np.linalg.norm(X)), 5),
+            # parts as bytes, each scaled to its own max; that max goes into H
+            "W": base64.b64encode(np.round(255 * Wm / top).T.astype(np.uint8).tobytes()).decode(),
+            "H": f32(Hm * top[:, None]), "match": r4(match),
+        })
+        print(f"    r = {r}: {fits[-1]['err']:.4f}, stable {np.mean(match > 0.8):.2f}")
+    dump(out, "choosing", {"faces": 300, "side": 32, "fits": fits})
+
+
 def main(argv):
     out = Path(argv[1] if len(argv) > 1 else "Course05/data")
     out.mkdir(parents=True, exist_ok=True)
-    for make in (faces, topics, spectral, music, layers, ratings, arms, init):
-        make(out)
+    only = set(argv[2:])
+    for make in (faces, topics, spectral, music, layers, ratings, arms, init, choosing):
+        if not only or make.__name__ in only:
+            make(out)
 
 
 if __name__ == "__main__":

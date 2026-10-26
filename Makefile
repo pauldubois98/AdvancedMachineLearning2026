@@ -174,6 +174,7 @@ Course05/slides.pptx: $(C05_FIGURES)
 C03_SLIDEV_SHARED := Course03/slidev/style.css \
                      $(wildcard Course03/slidev/components/*.vue) \
                      $(wildcard Course03/slidev/layouts/*.vue) \
+                     $(wildcard Course03/slidev/setup/*.ts) \
                      $(wildcard Course03/slidev/lib/*.ts)
 C03_SLIDEV_SRC := Course03/slidev/slides.md $(C03_SLIDEV_SHARED)
 C03_SLIDEV_BIS_SRC := Course03/slidev/slides-bis.md $(C03_SLIDEV_SHARED)
@@ -226,6 +227,7 @@ Course03/interactive-bis.html: $(C03_SLIDEV_BIS_SRC) Course03/slidev/vite.config
 C04_SLIDEV_SRC := Course04/slidev/slides.md Course04/slidev/style.css \
                   $(wildcard Course04/slidev/components/*.vue) \
                   $(wildcard Course04/slidev/layouts/*.vue) \
+                  $(wildcard Course04/slidev/setup/*.ts) \
                   $(wildcard Course04/slidev/lib/*.ts) \
                   $(wildcard Course04/data/*.json)
 
@@ -239,6 +241,7 @@ Course04/interactive.html: $(C04_SLIDEV_SRC) Course04/slidev/vite.config.ts \
 C05_SLIDEV_SRC := Course05/slidev/slides.md Course05/slidev/style.css \
                   $(wildcard Course05/slidev/components/*.vue) \
                   $(wildcard Course05/slidev/layouts/*.vue) \
+                  $(wildcard Course05/slidev/setup/*.ts) \
                   $(wildcard Course05/slidev/lib/*.ts) \
                   $(wildcard Course05/data/*.json)
 

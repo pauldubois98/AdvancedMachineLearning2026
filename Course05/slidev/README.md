@@ -21,6 +21,10 @@ This is its own npm project, like `Course04/slidev/`: the decks share no files.
 single self-contained file, **committed to the repository** because the Pages
 workflow never runs a build. It also opens straight from disk.
 
+Press `h` to hide Slidev's navigation bar (and `h` again to bring it back).
+On a tall window Slidev pins that bar over the bottom of the slide; `style.css`
+makes it appear only on hover, and `setup/shortcuts.ts` adds the key.
+
 ## What is live
 
 | slide | knobs |
@@ -60,7 +64,7 @@ workflow never runs a build. It also opens straight from disk.
 | One layer at a time | the layer k |
 | One entry at a time | [R h]<sub>i</sub> and ‖h‖² |
 | Three algorithms, measured | r; MU, ALS and HALS race live |
-| Choosing r | the share held out, the draw |
+| Choosing r | r (precomputed fits, r = 2 … 48), the face rebuilt |
 
 ## The data
 
@@ -70,6 +74,9 @@ its own generators (`_spectral_toy`, `_music_toy`, `_layers_fit`, the ratings
 toy, the two-arm cloud), so the matrices are the printed ones, not look-alikes.
 The faces are the Olivetti faces shrunk from 64 × 64 to 32 × 32, which keeps a
 live refit fast; the initialization race is the printed run itself, at 64 × 64.
+The fits behind *Choosing r* are too slow to run live for r up to 48, so
+`choosing.json` holds them: the parts, the weights, and how well each part
+is found again by a fit from another start.
 
 `lib/nmf.ts` is a transcription of the script's `_mu`, `_als`, `_hals` and
 `_init`: the same rules, the same floors, the same five starts.

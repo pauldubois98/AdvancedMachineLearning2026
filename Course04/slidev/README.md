@@ -34,6 +34,10 @@ blank.
 The deck uses `routerMode: hash` and a relative `--base`, so the file works from
 any path without server rewrites; deep links look like `interactive.html#/36`.
 
+Press `h` to hide Slidev's navigation bar (and `h` again to bring it back).
+On a tall window Slidev pins that bar over the bottom of the slide; `style.css`
+makes it appear only on hover, and `setup/shortcuts.ts` adds the key.
+
 ## What is live
 
 Three of the use-case slides run on real data: `Course04/data/*.json`, written by

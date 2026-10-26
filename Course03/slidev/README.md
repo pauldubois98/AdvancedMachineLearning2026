@@ -39,6 +39,10 @@ file works from any path without server rewrites; deep links look like
 or, from this directory, `npm install && npm run dev` (`npm run dev-bis` for the
 trees deck). `npm run export` writes a PDF (needs playwright-chromium).
 
+Press `h` to hide Slidev's navigation bar (and `h` again to bring it back).
+On a tall window Slidev pins that bar over the bottom of the slide; `style.css`
+makes it appear only on hover, and `setup/shortcuts.ts` adds the key.
+
 ## What is live — `slides.md`, Support Vector Machines
 
 | slide | knobs |

@@ -44,6 +44,9 @@ const props = withDefaults(
     title?: string
     titleColor?: string
     pad?: { l: number; r: number; t: number; b: number }
+    /** the height of the drawing in text units: lower it for a short chart, so
+     *  its text is not shrunk with it */
+    unitHeight?: number
   }>(),
   {
     bands: () => [], bars: () => [], ribbons: () => [], dots: () => [], vlines: () => [],
@@ -54,7 +57,7 @@ const props = withDefaults(
 )
 
 const svg = ref<SVGSVGElement | null>(null)
-const { W, H } = useFitBox(svg, 600, 320)
+const { W, H } = useFitBox(svg, 600, props.unitHeight ?? 320)
 // curves are clipped to the plot box, the way matplotlib's axes limits clip
 const clipId = `lc-clip-${Math.random().toString(36).slice(2, 9)}`
 const inner = computed(() => ({
