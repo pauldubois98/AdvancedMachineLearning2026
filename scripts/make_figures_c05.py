@@ -3405,18 +3405,14 @@ def choosing_r(fig):
 
     side = fig.add_axes([0.56, 0.18, 0.42, 0.62])
     side.axis("off")
-    side.text(0, 1.0, "the curve never rises", color=RED, fontsize=12.5,
+    side.text(0, 1.0, "Larger $r$ always fits better", color=RED, fontsize=12.5,
               weight="bold", va="top")
-    side.text(0, 0.87, r"a larger $r$ always fits better, so the error alone "
-                       "never\npicks $r$ for you", color=INK, fontsize=11,
-              va="top", linespacing=1.6)
-    side.text(0, 0.62, "what people use instead", color=GREEN, fontsize=12.5,
+    side.text(0, 0.62, "Choose $r$ with:", color=GREEN, fontsize=12.5,
               weight="bold", va="top")
     for i, item in enumerate([
-            "the elbow, if there is one",
-            "held-out entries: fit on a mask, score the rest",
-            "stability: do the components survive a restart?",
-            "domain knowledge — 3 materials, 20 topics",
+            "Elbow (if there is one)",
+            "Stability (unstable components can be discarded)",
+            "Domain knowledge (e.g. 3 notes/materials)",
     ]):
         side.text(0, 0.48 - i * 0.12, "—", color=GREEN, fontsize=11, va="top")
         side.text(0.035, 0.48 - i * 0.12, item, color=INK, fontsize=11,
