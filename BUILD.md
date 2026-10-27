@@ -50,6 +50,8 @@ so the deck builds without the cache.
 
 Course05's figures read the Olivetti faces and 20 Newsgroups from the same `.cache/datasets/sklearn/` that Course01 fills; everything else they draw is computed in the script.
 
+Course06's figures need no download: the animal-length table of the 2023 lecture is in the script, Fisher's iris ships with scikit-learn, and everything else is simulated.
+
 `make slides` needs `pandoc`; the figures need `numpy`, `matplotlib`, `scipy`, `scikit-learn` and the Lato font (`fonts-lato`).
 The `ds_*` figures are drawn from the real datasets: the first build downloads them (about 370 MB) into `.cache/datasets/`, later builds reuse that cache.
 
