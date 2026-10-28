@@ -256,7 +256,7 @@ date: Week 5 — Lecture
 
 # Weighted NMF
 
-## Entries with different importances
+## Entries with different importance
 
 ![](img/weighted_idea.png)
 

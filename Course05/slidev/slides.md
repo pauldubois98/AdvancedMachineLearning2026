@@ -1333,8 +1333,6 @@ layout: eq
 
 </div>
 
-<div class="box blue mt-4">We derived the multiplicative ones in full; the next slide compares them.</div>
-
 ---
 layout: fig
 ---

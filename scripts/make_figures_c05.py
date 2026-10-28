@@ -2025,10 +2025,9 @@ def algo_types(fig):
         ax.text(x[2], y, cost, color=INK, fontsize=12, va="center")
         if i:
             ax.plot([0.42, 8.58], [y + 0.27, y + 0.27], color=LIGHT, lw=1.0)
-    box(ax, 1.20, 0.14, 6.60, 0.48, BLUE, "", fill="#f0f5fb")
-    ax.text(W / 2, 0.38, "We derive the multiplicative ones in full, then "
-                         "compare",
-            ha="center", va="center", color=BLUE, fontsize=12.5)
+    # box(ax, 1.20, 0.14, 6.60, 0.48, BLUE, "", fill="#f0f5fb")
+    # ax.text(W / 2, 0.38, "We derive the multiplicative ones in full, then compare",
+    #         ha="center", va="center", color=BLUE, fontsize=12.5)
 
 
 # ==========================================================================
@@ -2794,7 +2793,7 @@ def init_faces(fig):
         (r"$r$ columns of $X$", BLUE, "cols", "six real faces"),
         ("k-means", PURPLE, "kmeans", "six centroids"),
     ]
-    fig.text(0.5, 0.95, rf"The same $W_0$, built five ways.\n$r = {r}$ columns drawn as 64 × 64 images",
+    fig.text(0.5, 0.95, f"The same $W_0$, built five ways.\n$r = {r}$ columns drawn as 64 × 64 images",
              ha="center", va="center", color=MUTED, fontsize=12.5)
     size, step = 0.40, 0.44
     for i, (name, color, how, why) in enumerate(rows):
