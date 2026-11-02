@@ -212,6 +212,7 @@ Course03/slides-bis.pptx: $(C03BIS_FIGURES)
 Course04/slides.pptx: $(C04_FIGURES)
 Course05/slides.pptx: $(C05_FIGURES)
 Course06/slides.pptx: $(C06_FIGURES)
+Course07/slides.pptx: $(C07_FIGURES)
 
 %.pptx: %.md scripts/fit_pptx.py
 	pandoc $< -o $@ --slide-level=2 --resource-path=$(dir $<)
