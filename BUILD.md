@@ -23,7 +23,7 @@ make clean-slides clean-figures
 ```
 
 `make interactive` serves Course03's interactive companion deck (sliders for C,
-gamma, epsilon, the kernel), `make interactive-bis` the trees-and-boosting one
+gamma, epsilon, the kernel), `make interactive-c07` the trees-and-boosting one
 (depth, max_features, M, eta, lambda, gamma, bins), `make interactive-c04`
 Course04's clustering one (K, the linkage and the cut, epsilon, MinPts, C_min),
 `make interactive-c05` Course05's NMF one (r, the loss, beta, the start, the
@@ -32,20 +32,20 @@ mixtures-and-EM one (the weights, means and widths, K, the start, the pass of
 EM, N for N-SEM, the covariance family, n for BIC).
 `make interactive-build` writes all five published copies, the single
 self-contained files `Course03/interactive.html`,
-`Course03/interactive-bis.html`, `Course04/interactive.html`,
-`Course05/interactive.html` and `Course06/interactive.html`, which **are
+`Course04/interactive.html`, `Course05/interactive.html`,
+`Course06/interactive.html` and `Course07/interactive.html`, which **are
 committed**: the Pages workflow uploads the repository as it stands and never
 runs a build, so a deck is only as fresh as the last `make interactive-build`
 that was committed. They are served at
 <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html>,
-<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html>,
 <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html>,
-<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html>
-and <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course06/interactive.html>,
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html>,
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course06/interactive.html>
+and <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html>,
 and the same files open offline by double-clicking them.
 All five need `node` and `npm`; see `Course03/slidev/README.md`,
-`Course04/slidev/README.md`, `Course05/slidev/README.md` and
-`Course06/slidev/README.md`. The four projects
+`Course04/slidev/README.md`, `Course05/slidev/README.md`,
+`Course06/slidev/README.md` and `Course07/slidev/README.md`. The five projects
 are independent: rebuilding one never touches the others.
 
 Course05's interactive deck reads `Course05/data/*.json`, which

@@ -27,8 +27,6 @@ Feel free to use another one of your choice.
 - Session 3:
   - [Slides (.pptx)](Course03/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html) (same lecture, with sliders for C, γ, ε and the kernel)
-  - [Slides bis (.pptx)](Course03/slides-bis.pptx)
-  - [Slides bis - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive-bis.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)
   - [Notebook](Course03/lab3.ipynb)
   - [Notebook - solutions](Course03/lab3_solutions.ipynb)
 - Session 4:
@@ -39,3 +37,6 @@ Feel free to use another one of your choice.
 - Session 5:
   - [Slides (.pptx)](Course05/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html) (same lecture, with NMF refitted live: r, the loss, β, the start, the mask, λ, and MU against ALS and HALS)
+- Session 7:
+  - [Slides (.pptx)](Course07/slides.pptx)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)

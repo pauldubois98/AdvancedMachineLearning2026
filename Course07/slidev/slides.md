@@ -1,9 +1,9 @@
 ---
 theme: default
-title: "Session 3 bis: Trees, Forests and Boosting"
+title: "Session 7: Trees, Forests and Boosting"
 info: |
   Advanced Machine Learning · MSc DSBA · 2026 · Paul Dubois
-  Interactive companion to Course03/slides-bis.pptx.
+  Interactive companion to Course07/slides.pptx.
 class: text-center
 highlighter: shiki
 lineNumbers: false
@@ -19,7 +19,7 @@ favicon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='
 layout: cover
 ---
 
-# Session 3 bis<br>Trees, Forests and Boosting
+# Session 7<br>Trees, Forests and Boosting
 
 Advanced Machine Learning · MSc DSBA · 2026
 
