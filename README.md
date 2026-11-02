@@ -37,6 +37,8 @@ Feel free to use another one of your choice.
 - Session 5:
   - [Slides (.pptx)](Course05/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html) (same lecture, with NMF refitted live: r, the loss, β, the start, the mask, λ, and MU against ALS and HALS)
+  - [Notebook](Course05/lab5.ipynb)
+  - [Notebook - solutions](Course05/lab5_solutions.ipynb)
 - Session 7:
   - [Slides (.pptx)](Course07/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)
