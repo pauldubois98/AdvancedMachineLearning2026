@@ -26,19 +26,24 @@ Feel free to use another one of your choice.
   - [Notebook - solutions](Course02/lab2_solutions.ipynb)
 - Session 3:
   - [Slides (.pptx)](Course03/slides.pptx)
-  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html) (same lecture, with sliders for C, γ, ε and the kernel)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course03/interactive.html)
   - [Notebook](Course03/lab3.ipynb)
   - [Notebook - solutions](Course03/lab3_solutions.ipynb)
 - Session 4:
   - [Slides (.pptx)](Course04/slides.pptx)
-  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html) (same lecture, with sliders for K, the linkage and the cut, ε, MinPts and C_min)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html)
   - [Notebook](Course04/lab4.ipynb)
   - [Notebook - solutions](Course04/lab4_solutions.ipynb)
 - Session 5:
   - [Slides (.pptx)](Course05/slides.pptx)
-  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html) (same lecture, with NMF refitted live: r, the loss, β, the start, the mask, λ, and MU against ALS and HALS)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html)
   - [Notebook](Course05/lab5.ipynb)
   - [Notebook - solutions](Course05/lab5_solutions.ipynb)
+- Session 6:
+  - [Slides (.pptx)](Course06/slides.pptx)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course06/interactive.html)
 - Session 7:
   - [Slides (.pptx)](Course07/slides.pptx)
-  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html) (same lecture, with sliders for depth, max_features, M, η, λ and γ)
+  - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html)
+- Session 8:
+  - [Slides (.pptx)](Course08/slides.pptx)
