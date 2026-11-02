@@ -1,6 +1,6 @@
 ---
 title: |
-  Session 7\
+  Session 8\
   Model Order Selection
 subtitle: |
   Advanced Machine Learning · MSc DSBA · 2026\

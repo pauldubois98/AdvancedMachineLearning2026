@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Every figure of Course07 (model order selection).
+"""Every figure of Course08 (model order selection).
 
 One function per figure, registered under the stem the slide deck asks for.
 All figures share one canvas (9 x 3.7075 in), which is exactly the content
 area pandoc leaves under a slide title, so a figure never has to be resized.
 
-    python3 scripts/make_figures_c07.py Course07/img [stem ...]
+    python3 scripts/make_figures_c08.py Course08/img [stem ...]
 """
 
 import sys
@@ -2356,7 +2356,7 @@ def method_choice(fig):
 
 # ==========================================================================
 def main(argv):
-    out = Path(argv[1] if len(argv) > 1 else "Course07/img")
+    out = Path(argv[1] if len(argv) > 1 else "Course08/img")
     out.mkdir(parents=True, exist_ok=True)
     wanted = argv[2:] or sorted(FIGURES)
     for stem in wanted:
