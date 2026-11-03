@@ -64,6 +64,8 @@ Course06's figures need no download: the animal-length table of the 2023 lecture
 
 Course08's figures need no download either: Bishop's ten-point curve-fitting example and everything else are generated in the script, and the demonstrations use scikit-learn's own estimators.
 
+Course09's figures use scikit-learn's handwritten digits and swiss roll, and MNIST's 10 000 test images, which the first build downloads (about 1.7 MB) into `.cache/datasets/`. SNE and t-SNE are written out in numpy in the script, so the two are compared on the same code; the larger maps use scikit-learn's `TSNE`. A full build takes about half a minute.
+
 `make slides` needs `pandoc`; the figures need `numpy`, `matplotlib`, `scipy`, `scikit-learn` and the Lato font (`fonts-lato`).
 The `ds_*` figures are drawn from the real datasets: the first build downloads them (about 370 MB) into `.cache/datasets/`, later builds reuse that cache.
 
