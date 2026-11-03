@@ -48,3 +48,5 @@ Feel free to use another one of your choice.
 - Session 8:
   - [Slides (.pptx)](Course08/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course08/interactive.html)
+- Session 9 (optional):
+  - [Slides (.pptx)](Course09/slides.pptx)
