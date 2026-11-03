@@ -169,6 +169,7 @@ C08_FIGURES := $(foreach f,$(C08_STEMS),Course08/img/$(f).png)
 
 .PHONY: slides figures clean-slides clean-figures \
         interactive interactive-c04 interactive-c05 interactive-c06 interactive-c07 \
+        interactive-c08 \
         interactive-build \
         clean-interactive
 slides: $(SLIDE_TARGETS)
@@ -245,9 +246,12 @@ interactive-c06: Course06/slidev/node_modules
 interactive-c07: Course07/slidev/node_modules
 	cd Course07/slidev && npm run dev
 
+interactive-c08: Course08/slidev/node_modules
+	cd Course08/slidev && npm run dev
+
 interactive-build: Course03/interactive.html Course04/interactive.html \
                    Course05/interactive.html Course06/interactive.html \
-                   Course07/interactive.html
+                   Course07/interactive.html Course08/interactive.html
 
 Course03/slidev/node_modules: Course03/slidev/package.json
 	cd Course03/slidev && npm install --no-audit --no-fund
@@ -267,6 +271,10 @@ Course06/slidev/node_modules: Course06/slidev/package.json
 
 Course07/slidev/node_modules: Course07/slidev/package.json
 	cd Course07/slidev && npm install --no-audit --no-fund
+	@touch $@
+
+Course08/slidev/node_modules: Course08/slidev/package.json
+	cd Course08/slidev && npm install --no-audit --no-fund
 	@touch $@
 
 # The deck ships as ONE committed, self-contained file, because the Pages
@@ -322,12 +330,26 @@ Course06/interactive.html: $(C06_SLIDEV_SRC) Course06/slidev/vite.config.ts \
 	cd Course06/slidev && npm run build
 	cp Course06/slidev/dist/index.html $@
 
+# Course08's companion, its own npm project. No data file: Bishop's ten
+# points are written into lib/c08.ts, every other sample is drawn in the
+# browser from a fixed seed.
+C08_SLIDEV_SRC := Course08/slidev/slides.md Course08/slidev/style.css \
+                  $(wildcard Course08/slidev/components/*.vue) \
+                  $(wildcard Course08/slidev/layouts/*.vue) \
+                  $(wildcard Course08/slidev/setup/*.ts) \
+                  $(wildcard Course08/slidev/lib/*.ts)
+
+Course08/interactive.html: $(C08_SLIDEV_SRC) Course08/slidev/vite.config.ts \
+                           Course08/slidev/node_modules
+	cd Course08/slidev && npm run build
+	cp Course08/slidev/dist/index.html $@
+
 clean-interactive:
 	rm -rf Course03/slidev/dist Course04/slidev/dist Course05/slidev/dist \
-	       Course06/slidev/dist Course07/slidev/dist \
+	       Course06/slidev/dist Course07/slidev/dist Course08/slidev/dist \
 	       Course03/interactive.html Course04/interactive.html \
 	       Course05/interactive.html Course06/interactive.html \
-	       Course07/interactive.html
+	       Course07/interactive.html Course08/interactive.html
 
 clean-slides:
 	rm -f $(SLIDE_TARGETS)
