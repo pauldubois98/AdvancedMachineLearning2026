@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.slidev/
+# WebP copies of Course01/img, made by the Makefile
+img/
