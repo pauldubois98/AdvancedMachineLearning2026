@@ -182,7 +182,7 @@ C09_FIGURES := $(foreach f,$(C09_STEMS),Course09/img/$(f).png)
 
 .PHONY: slides figures clean-slides clean-figures \
         interactive interactive-c04 interactive-c05 interactive-c06 interactive-c07 \
-        interactive-c08 \
+        interactive-c08 interactive-c09 \
         interactive-build \
         clean-interactive
 slides: $(SLIDE_TARGETS)
@@ -266,9 +266,13 @@ interactive-c07: Course07/slidev/node_modules
 interactive-c08: Course08/slidev/node_modules
 	cd Course08/slidev && npm run dev
 
+interactive-c09: Course09/slidev/node_modules
+	cd Course09/slidev && npm run dev
+
 interactive-build: Course03/interactive.html Course04/interactive.html \
                    Course05/interactive.html Course06/interactive.html \
-                   Course07/interactive.html Course08/interactive.html
+                   Course07/interactive.html Course08/interactive.html \
+                   Course09/interactive.html
 
 Course03/slidev/node_modules: Course03/slidev/package.json
 	cd Course03/slidev && npm install --no-audit --no-fund
@@ -292,6 +296,10 @@ Course07/slidev/node_modules: Course07/slidev/package.json
 
 Course08/slidev/node_modules: Course08/slidev/package.json
 	cd Course08/slidev && npm install --no-audit --no-fund
+	@touch $@
+
+Course09/slidev/node_modules: Course09/slidev/package.json
+	cd Course09/slidev && npm install --no-audit --no-fund
 	@touch $@
 
 # The deck ships as ONE committed, self-contained file, because the Pages
@@ -361,12 +369,32 @@ Course08/interactive.html: $(C08_SLIDEV_SRC) Course08/slidev/vite.config.ts \
 	cd Course08/slidev && npm run build
 	cp Course08/slidev/dist/index.html $@
 
+# Course09's companion, its own npm project. The toy, the blobs and the swiss
+# roll are drawn in the browser; the 600 digits and the MNIST maps (t-SNE on
+# 5000 points is too slow for a slide) come from scripts/make_data_c09.py.
+C09_DATA := Course09/data/digits600.json Course09/data/mnist_maps.json
+C09_SLIDEV_SRC := Course09/slidev/slides.md Course09/slidev/style.css \
+                  $(wildcard Course09/slidev/components/*.vue) \
+                  $(wildcard Course09/slidev/layouts/*.vue) \
+                  $(wildcard Course09/slidev/setup/*.ts) \
+                  $(wildcard Course09/slidev/lib/*.ts) $(C09_DATA)
+
+$(C09_DATA) &: scripts/make_data_c09.py scripts/make_figures_c09.py
+	python3 scripts/make_data_c09.py Course09/data
+
+Course09/interactive.html: $(C09_SLIDEV_SRC) Course09/slidev/vite.config.ts \
+                           Course09/slidev/node_modules
+	cd Course09/slidev && npm run build
+	cp Course09/slidev/dist/index.html $@
+
 clean-interactive:
 	rm -rf Course03/slidev/dist Course04/slidev/dist Course05/slidev/dist \
 	       Course06/slidev/dist Course07/slidev/dist Course08/slidev/dist \
+	       Course09/slidev/dist \
 	       Course03/interactive.html Course04/interactive.html \
 	       Course05/interactive.html Course06/interactive.html \
-	       Course07/interactive.html Course08/interactive.html
+	       Course07/interactive.html Course08/interactive.html \
+	       Course09/interactive.html
 
 clean-slides:
 	rm -f $(SLIDE_TARGETS)

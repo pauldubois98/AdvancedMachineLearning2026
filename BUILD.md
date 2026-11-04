@@ -11,7 +11,7 @@ scripts/fit_pptx.py       post-processes pandoc's output (autofit, centred state
 Makefile                  figures -> pptx
 Course03/slidev/          Course03's two lectures as interactive Slidev decks (npm)
 Course04/slidev/          Course04's lecture as an interactive Slidev deck (npm)
-Course05/slidev/, Course06/slidev/, Course08/slidev/   the same, for Course05, Course06 and Course08
+Course05/slidev/, Course06/slidev/, Course08/slidev/, Course09/slidev/   the same, for Course05, Course06, Course08 and Course09
 ```
 
 ## Building
@@ -29,14 +29,16 @@ Course04's clustering one (K, the linkage and the cut, epsilon, MinPts, C_min),
 `make interactive-c05` Course05's NMF one (r, the loss, beta, the start, the
 mask, lambda, MU against ALS and HALS), `make interactive-c06` Course06's
 mixtures-and-EM one (the weights, means and widths, K, the start, the pass of
-EM, N for N-SEM, the covariance family, n for BIC), and `make interactive-c08`
+EM, N for N-SEM, the covariance family, n for BIC), `make interactive-c08`
 Course08's model-selection one (gamma, C, lambda, K, epsilon, r, M, N, the
-folds, the search budget, the surrogate, the pruner, AIC against BIC).
-`make interactive-build` writes all six published copies, the single
+folds, the search budget, the surrogate, the pruner, AIC against BIC), and
+`make interactive-c09` Course09's dimension-reduction one (the PCA axis, sigma,
+the perplexity and its bisection, the start, the move of SNE, nu, live t-SNE runs).
+`make interactive-build` writes all seven published copies, the single
 self-contained files `Course03/interactive.html`,
 `Course04/interactive.html`, `Course05/interactive.html`,
-`Course06/interactive.html`, `Course07/interactive.html` and
-`Course08/interactive.html`, which **are
+`Course06/interactive.html`, `Course07/interactive.html`,
+`Course08/interactive.html` and `Course09/interactive.html`, which **are
 committed**: the Pages workflow uploads the repository as it stands and never
 runs a build, so a deck is only as fresh as the last `make interactive-build`
 that was committed. They are served at
@@ -44,14 +46,18 @@ that was committed. They are served at
 <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course04/interactive.html>,
 <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course05/interactive.html>,
 <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course06/interactive.html>,
-<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html>
-and <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course08/interactive.html>,
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html>,
+<https://pauldubois98.github.io/AdvancedMachineLearning2026/Course08/interactive.html>
+and <https://pauldubois98.github.io/AdvancedMachineLearning2026/Course09/interactive.html>,
 and the same files open offline by double-clicking them.
-All six need `node` and `npm`; see `Course03/slidev/README.md`,
+All seven need `node` and `npm`; see `Course03/slidev/README.md`,
 `Course04/slidev/README.md`, `Course05/slidev/README.md`,
-`Course06/slidev/README.md`, `Course07/slidev/README.md` and
-`Course08/slidev/README.md`. The six projects
+`Course06/slidev/README.md`, `Course07/slidev/README.md`,
+`Course08/slidev/README.md` and `Course09/slidev/README.md`. The seven projects
 are independent: rebuilding one never touches the others.
+
+Course09's interactive deck reads `Course09/data/*.json` (the 600 digits and
+the MNIST maps), which `scripts/make_data_c09.py` writes; they are committed.
 
 Course05's interactive deck reads `Course05/data/*.json`, which
 `scripts/make_data_c05.py` writes from the same generators as the printed
