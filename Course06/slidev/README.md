@@ -47,7 +47,7 @@ Press `h` to hide Slidev's navigation bar (and `h` again to bring it back).
 | Soft and hard | soft or hard, the certainty threshold |
 | The E-step, The M-step | the current θᵗ |
 | Example run | the pass, the start |
-| Same run | the pass, the deck's start or a random one |
+| Same run | the pass, the seed of the random start |
 | Likelihood evolution | a start of your own, against the three of the figure |
 | Jensen inequality | u₁, u₂ and the weight |
 | E-step, M-step (the bound) | θᵗ, and how close q is to the posterior |
@@ -58,7 +58,6 @@ Press `h` to hide Slidev's navigation bar (and `h` again to bring it back).
 | k-means vs EM vs SEM vs N-SEM | N, the seed |
 | Starts comparison | the number of random starts, the first seed |
 | Covariance types | K |
-| Number of components | n, the seed: BIC and AIC recomputed |
 | Example on real data | petals or sepals, k-means or random start |
 | Scoring a new point | the contour level; click to score a point of your own |
 

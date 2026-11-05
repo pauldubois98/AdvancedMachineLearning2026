@@ -2,17 +2,15 @@
      colours are the hard labels at the current pass. -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { argmax, em2, resp2, sampleMix2, start2, TWO_BLOBS, type Mix2 } from '../lib/gmm'
+import { argmax, em2, resp2, sampleMix2, start2, TWO_BLOBS } from '../lib/gmm'
 import { fmt } from '../lib/charts'
 import { COMP, GREEN, INK, MUTED } from '../lib/theme'
 
 const { X } = sampleMix2(TWO_BLOBS, 300, 3)
-const startKind = ref('deck')
 const seed = ref(1)
 const t = ref(0)
 const T = 30
-const DECK: Mix2 = { p: [0.5, 0.5], mu: [[-0.1, 0.9], [0.1, -0.9]], S: [[0.9, 0, 0.9], [0.9, 0, 0.9]] }
-const hist = computed(() => em2(X, startKind.value === 'deck' ? DECK : start2(X, 2, seed.value), T))
+const hist = computed(() => em2(X, start2(X, 2, seed.value), T))
 const cur = computed(() => hist.value[t.value])
 const colors = computed(() => X.map((x) => COMP[argmax(resp2(x, cur.value))]))
 const lls = computed(() => hist.value.map((h, i) => [i, h.ll] as [number, number]))
@@ -37,8 +35,7 @@ const yr = computed(() => [Math.min(...lls.value.map((p) => p[1])) - 5, Math.max
     </div>
     <div class="controls">
       <Knob v-model="t" :min="0" :max="T" :step="1" label="pass t" :digits="0" :color="GREEN" />
-      <Choice v-model="startKind" :options="[{ value: 'deck', label: 'the deck\'s start' }, { value: 'random', label: 'random start' }]" label="start" />
-      <Knob v-model="seed" :min="1" :max="40" :step="1" label="seed" :digits="0" :color="INK" :disabled="startKind === 'deck'" />
+      <Knob v-model="seed" :min="1" :max="40" :step="1" label="random start, seed" :digits="0" :color="INK" />
     </div>
   </div>
 </template>
