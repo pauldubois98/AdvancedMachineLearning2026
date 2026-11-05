@@ -15,6 +15,8 @@ The project must involve at least one of the techniques seen during this course.
 [Here](SUGGESTED_DATASETS.md) are some suggestions for datasets;
 Feel free to use another one of your choice.
 
+DCE: You are allowed to use compute clusters from the DCE, more informations [here](DCE_TUTORIAL.md).
+
 - Session 1:
   - [Slides (.pptx)](Course01/slides.pptx)
   - [Notebook](Course01/numpy_LDA_QDA.ipynb)
