@@ -46,6 +46,7 @@ DCE: You are allowed to use compute clusters from the DCE, more informations [he
 - Session 6:
   - [Slides (.pptx)](Course06/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course06/interactive.html)
+  - [Notebook](Course06/lab6.ipynb)
 - Session 7:
   - [Slides (.pptx)](Course07/slides.pptx)
   - [Slides - interactive](https://pauldubois98.github.io/AdvancedMachineLearning2026/Course07/interactive.html)
