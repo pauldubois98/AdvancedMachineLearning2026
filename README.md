@@ -8,6 +8,8 @@ Lecturer: Paul Dubois (<p.dubois@centralesupelec.fr>)
 <br>
 TA: Vuk Ignjatovic (<vuk.ignjatovic@centralesupelec.fr>)
 
+Course description: [DOCX](COURSE%20DESCRIPTION_AML.docx), [PDF](COURSE%20DESCRIPTION_AML.pdf)
+
 Exam:
 Students must submit an individual project report.
 The report should be ~5 pages long on the topic of their choice.
