@@ -8,8 +8,13 @@ import { dataDomain, equalise, logit, sampleField } from '../lib/plot'
 import { GREEN, MUTED, RED } from '../lib/theme'
 
 const M = ref(40)
-const mf = ref('1')
-const data = moons(260, 0.22, 0)
+// which of the two injections of randomness is switched on
+const mode = ref('both')
+const data = moons(260, 0.30, 0)
+// scored on fresh points, never on the training rows: without the bootstrap
+// every unpruned tree memorises its own rows, so training accuracy is 100%
+// whatever the knobs say
+const test = moons(600, 0.30, 41)
 const RES = 100
 const MAX = 120
 // a fixed domain, because the fields are sampled once and reused
@@ -18,7 +23,12 @@ const domain = equalise(dataDomain(data.X, 0.5), 580, 460)
 /** every tree's probability field, sampled once */
 const cache = computed(() => {
   const f = fitForest(data.X, data.y, {
-    nTrees: MAX, maxFeatures: Number(mf.value), seed: 0,
+    nTrees: MAX,
+    // 'bag' leaves every column available at each node; the other two draw one
+    maxFeatures: mode.value === 'bag' ? 2 : 1,
+    // 'mf' fits every tree on all the rows, so only the columns differ
+    bootstrap: mode.value !== 'mf',
+    seed: 0,
   })
   const grids = f.trees.map((t) =>
     Float32Array.from(sampleField((x, y) => t.predict([x, y])[1], domain, RES)),
@@ -40,8 +50,8 @@ function averaged(m: number): Float64Array {
 const one = computed(() => averaged(1))
 const many = computed(() => averaged(Math.round(M.value)))
 const acc = computed(() => ({
-  one: forestAccuracy(cache.value.f, data.X, data.y, 1),
-  many: forestAccuracy(cache.value.f, data.X, data.y, Math.round(M.value)),
+  one: forestAccuracy(cache.value.f, test.X, test.y, 1),
+  many: forestAccuracy(cache.value.f, test.X, test.y, Math.round(M.value)),
 }))
 </script>
 
@@ -63,8 +73,12 @@ const acc = computed(() => ({
       <div class="knobs">
         <Knob v-model="M" :min="1" :max="120" :step="1" label="trees, M" :digits="0" :color="GREEN" />
         <Choice
-          v-model="mf" label="max_features"
-          :options="[{ value: '1', label: '1' }, { value: '2', label: 'both (bagging)' }]"
+          v-model="mode" label="randomness"
+          :options="[
+            { value: 'mf', label: 'max_features only' },
+            { value: 'bag', label: 'bagging only' },
+            { value: 'both', label: 'both' },
+          ]"
         />
         <Readout
           :items="[
@@ -75,8 +89,11 @@ const acc = computed(() => ({
       </div>
       <p class="note">
         Same bias, less and less variance: the staircase does not become a curve,
-        a hundred staircases averaged do. Allowing both columns makes the trees
-        more alike, and the averaging buys less.
+        a hundred staircases averaged do. Each injection on its own makes the
+        trees differ a little — with only two columns here, resampling the rows
+        is the stronger of the two; switch both on and the trees disagree most,
+        which is what gives the average something to smooth away. Both scores
+        are measured on 600 fresh points.
       </p>
     </div>
   </div>

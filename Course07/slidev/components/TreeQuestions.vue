@@ -75,13 +75,13 @@ const cuts = computed(() => [
 <template>
   <div class="wrap">
     <TreeDiagram
-      :root="tree.root" :max-depth="3" title="three questions, four answers"
+      :root="tree.root" :max-depth="3" title="Nested questions"
     />
     <div class="right">
       <FieldPlot
         :X="data.X" :y="data.y" :decision="field" :domain="domain" :margins="false"
         :boundary="false" :segments="cuts" :point-size="12" :field-alpha="0.55"
-        title="every leaf is a rectangle of feature space"
+        title=""
       />
       <div class="controls">
         <Knob v-model="t1" :min="0.05" :max="0.95" label="root: x₁ ≤" :digits="2" :color="BLUE" />
@@ -93,7 +93,7 @@ const cuts = computed(() => [
             { label: 'rows per leaf', value: tree.rows.map((r) => r.length).join(' / ') },
           ]"
         />
-        <p class="note">The questions are axis-aligned, so the boxes are too.</p>
+        <p class="note">Questions are axis-aligned.</p>
       </div>
     </div>
   </div>

@@ -45,17 +45,17 @@ layout: fig
 layout: fig
 ---
 
-## Choosing the split
+## What "pure" means
 
-<TreeSplit />
+<ImpurityCurves />
 
 ---
 layout: fig
 ---
 
-## What "pure" means
+## Choosing the split
 
-<ImpurityCurves />
+<TreeSplit />
 
 ---
 layout: fig

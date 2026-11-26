@@ -11,10 +11,16 @@ const draw = ref(1)
 const ROWS = ['root', 'left child', 'right child', 'and so on']
 
 const rows = computed(() => {
-  const rng = new Rng(draw.value * 101 + Math.round(p.value) * 7 + Math.round(k.value))
   const P = Math.round(p.value)
   const K = Math.min(Math.round(k.value), P)
-  return ROWS.map((name) => {
+  const rng = new Rng(draw.value * 101 + P * 7 + K)
+  // How good each column would be at each node, seeded by p alone and never by
+  // the redraw knob: redrawing may change which columns are candidates, but not
+  // which of them wins. At max_features = p nothing moves at all — that is the
+  // "no column randomness: bagging" row of the table.
+  const strength = new Rng(P * 7 + 13)
+  const score = ROWS.map(() => Array.from({ length: P }, () => strength.next()))
+  return ROWS.map((name, r) => {
     const all = Array.from({ length: P }, (_, i) => i)
     for (let i = P - 1; i > 0; i--) {
       const j = Math.floor(rng.next() * (i + 1))
@@ -23,7 +29,8 @@ const rows = computed(() => {
       all[j] = t
     }
     const drawn = all.slice(0, K).sort((a, b) => a - b)
-    return { name, drawn, winner: drawn[Math.floor(rng.next() * K)] }
+    const winner = drawn.reduce((a, b) => (score[r][b] > score[r][a] ? b : a))
+    return { name, drawn, winner }
   })
 })
 const sqrtP = computed(() => Math.round(Math.sqrt(Math.round(p.value))))
