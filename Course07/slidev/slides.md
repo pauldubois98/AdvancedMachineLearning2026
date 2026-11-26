@@ -350,9 +350,9 @@ layout: section
 layout: fig
 ---
 
-## Categories: the target statistic problem
+## Why not just number the categories?
 
-<CatExample />
+<CatRandomCodes />
 
 ---
 layout: fig
@@ -361,6 +361,14 @@ layout: fig
 ## The encoding leaks the label
 
 <CatLeakWhy />
+
+---
+layout: fig
+---
+
+## Categories: the target statistic problem
+
+<CatExample />
 
 ---
 layout: fig
