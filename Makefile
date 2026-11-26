@@ -369,6 +369,19 @@ Course06/interactive.html: $(C06_SLIDEV_SRC) Course06/slidev/vite.config.ts \
 	cd Course06/slidev && npm run build
 	cp Course06/slidev/dist/index.html $@
 
+# Course07's companion, its own npm project since the trees deck moved out
+# of Course03/slidev: everything it draws is computed in the browser.
+C07_SLIDEV_SRC := Course07/slidev/slides.md Course07/slidev/style.css \
+                  $(wildcard Course07/slidev/components/*.vue) \
+                  $(wildcard Course07/slidev/layouts/*.vue) \
+                  $(wildcard Course07/slidev/setup/*.ts) \
+                  $(wildcard Course07/slidev/lib/*.ts)
+
+Course07/interactive.html: $(C07_SLIDEV_SRC) Course07/slidev/vite.config.ts \
+                           Course07/slidev/node_modules
+	cd Course07/slidev && npm run build
+	cp Course07/slidev/dist/index.html $@
+
 # Course08's companion, its own npm project. No data file: Bishop's ten
 # points are written into lib/c08.ts, every other sample is drawn in the
 # browser from a fixed seed.
