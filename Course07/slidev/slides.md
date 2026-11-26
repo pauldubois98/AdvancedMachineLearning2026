@@ -187,6 +187,22 @@ layout: fig
 layout: fig
 ---
 
+## Boosting as an additive model
+
+<AdditiveModel />
+
+---
+layout: fig
+---
+
+## Shrinkage
+
+<ShrinkageDemo />
+
+---
+layout: fig
+---
+
 ## Forest and boosting attack different errors
 
 <BaggingVsBoosting />
@@ -200,14 +216,6 @@ layout: fig
 <BoostingOverfit />
 
 ---
-layout: fig
----
-
-## Boosting as an additive model
-
-<AdditiveModel />
-
----
 layout: eq
 ---
 
@@ -216,20 +224,6 @@ layout: eq
 $$ r_{im} \;=\; -\left[\frac{\partial L(y_i, F(x_i))}{\partial F(x_i)}\right]_{F = F_{m-1}} \qquad\qquad F_m \;=\; F_{m-1} + \eta\, h_m $$
 
 <GradientStep />
-
----
-layout: section
----
-
-# Shrinkage
-
----
-layout: fig
----
-
-## Shrinkage
-
-<ShrinkageDemo />
 
 ---
 layout: fig
@@ -264,6 +258,14 @@ layout: fig
 <XgbSplitSearch />
 
 ---
+layout: fig
+---
+
+## Gradient and Hessian
+
+<XgbGh />
+
+---
 layout: eq
 ---
 
@@ -284,22 +286,6 @@ layout: fig
 <XgbLeafScore />
 
 ---
-layout: fig
----
-
-## Gradient and Hessian
-
-<XgbGh />
-
----
-layout: fig
----
-
-## Summing trees to get the prediction
-
-<XgbLeafPredict />
-
----
 layout: section
 ---
 
@@ -317,20 +303,21 @@ layout: fig
 layout: fig
 ---
 
-## Finding the optimal cut in one sweep
-
-<LgbmPrefix />
-
----
-layout: fig
----
-
 ## Scan bin edges, not rows
 
 <LgbmBinnedScan />
 
 ---
 layout: fig
+---
+
+## Finding the optimal cut in one sweep
+
+<LgbmPrefix />
+
+---
+layout: fig
+hide: true
 ---
 
 ## A child's histogram is the parent minus its sibling

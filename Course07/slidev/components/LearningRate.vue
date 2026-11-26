@@ -6,9 +6,13 @@ import { friedman1, split } from '../lib/databis'
 import { fitBooster } from '../lib/boost'
 import { BLUE, GOLD, GREEN, MUTED, RED } from '../lib/theme'
 
-const M = ref(50)
-const depth = ref('3')
-const MAX = 200
+const M = ref(100)
+// depth 2 is the default because it is where the eta story is clean: deeper
+// trees reach their minimum in fewer rounds, and the smallest eta stops paying
+const depth = ref('2')
+// 200 rounds is not a budget eta = 0.01 can finish in — its minimum is at
+// m = 644 — so the curve was still falling at the right edge of the old axis
+const MAX = 800
 const ETAS = [
   { eta: 0.5, color: RED },
   { eta: 0.2, color: GOLD },
@@ -69,11 +73,11 @@ const at = computed(() =>
       :series="series"
       :dots="[...minima, { x: M, y: 0, color: '#1b1b1b', r: 0 }]"
       :vlines="[{ x: M, color: '#1b1b1b', dash: '' }]"
-      :x-domain="[1, MAX]" :y-domain="[8, 30]" log-x
-      :x-ticks="[1, 10, 100]" :y-ticks="[10, 20, 30]"
+      :x-domain="[1, MAX]" :y-domain="[11, 25]" log-x
+      :x-ticks="[1, 10, 100, 800]" :y-ticks="[12, 16, 20, 24]"
       x-label="number of trees (log scale)" y-label="test MSE"
-      title="small η reaches a lower minimum, and needs far more trees to get there"
-      :labels="curves.map((c, i) => ({ x: 1.2, y: 29 - i * 1.6, text: `η = ${c.eta}`, color: c.color, size: 11.5 }))"
+      title="smaller η needs far more trees, and reaches a slightly lower minimum"
+      :labels="curves.map((c, i) => ({ x: 200, y: 24.4 - i * 0.95, text: `η = ${c.eta}`, color: c.color, size: 11.5 }))"
     />
     <div class="controls">
       <div class="knobs">
@@ -87,8 +91,10 @@ const at = computed(() =>
       <p class="note">
         <span v-if="curves.length < ETAS.length">Measuring… {{ curves.length }}/{{ ETAS.length }} runs</span>
         <span v-else>
-          The dots are each run's best. Halving η roughly doubles the trees you need:
-          they are not two knobs, they are a budget and how finely you spend it.
+          The dots are each run's best. At depth 2 it moves from m = 8 at η = 0.5
+          to m = 644 at η = 0.01, and drops a little each time: η and M are not two
+          knobs but a budget and how finely you spend it. Deeper trees get there in
+          fewer rounds, and the smallest η then stops paying for itself.
         </span>
       </p>
     </div>

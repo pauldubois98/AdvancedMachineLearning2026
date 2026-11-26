@@ -36,12 +36,6 @@ const residual = computed(() => {
   const r = k === 0 ? data.y.map((v) => v - run.value.f0) : run.value.rounds[k - 1].residual.map((_, i) => data.y[i] - run.value.rounds[k - 1].F[i])
   return data.x.map((x, i) => ({ x, y: r[i], color: GOLD, r: 3 }))
 })
-const nextTree = computed(() => {
-  const k = Math.round(m.value)
-  if (k >= MAX) return []
-  const t = run.value.rounds[k].tree
-  return grid.value.map((x) => [x, t.predict([x])[0]] as [number, number])
-})
 const sub = (n: number) => String(n).split('').map((c) => '\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'[Number(c)]).join('')
 const truth = computed(() => grid.value.map((x) => [x, Math.sin(2 * Math.PI * x)] as [number, number]))
 const rss = computed(() => {
@@ -66,13 +60,13 @@ const rss = computed(() => {
         :title-color="RED"
       />
       <LineChart
-        :series="[{ points: nextTree, color: GREEN, width: 2.2, step: false }]"
+        :series="[]"
         :dots="residual"
         :hlines="[{ y: 0, color: INK, dash: '' }]"
         :x-domain="[0, 1]" :y-domain="[-1.9, 1.9]" :x-ticks="[0, 0.5, 1]" :y-ticks="[-1, 0, 1]"
         x-label="x" y-label="residual"
-        :title="m >= MAX ? 'nothing left to fit' : 'what is left over, and the tree fitted to it'"
-        :title-color="GREEN"
+        :title="`what is left over: y \u2212 F${sub(Math.round(m))}`"
+        :title-color="GOLD"
       />
     </div>
     <div class="controls">
