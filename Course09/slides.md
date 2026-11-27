@@ -6,7 +6,7 @@ subtitle: |
   Advanced Machine Learning · MSc DSBA · 2026\
   \
   Paul Dubois
-date: Week 8 — Lecture
+date: Bonus lecture
 ---
 
 # Dimension Reduction

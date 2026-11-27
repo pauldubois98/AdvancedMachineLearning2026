@@ -25,7 +25,7 @@ Advanced Machine Learning · MSc DSBA · 2026
 
 Paul Dubois
 
-<div class="note mt-8">Week 8 lecture</div>
+<div class="note mt-8">Bonus lecture</div>
 
 ---
 layout: section

@@ -1,5 +1,6 @@
 ---
 title: |
+  Session 7\
   Trees, Forests and Boosting
 subtitle: |
   Advanced Machine Learning · MSc DSBA · 2026\

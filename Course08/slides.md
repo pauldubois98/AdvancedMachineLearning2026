@@ -6,7 +6,7 @@ subtitle: |
   Advanced Machine Learning · MSc DSBA · 2026\
   \
   Paul Dubois
-date: Week 7 — Lecture
+date: Week 8 — Lecture
 ---
 ## Kernel of SVM
 
